@@ -6,9 +6,9 @@ sidebar_position: 2
 
 ## Adding a Template
 
-1. Click on "Operations Center" in the navigation bar and enter the "Template" tab.
+1. Click on "Operations Hub" in the navigation bar and enter the "Template" tab.
 2. Click the "New Template" button.
-3. Enter the name, description, source of the template. Where,
+3. Enter the name, description, source of the template.
     - Source: An address compatible with the Terraform git type module source, refer to the [instructions](https://developer.hashicorp.com/terraform/language/modules/sources#module-sources).
     Example source URLs:
       - https://github.com/walrus-catalog/webservice?ref=v0.0.1
