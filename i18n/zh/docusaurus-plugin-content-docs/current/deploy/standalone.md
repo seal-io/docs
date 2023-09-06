@@ -115,3 +115,5 @@ sudo docker run -d --privileged --restart=always \
   -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,.svc,.cluster.local,example.com" \
   sealio/walrus:<VERSION>
 ```
+> 注意：
+> - 如果有任何连接器(K8s、云或任何其他基础设施)想要添加到Walrus，并且应该绕过代理，请确保在运行Walrus时，将其访问地址(例如，kubeconfig中的K8s API server地址、特定云URL的域名或IP地址)合并到“NO_PROXY”配置中。
