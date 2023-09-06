@@ -23,6 +23,16 @@ Walrus支持在同一git代码中管理多个版本的模板。模板版本需�
 
 ```
 
+## 模板源
+
+模板源为 git 仓库的地址，例如：https://github.com/walrus-catalog/webservice。
+
+模板会同步仓库的Tag来设置模板版本。您也可以在地址后面通过查询参数`ref`来指定模板版本，例如：
+- https://github.com/walrus-catalog/webservice?ref=v0.0.1
+
+ref 的值可以是分支名、Tag名或者commit hash。当您想要使用模板的特定版本时可以使用这种方式来指定模板版本，比如您有一个名为`dev`的分支，您可以使用以下URL来指定分支：
+- https://github.com/walrus-catalog/webservice?ref=dev
+
 
 ## 变量样式扩展
 
@@ -56,15 +66,15 @@ variable "limit_cpu" {
 
 Walrus会提供以下元数据变量，当您在模板中声明匹配的变量名称的时候，Walrus会在部署中注入元数据变量的值。
 
-| 变量名                               | 类型  | 描述                                       | 
+| 变量名                               | 类型  | 描述                                       |
 |-----------------------------------|-----|------------------------------------------|
-| walrus_metadata_project_name      | 字符串 | 服务所属项目名称                                 | 
-| walrus_metadata_project_id        | 字符串 | 服务所属项目ID                                 | 
-| walrus_metadata_environment_name  | 字符串 | 服务所属环境名称                                 | 
-| walrus_metadata_environment_id    | 字符串 | 服务所属环境ID                                 | 
-| walrus_metadata_service_name      | 字符串 | 服务名称                                     | 
-| walrus_metadata_service_id        | 字符串 | 服务ID                                     | 
-| walrus_metadata_namespace_name    | 字符串 | Walrus管理的环境namesapce名称，在Kubernetes环境中可用  | 
+| walrus_metadata_project_name      | 字符串 | 服务所属项目名称                                 |
+| walrus_metadata_project_id        | 字符串 | 服务所属项目ID                                 |
+| walrus_metadata_environment_name  | 字符串 | 服务所属环境名称                                 |
+| walrus_metadata_environment_id    | 字符串 | 服务所属环境ID                                 |
+| walrus_metadata_service_name      | 字符串 | 服务名称                                     |
+| walrus_metadata_service_id        | 字符串 | 服务ID                                     |
+| walrus_metadata_namespace_name    | 字符串 | Walrus管理的环境namesapce名称，在Kubernetes环境中可用  |
 
 ## 输出
 

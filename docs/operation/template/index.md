@@ -21,6 +21,17 @@ Walrus supports managing multiple versions of templates in the same git codebase
 │── variables.tf
 ```
 
+## Template Source
+
+The template source is the address of a git repository, e.g. https://github.com/walrus-catalog/webservice.
+
+It will sync the repository tags to set the template versions. You can alse specify the template version with the query parameter `ref` at the end, such as:
+- https://github.com/walrus-catalog/webservice?ref=v0.0.1
+
+The ref value can be a branch name, tag name or a commit hash. It will be useful when you want to use a specific version of the template. If you have an branch named `dev`, you can use the following url to specify the branch:
+- https://github.com/walrus-catalog/webservice?ref=dev
+
+
 ## Variable style extension
 
 Walrus has extended the Terraform variable definition to support additional attributes describing the variable style, which is useful in generating user-friendly forms on the user interface. The extended styles are defined by HCL annotations.
