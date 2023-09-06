@@ -115,3 +115,5 @@ sudo docker run -d --privileged --restart=always \
   -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,.svc,.cluster.local,example.com" \
   sealio/walrus:<VERSION>
 ```
+> Note: 
+  > - If there are any connectors (K8s, cloud, or any other infrastructure) that you want to add to Walrus and should bypass the proxy, make sure to incorporate their access addresses (e.g., the K8s API server addresses in kubeconfig or the domain names/IP addresses for specific cloud URLs) into the `NO_PROXY` configuration when running Walrus.
