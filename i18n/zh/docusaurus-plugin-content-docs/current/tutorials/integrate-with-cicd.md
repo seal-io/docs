@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # 集成 CICD 工具
 
-本教程介绍如何如何同过 Walrus CLI 与您的 CI/CD 工具集成，以实现自动化的部署流程。
+本教程介绍如何通过 Walrus CLI 与您的 CI/CD 工具集成，以实现自动化的部署流程。
 
 ## 先决条件
 
@@ -16,16 +16,16 @@ sidebar_position: 3
 
 首先，您需要创建一个 API 密钥，以便让 Walrus CLI 能够与 Walrus 服务进行通信。
 
-1. 进入`个人中心`的`API 密钥`，点击`添加密钥`，配置名称和密钥的过期时间。
+1. 进入`个人中心`的`API 密钥`，点击`添加密钥`，配置名称和密钥的过期时间；
 2. 完成后，复制生成的密钥，以备后用。
 
 ### Walrus CLI 和 CI/CD 工具集成
 
 我们以 CLI 和 GitHub Actions 集成为例。
 
-1. 进入 GitHub 仓库，在目录 `.github/workflows` 下创建 `ci.yaml` 文件，并在其中定义您的 CI/CD 工作流。。
-2. 在工作流程中，配置 GitHub Actions 的密钥，包括 `CI_REGISTRY_PASSWORD`，`CI_WALRUS_SERVER` 和 `CI_WALRUS_TOKEN`，以便安全地存储敏感信息，`CI_WALRUS_SERVER` 的格式为 https://domian:port/。
-3. 以下为 `ci.yaml`` 样例：
+1. 进入 GitHub 仓库，在目录 `.github/workflows` 下创建 `ci.yaml` 文件，并在其中定义您的 CI/CD 工作流；
+2. 在工作流程中，配置 GitHub Actions 的密钥，包括 `CI_REGISTRY_PASSWORD`，`CI_WALRUS_SERVER` 和 `CI_WALRUS_TOKEN`，以便安全地存储敏感信息，`CI_WALRUS_SERVER` 的格式为 https://domian:port/；
+3. 以下为 `ci.yaml` 样例：
 
 ```yaml
 name: ci
