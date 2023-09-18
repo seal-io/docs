@@ -150,7 +150,18 @@ const config = {
   ],
 
   /* Allows use of @theme/ApiItem and other components */
-  themes: ["docusaurus-theme-openapi-docs"], 
+  themes: [
+		"docusaurus-theme-openapi-docs",
+		[
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en", "zh"],
+				docsRouteBasePath: "/",
+				highlightSearchTermsOnTargetPage: true,
+      },
+    ],
+	],
 };
 
 module.exports = config;
