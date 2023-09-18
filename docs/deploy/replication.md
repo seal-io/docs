@@ -68,11 +68,11 @@ metadata:
 data:
   "init.sh": |
     #!/usr/bin/env bash
-    
+
     set -o errexit
     set -o nounset
     set -o pipefail
-    
+
     if [[ ! -d \${PGDATA} ]]; then
       mkdir -p \${PGDATA}
       chown 999:999 \${PGDATA}
@@ -80,11 +80,11 @@ data:
 
   "probe.sh": |
     #!/usr/bin/env bash
-    
+
     set -o errexit
     set -o nounset
     set -o pipefail
-    
+
     psql --no-password --username=\${POSTGRES_USER} --dbname=\${POSTGRES_DB} --command="SELECT 1"
 
 ---
@@ -240,11 +240,11 @@ metadata:
 data:
   "init.sh": |
     #!/usr/bin/env bash
-    
+
     set -o errexit
     set -o nounset
     set -o pipefail
-    
+
     # validate database
     set +o errexit
     while true; do
@@ -255,7 +255,7 @@ data:
       sleep 2s
     done
     set -o errexit
-    
+
     # mutate app configuration
     cp -f /conf/app.conf app.conf
     sed -i '/^tableNamePrefix =.*/d' app.conf
@@ -533,7 +533,7 @@ spec:
       serviceAccountName: walrus
       containers:
         - name: walrus-server
-          image: sealio/walrus:v0.3.0
+          image: sealio/walrus:{{ VERSION }}
           imagePullPolicy: Always
           resources:
             limits:

@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Standalone installation is suitable for PoC or test scenarios.
 
-> Prerequisites: 
+> Prerequisites:
 > - A Linux server with no less than 4 CPU cores and 8GiB memory.
 > - At least 50GB of free disk space.
 > - Docker installed, if not please refer to [Docker's official documentation](https://docs.docker.com/) for how to setup Docker on your machine.
@@ -17,7 +17,7 @@ Run the following Docker command for standalone installation. For additional con
 ```shell
 sudo docker run -d --privileged --restart=always \
   -p 80:80 -p 443:443 \
-  sealio/walrus:<VERSION>
+  sealio/walrus:{{ VERSION }}
 ```
 
 ## Setting up TLS
@@ -30,7 +30,7 @@ By default Walrus uses a self-signed HTTPS certificate, which results in a warni
 
 Let's Encrypt issues a 90-day HTTPS certificate. The renewal of this certificate will be automatically completed by Walrus.
 
-> Prerequisites: 
+> Prerequisites:
 > - Configure a domain name so that it can be mapped to the Linux server where Walrus is deployed, such as `walrus.mydomain.com`.
 > - Open ports 80 and 443 on the Linux server where Walrus is deployed, and ensure the server can be accessed by Let's Encrypt service.
 
@@ -38,7 +38,7 @@ Let's Encrypt issues a 90-day HTTPS certificate. The renewal of this certificate
 sudo docker run -d --privileged --restart=always \
  -p 80:80 -p 443:443 \
  -e SERVER_TLS_AUTO_CERT_DOMAINS=<YOUR_DOMAIN_NAME> \
- sealio/walrus:<VERSION>
+ sealio/walrus:{{ VERSION }}
 ```
 
 The above adopts the [HTTP-01](https://letsencrypt.org/docs/challenge-types/#http-01-challenge) challenge mode. If **port 80 cannot be opened**, it will automatically switch to using [TLS-ALPN-01](https://letsencrypt.org/docs/challenge-types/#tls-alpn-01) challenge mode.
@@ -47,14 +47,14 @@ The above adopts the [HTTP-01](https://letsencrypt.org/docs/challenge-types/#htt
 sudo docker run -d --privileged --restart=always \
  -p 443:443 \
  -e SERVER_TLS_AUTO_CERT_DOMAINS=<YOUR_DOMAIN_NAME> \
- sealio/walrus:<VERSION>
+ sealio/walrus:{{ VERSION }}
 ```
 
 ### Using a Custom Certificate
 
 A custom certificate refers to a HTTPS certificate issued by a certificate authority.
 
-> Prerequisites: 
+> Prerequisites:
 > - Prepare certificate files on the Linux server where Walrus is deployed, for example, place the private key PEM file for the HTTPs service under the <PRIVATE_KEY_FILE> path, and place the HTTPs service certificate (chain) PEM file under the <CERT_FILE> path.
 > - If there is a (non-public trust) CA certificate, please also place it in the file under the <CERT_FILE> path, usually chained after the HTTPs service certificate (chain).
 
@@ -65,21 +65,21 @@ sudo docker run -d --privileged --restart=always \
   -v /<CERT_FILE>:/etc/walrus/ssl/cert.pem \
   -e SERVER_TLS_PRIVATE_KEY_FILE=/etc/walrus/ssl/key.pem \
   -e SERVER_TLS_CERT_FILE=/etc/walrus/ssl/cert.pem \
-  sealio/walrus:<VERSION>
+  sealio/walrus:{{ VERSION }}
 ```
 
 ### Using TLS Termination
 
 [TLS Termination](https://en.wikipedia.org/wiki/TLS_termination_proxy) is generally executed by a reverse proxy service.
 
-> Note: 
+> Note:
 > - The link from the reverse proxy service to Walrus can use HTTP requests and set Walrus's session Cookie `walrus_session` to `Secure: true` to avoid man-in-the-middle attacks.
 
 ```shell
 sudo docker run -d --privileged --restart=always \
   -p 80:80 \
   -e SERVER_ENABLE_TLS=false \
-  sealio/walrus:<VERSION>
+  sealio/walrus:{{ VERSION }}
 ```
 
 ## Configuring the Database
@@ -101,7 +101,7 @@ docker run -d --restart=always \
 sudo docker run -d --privileged --restart=always \
   -p 80:80 -p 443:443 \
   -e SERVER_DATA_SOURCE_ADDRESS="postgres://root:Root123@<postgres-ip-address>:5432/walrus?sslmode=disable"\
-  sealio/walrus:<VERSION>
+  sealio/walrus:{{ VERSION }}
 ```
 
 ## Configuring HTTP Proxy
@@ -113,7 +113,7 @@ sudo docker run -d --privileged --restart=always \
   -e HTTP_PROXY="http://192.168.0.100:3128" \
   -e HTTPS_PROXY="http://192.168.0.100:3128" \
   -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,.svc,.cluster.local,example.com" \
-  sealio/walrus:<VERSION>
+  sealio/walrus:{{ VERSION }}
 ```
-> Note: 
+> Note:
   > - If there are any connectors (K8s, cloud, or any other infrastructure) that you want to add to Walrus and should bypass the proxy, make sure to incorporate their access addresses (e.g., the K8s API server addresses in kubeconfig or the domain names/IP addresses for specific cloud URLs) into the `NO_PROXY` configuration when running Walrus.
