@@ -1,7 +1,7 @@
 # Quick Start
 
 > Note:
-> 
+>
 > Walrus is alpha-quality software. It is under rapid development. Subsequent versions may introduce API changes that are not compatible.
 
 ## Deployment
@@ -15,7 +15,7 @@
 Execute the following command to start the Walrus service:
 
 ```shell
-sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 --name walrus sealio/walrus
+sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 --name walrus sealio/walrus:{{ VERSION }}
 ```
 
 For more detailed installation requirements, please refer to [installation](/deploy/standalone).

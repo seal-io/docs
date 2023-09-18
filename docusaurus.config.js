@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const variableInjector = require('./src/plugins/variable-injector')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -46,6 +47,7 @@ const config = {
           lastVersion: 'current',
           versions: {
             current:{
+              // Label for this version.
               label: 'v0.3',
               banner: 'none',
             },
@@ -53,6 +55,17 @@ const config = {
           docLayoutComponent: "@theme/DocPage",
           /* Derived from docusaurus-theme-openapi */
           docItemComponent: "@theme/ApiItem",
+          remarkPlugins: [
+            [
+              variableInjector, // replaces eg {{ VERSION }} to VERSION value with config strings
+              {
+                replacements: {
+                  // Version of the current release.
+                  VERSION: 'v0.3.1',
+                },
+              }
+            ]
+          ],
         },
         blog: false,
         theme: {
@@ -151,17 +164,17 @@ const config = {
 
   /* Allows use of @theme/ApiItem and other components */
   themes: [
-		"docusaurus-theme-openapi-docs",
-		[
+    "docusaurus-theme-openapi-docs",
+    [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
         language: ["en", "zh"],
-				docsRouteBasePath: "/",
-				highlightSearchTermsOnTargetPage: true,
+        docsRouteBasePath: "/",
+        highlightSearchTermsOnTargetPage: true,
       },
     ],
-	],
+  ],
 };
 
 module.exports = config;
