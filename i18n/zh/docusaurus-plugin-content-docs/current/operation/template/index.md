@@ -25,7 +25,7 @@ Walrus支持在同一git代码中管理多个版本的模板。模板版本需�
 
 ## 模板源
 
-模板源为 git 仓库的地址，例如：https://github.com/walrus-catalog/webservice。
+模板源为 git 仓库的地址，例如：https://github.com/walrus-catalog/webservice
 
 模板会同步仓库的Tag来设置模板版本。您也可以在地址后面通过查询参数`ref`来指定模板版本，例如：
 - https://github.com/walrus-catalog/webservice?ref=v0.0.1
