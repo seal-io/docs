@@ -14,9 +14,12 @@ If you intend to run Walrus in production, you need to follow the high-avaialbil
 
 You can fill in the following YAML with relevant information and use the `kubectl apply` command to complete the high availability deployment.
 
+1. Create the Walrus deployment YAML:
 ```shell
-cat <<EOF | kubectl apply -f -
-
+vim walrus.yaml
+```
+2. Fill in the following YAML:
+```shell
 ---
 apiVersion: v1
 kind: Namespace
@@ -73,9 +76,9 @@ data:
     set -o nounset
     set -o pipefail
 
-    if [[ ! -d \${PGDATA} ]]; then
-      mkdir -p \${PGDATA}
-      chown 999:999 \${PGDATA}
+    if [[ ! -d ${PGDATA} ]]; then
+      mkdir -p ${PGDATA}
+      chown 999:999 ${PGDATA}
     fi
 
   "probe.sh": |
@@ -85,7 +88,7 @@ data:
     set -o nounset
     set -o pipefail
 
-    psql --no-password --username=\${POSTGRES_USER} --dbname=\${POSTGRES_DB} --command="SELECT 1"
+    psql --no-password --username=${POSTGRES_USER} --dbname=${POSTGRES_DB} --command="SELECT 1"
 
 ---
 apiVersion: v1
@@ -248,7 +251,7 @@ data:
     # validate database
     set +o errexit
     while true; do
-      if psql --command="SELECT 1" "\${DB_SOURCE}" >/dev/null 2>&1; then
+      if psql --command="SELECT 1" "${DB_SOURCE}" >/dev/null 2>&1; then
         break
       fi
       echo "waiting db to be ready ..."
@@ -261,12 +264,12 @@ data:
     sed -i '/^tableNamePrefix =.*/d' app.conf
     echo "tableNamePrefix = casdoor_" >>app.conf
     sed -i '/^driverName =.*/d' app.conf
-    echo "driverName = \"\${DB_DRIVER}\"" >>app.conf
+    echo "driverName = \"${DB_DRIVER}\"" >>app.conf
     sed -i '/^dataSourceName =.*/d' app.conf
-    echo "dataSourceName = \"\${DB_SOURCE}\"" >>app.conf
+    echo "dataSourceName = \"${DB_SOURCE}\"" >>app.conf
     sed -i '/^sessionConfig =.*/d' app.conf
     echo 'sessionConfig = {"enableSetCookie":true,"cookieName":"casdoor_session_id","cookieLifeTime":3600,"providerConfig":"/var/run/casdoor","gclifetime":3600,"domain":"","secure":false,"disableHTTPOnly":false}' >>app.conf
-    sed "s#\${DB_PASSWORD}#***#g" app.conf
+    sed "s#${DB_PASSWORD}#***#g" app.conf
 
 ---
 apiVersion: v1
@@ -337,7 +340,7 @@ spec:
                   name: walrus
                   key: db_name
             - name: DB_SOURCE
-              value: \$(DB_DRIVER)://\$(DB_USER):\$(DB_PASSWORD)@database:5432/\$(DB_NAME)?sslmode=disable
+              value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD)@database:5432/$(DB_NAME)?sslmode=disable
           volumeMounts:
             - name: script
               mountPath: /script
@@ -569,7 +572,7 @@ spec:
                   name: walrus
                   key: enable_tls
             - name: SERVER_DATA_SOURCE_ADDRESS
-              value: \$(DB_DRIVER)://\$(DB_USER):\$(DB_PASSWORD)@database:5432/\$(DB_NAME)?sslmode=disable
+              value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD)@database:5432/$(DB_NAME)?sslmode=disable
             - name: SERVER_CASDOOR_SERVER
               value: http://identity-access-manager:8000
           ports:
@@ -612,6 +615,11 @@ spec:
             claimName: walrus
 
 EOF
+```
+
+3. Apply the YAML:
+```shell
+kubectl apply -f walrus.yaml
 ```
 
 ## Configuring TLS
