@@ -6,7 +6,9 @@ sidebar_position: 2
 
 ## Adding a Template
 
-1. Click on "Operations Hub" in the navigation bar and enter the "Template" tab.
+1. Enter the "Template" tab.
+    - Project Template: Click on "Application Management" in the navigation bar and select the corresponding project, then click on the "Template" tab.
+    - Global Template: Click on "Operations Center" in the navigation bar and enter the "Template" tab.
 2. Click the "New Template" button.
 3. Enter the name, description, source of the template.
     - Source: An address compatible with the Terraform git type module source, refer to the [instructions](https://developer.hashicorp.com/terraform/language/modules/sources#module-sources).
@@ -24,7 +26,9 @@ The template will use the image file named icon in the root path of the default 
 
 ## Editing a Template
 
-1. Click on "Operations Center" in the navigation bar and enter the "Template" tab.
+1. Enter the "Template" tab.
+    - Project Template: Click on "Application Management" in the navigation bar and select the corresponding project, then click on the "Template" tab.
+    - Global Template: Click on "Operations Center" in the navigation bar and enter the "Template" tab.
 2. Find the template you need to edit.
 3. Click the more operations button indicated by the thumbnail and select 'edit'.
 4. Modify the corresponding attribute values as per your need.
@@ -32,7 +36,9 @@ The template will use the image file named icon in the root path of the default 
 
 ## Deleting a Template
 
-1. Click on "Operations Center" in the navigation bar and enter the "Template" tab.
+1. Enter the "Template" tab.
+    - Project Template: Click on "Application Management" in the navigation bar and select the corresponding project, then click on the "Template" tab.
+    - Global Template: Click on "Operations Center" in the navigation bar and enter the "Template" tab.
 2. Select the template you need to delete.
 3. Click the "Delete" button.
 4. In the delete confirmation prompt, click the "OK" button.
