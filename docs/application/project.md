@@ -67,6 +67,14 @@ In the project view, click the `Variable` tab to [manage variables](/operation/v
 
 In the project view, click the `Connector` tab to [manage connectors](/operation/connector).
 
+## Template Management
+
+In the project view, click the `Template` tab to [manage templates](/operation/template).
+
+## Catalog Management
+
+In the project view, click the `Catalog` tab to [manage catalogs](/operation/catalog).
+
 ## Member Management
 
 In the project view, click the `Members` tab to manage the members.
