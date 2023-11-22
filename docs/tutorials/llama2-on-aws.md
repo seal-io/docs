@@ -26,7 +26,7 @@ With Walrus, you can have a running llama-2 instance on AWS with a user-friendly
 3. In the source field, enter `https://github.com/walrus-tutorials/llama2-on-aws`.
 4. Click `Save`.
 
-![llama2-add-template](/img/v0.3.0/tutorials/llama2-on-aws/llama2-add-template.png)
+![llama2-add-template](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-template.png)
 
 ### Configure Environment and AWS Credentials
 1. In the left navigation, click on `Application Management`, go to the `default` project view, and click the `Connectors` tab.
@@ -39,14 +39,14 @@ With Walrus, you can have a running llama-2 instance on AWS with a user-friendly
 > Note:
 > The specified region is used here because the subsequent steps involve using an AMI from that region. If you want to use a different region, you can export the AMI to your region or refer to the following sections on how to build the llama-2 image from scratch.
 
-![llama2-add-connector](/img/v0.3.0/tutorials/llama2-on-aws/llama2-add-connector.png)
+![llama2-add-connector](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-connector.png)
 
 1. Click the `Environments` tab, click the `New Environment` button.
 2. Enter an environment name, e.g., `dev`.
 3. Click the `Add Connector` button and select the `aws` connector created in the previous step.
 4. Click `Save`.
 
-![llama2-add-environment](/img/v0.3.0/tutorials/llama2-on-aws/llama2-add-env.png)
+![llama2-add-environment](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-env.png)
 
 ### Create the llama-2 Service
 1. In the `Environments` tab, click on the name of the `dev` environment to enter its view.
@@ -63,9 +63,9 @@ With Walrus, you can have a running llama-2 instance on AWS with a user-friendly
 
 You can see the deployment and running status of the llama-2 service on its details page. Once the llama-2 service deployment is complete, you can access its web UI by clicking the access link of the service in the Walrus UI.
 
-![llama2-service-detail](/img/v0.3.0/tutorials/llama2-on-aws/llama2-service-detail.png)
+![llama2-service-detail](/img/v0.4.0/tutorials/llama2-on-aws/llama2-service-detail.png)
 
-![llama2-webui](/img/v0.3.0/tutorials/llama2-on-aws/llama2-web-ui.png)
+![llama2-webui](/img/v0.4.0/tutorials/llama2-on-aws/llama2-web-ui.png)
 
 ## Deep Dive: Building the llama-2 Image from Scratch
 
