@@ -48,7 +48,7 @@ const config = {
           versions: {
             current:{
               // Label for this version.
-              label: 'v0.3',
+              label: 'v0.4',
               banner: 'none',
             },
           },
@@ -61,7 +61,7 @@ const config = {
               {
                 replacements: {
                   // Version of the current release.
-                  VERSION: 'v0.3.1',
+                  VERSION: 'v0.4.0',
                 },
               }
             ]

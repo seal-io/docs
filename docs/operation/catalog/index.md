@@ -12,7 +12,7 @@ The catalog is a collection of templates. You can view, import, edit, and delete
 2. In the Template tab, you can view the templates in the template list.
 3. You can search for templates in the template library using the Search box.
 
-![list](/img/v0.3.0/catalog/list-en.png)
+![list](/img/v0.4.0/catalog/list-en.png)
 
 ## Create a Catalog
 
@@ -24,11 +24,11 @@ The catalog is a collection of templates. You can view, import, edit, and delete
 	- Google: https://github.com/terraform-google-modules
 4. Click the Confirm button.
 
-![create](/img/v0.3.0/catalog/create-en.png)
+![create](/img/v0.4.0/catalog/create-en.png)
 
 > Walrus supports Github organizations containing Terraform module repositories. You can import all templates under that organization into the catalog.
 
-![create-result](/img/v0.3.0/catalog/create-result-en.png)
+![create-result](/img/v0.4.0/catalog/create-result-en.png)
 
 ## Delete a Catalog
 
