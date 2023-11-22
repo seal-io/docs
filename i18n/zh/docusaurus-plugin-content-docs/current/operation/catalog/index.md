@@ -12,7 +12,7 @@ sidebar_position: 1
 2. 在`模板`标签页中，您可以查看模板库中的模板。
 3. 您可以通过`搜索`框搜索模板库中的模板。
 
-![list](/img/v0.3.0/catalog/list.png)
+![list](/img/v0.4.0/catalog/list.png)
 
 ## 新增模板库
 
@@ -21,10 +21,10 @@ sidebar_position: 1
 3. 输入模板库的名称、描述、来源。其中，来源地址是一个 Github 组织的地址，例如 `https://github.com/terraform-aliyun-modules`。
 4. 点击`确定`按钮。
 
-![create](/img/v0.3.0/catalog/create.png)
+![create](/img/v0.4.0/catalog/create.png)
 
 > Walrus 支持包含 Terraform 模块仓库的 Github 组织，您可以在模板库中导入该组织下的所有模板。
-> ![create-result](/img/v0.3.0/catalog/create-result.png)
+> ![create-result](/img/v0.4.0/catalog/create-result.png)
 
 ## 删除模板库
 

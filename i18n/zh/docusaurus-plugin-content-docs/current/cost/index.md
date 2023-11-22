@@ -18,11 +18,11 @@ sidebar_position: 1
 1. 点击左侧导航栏中的`成本管理`。
 2. 点击`成本分析`标签页进入到成本分析视图。
 
-![cost-analysis](/img/v0.3.0/cost/cost-analysis.png)
+![cost-analysis](/img/v0.4.0/cost/cost-analysis.png)
 
 3. 您可以根据需求通过选择时间范围来查看特定时间段内的消费情况。
 
-![cost-perspective-timerange](/img/v0.3.0/cost/cost-perspective-timerange.png)
+![cost-perspective-timerange](/img/v0.4.0/cost/cost-perspective-timerange.png)
 
 > 注意：
 >
@@ -32,7 +32,7 @@ sidebar_position: 1
 
 可以通过点击下拉框，选择内置视图或用户自定义视图进行视图切换。
 
-![cost-perspective-switch](/img/v0.3.0/cost/cost-perspective-switch.png)
+![cost-perspective-switch](/img/v0.4.0/cost/cost-perspective-switch.png)
 
 
 
