@@ -14,7 +14,7 @@ sidebar_position: 1
 
 1. 点击左侧导航栏中的`用户管理`，进入用户列表
 
-![user-list](/img/v0.3.0/users/ss-user-list.png)
+![user-list](/img/v0.4.0/users/ss-user-list.png)
 
 > 注意：
 >
@@ -29,7 +29,7 @@ sidebar_position: 1
 >
 > - 也可通过点击密码输入框右侧图标快速生成随机密码。
 
-![user-create](/img/v0.3.0/users/ss-user-create.png)
+![user-create](/img/v0.4.0/users/ss-user-create.png)
 
 ## 查询用户
 

@@ -26,7 +26,7 @@ sidebar_position: 1
 3. 在来源中填写`https://github.com/walrus-tutorials/llama2-on-aws`。
 4. 点击`保存`。
 
-![llama2-add-template](/img/v0.3.0/tutorials/llama2-on-aws/llama2-add-template-cn.png)
+![llama2-add-template](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-template-cn.png)
 
 ### 配置环境和AWS凭证
 1. 在左侧导航中点击`应用管理`，在`default`项目视图中，点击`连接器`标签页。
@@ -39,14 +39,14 @@ sidebar_position: 1
 > 注意：
 > 这里使用指定的区域，是因为后续使用了该区域下指定的AMI。如果您想使用其它区域，可以将该AMI导出到您的区域。或参考后续章节了解如何从零构建llama-2镜像。
 
-![llama2-add-connector](/img/v0.3.0/tutorials/llama2-on-aws/llama2-add-connector-cn.png)
+![llama2-add-connector](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-connector-cn.png)
 
 1. 点击`环境`标签页，点击`新建环境`按钮。
 2. 填入环境名称，例如`dev`。
 3. 点击`添加连接器`按钮，选择上一步创建的`aws`连接器。
 4. 点击`保存`。
 
-![llama2-add-environment](/img/v0.3.0/tutorials/llama2-on-aws/llama2-add-env-cn.png)
+![llama2-add-environment](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-env-cn.png)
 
 ### 创建llama-2服务
 1. 在`环境`标签页中点击`dev`环境的名称，进入环境视图。
@@ -63,9 +63,9 @@ sidebar_position: 1
 
 您可以在llama-2服务的详情页中看到它的部署和运行状态。等待llama-2服务完成部署后，您可以通过Walrus UI点击该服务的访问链接来访问它的web UI。
 
-![llama2-service-detail](/img/v0.3.0/tutorials/llama2-on-aws/llama2-service-detail-cn.png)
+![llama2-service-detail](/img/v0.4.0/tutorials/llama2-on-aws/llama2-service-detail-cn.png)
 
-![llama2-webui](/img/v0.3.0/tutorials/llama2-on-aws/llama2-web-ui.png)
+![llama2-webui](/img/v0.4.0/tutorials/llama2-on-aws/llama2-web-ui.png)
 
 ## 深入了解：从零开始构建llama-2镜像
 
