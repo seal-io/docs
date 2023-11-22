@@ -4,7 +4,32 @@ sidebar_position: 2
 
 # Environment
 
+> Note:
+> Since v0.4.0, environment introduces `Environment Type` to enhance management.
+
 An environment is the target of service deployment. A project may contain multiple environments.
+
+## Environment Type
+
+> Note:
+> Custom environment type is not supported at present.
+
+Before v0.4.0, the isolation between different environments is not guaranteed, which means we will run into the below problems.
+
+- A production-purpose [Connector](/operation/connector) can be referenced by an environment intended for testing.
+- A common developer can deploy a service into production-purpose environment.
+
+Starting with v0.4.0, each environment declares its purpose by its **type**, thus preventing that [User](/users/user) without the ability to operate (write) on that `Environment Type` from operating the environment. It is worth noting that [Connector](/operation/connector) also needs to declare what `Environment Type` it applies to.
+
+The system has 3 built-in environment types, which are **Development**, **Staging** and **Production**.
+
+- **Development** and **Staging** environments can be operated by any [User](/users/user).
+- **Production** environment can only be operated by **Manager** and **Administrator**, **General User** stays in read-only.
+
+By using environment types, we can get the following isolation features.
+
+- The environment can only reference the same type of [Connector](/operation/connector).
+- The project [members](/application/project#member-management) can only operate the environments of the type that their roles can operate, otherwise, they will be treated as project [Viewer](/application/project#add-members).
 
 ## View the Environment List
 
@@ -20,8 +45,9 @@ An environment is the target of service deployment. A project may contain multip
 ![qs-create-env](/img/v0.4.0/quickstart/qs-create-env-en.png)
 
 3. Add `Environment tags` and `Environment description` based on the actual environment.
-4. Add a connector, click `Add Connector`, select the connector used in the environment, and finally click the `Confirm` button.
-5. Click the `Save` button to save the environment configuration, and then you can use this environment in Application Management.
+4. Choose proper `Environment type`.
+5. Add a connector, click `Add Connector`, select the connector used in the environment, and finally click the `Confirm` button.
+6. Click the `Save` button to save the environment configuration, and then you can use this environment in Application Management.
 
 ![qs-create-env2](/img/v0.4.0/quickstart/qs-create-env2-en.png)
 

@@ -31,6 +31,9 @@ Walrus offers connectors on the following two levels:
 
 ## Creating a Connector
 
+> Note:
+> Since v0.4.0, connector creation needs choose `Applicable Environment Type`, please check [Environment Type](/application/environment#environment-type) for more details.
+
 ### Creating a Kubernetes Connector
 
 1. Click on `New Connector` in the connectors list and select `Kubernetes`.
@@ -38,7 +41,8 @@ Walrus offers connectors on the following two levels:
 ![connector-create](/img/v0.4.0/quickstart/qs-add-connector-en.png)
 
 2. `Enable Cost Analysis` is turned on by default. Once enabled, you can create related views in the `Cost Management` menu on the left-hand side to view the related expense statistics.
-3. Fill out the form. After `Save` is successful, the Kubernetes connector is created.
+3. Choose `Applicable Environment Type`.
+4. Fill out the form. After `Save` is successful, the Kubernetes connector is created.
    
 ![connector-create-k8s](/img/v0.4.0/opration/connector/op-conn-create-k8s-en.png)
 
@@ -46,7 +50,8 @@ Walrus offers connectors on the following two levels:
 
 1. Click on `New Connector` in the connectors list and select `Cloud Vendor`.
 2. Configure `Name`, `Type`, `AccessKey`, `SecretKey`, `Region` connections.
-3. Fill out the form. After `Save` is successful, the cloud vendor is created.
+3. Choose `Applicable Environment Type`.
+4. Fill out the form. After `Save` is successful, the cloud vendor is created.
 
 ![connector-create-cloud](/img/v0.4.0/opration/connector/op-conn-create-cloud-en.png)
 
@@ -54,7 +59,8 @@ Walrus offers connectors on the following two levels:
 
 1. Click on `New Connector` in the connectors list and select `Version Control`.
 2. Choose the type. Currently supports GitHub, fill out the corresponding `Access token`. The permission to operate the repo needs to be turned on.
-3. Fill in the form. After `Save` is successful, the version control connector is created.
+3. Choose `Applicable Environment Type`.
+4. Fill in the form. After `Save` is successful, the version control connector is created.
 
 ![connector-create-vcs](/img/v0.4.0/opration/connector/op-conn-create-vcs-en.png)
 
@@ -62,7 +68,8 @@ Walrus offers connectors on the following two levels:
 
 1. Click on `New Connector` in the connectors list and select `Custom`.
 2. The type is the type of third-party platform Terraform Provider, for example: AWS, AliCloud.
-3. Add properties, for instance: if the Provider is [AliCloud](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs), you need to fill in access_key, secret_key, region.
+3. Choose `Applicable Environment Type`.
+4. Add properties, for instance: if the Provider is [AliCloud](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs), you need to fill in access_key, secret_key, region.
 
 ```
 provider "alicloud" {

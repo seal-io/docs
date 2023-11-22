@@ -4,10 +4,10 @@ sidebar_position: 1
 
 # User Management
 
-Currently, the system provides three types of system user roles, namely **general users**, **platform engineers**, and **administrators**.
+Currently, the system provides three types of system user roles, namely **general users**, **manager**, and **administrators**.
 
 - **General User**: Can configure project-level resources, such as creating personal projects, authorizing personal projects to others, etc.
-- **Platform Engineer**: Can configure global resources, such as creating templates, configuring global variables, changing global connectors, etc.
+- **Manager**: Can configure global resources, such as creating templates, configuring global variables, changing global connectors, etc.
 - **Administrator**: Has the highest authority in the system and can manage system resources as well as system users.
 
 ## View User List
