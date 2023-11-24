@@ -68,7 +68,7 @@ Within the environment, you can manage the services, including adding services, 
 3. Click `New Service`, select the service that needs to be added, fill in the corresponding information, and click the `Save` button to complete the addition of services.
 4. Click the `Delete` operation in the service list to delete services in the environment.
 
-For more details on service management, please refer to [Services](/application/service).
+For more details on service management, please refer to [Services and Resources](/application/service-and-resource).
 
 ## Dependency Graph
 
