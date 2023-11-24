@@ -15,7 +15,7 @@ Walrus offers connectors on the following two levels:
 1. Click on `Operation Hub` in the left-hand sidebar.
 2. Click on the `Connectors` tab to view the connectors list.
 
-![connector-list](/img/v0.4.0/opration/connector/op-conn-list-en.png)
+![connector-list](/img/v0.4.0/operation/connector/op-conn-list-en.png)
 
 ### Project Connectors List
 
@@ -44,7 +44,7 @@ Walrus offers connectors on the following two levels:
 3. Choose `Applicable Environment Type`.
 4. Fill out the form. After `Save` is successful, the Kubernetes connector is created.
    
-![connector-create-k8s](/img/v0.4.0/opration/connector/op-conn-create-k8s-en.png)
+![connector-create-k8s](/img/v0.4.0/operation/connector/op-conn-create-k8s-en.png)
 
 ### Creating a Cloud Vendor Connector
 
@@ -53,7 +53,7 @@ Walrus offers connectors on the following two levels:
 3. Choose `Applicable Environment Type`.
 4. Fill out the form. After `Save` is successful, the cloud vendor is created.
 
-![connector-create-cloud](/img/v0.4.0/opration/connector/op-conn-create-cloud-en.png)
+![connector-create-cloud](/img/v0.4.0/operation/connector/op-conn-create-cloud-en.png)
 
 ### Creating a Version Control Connector
 
@@ -62,7 +62,7 @@ Walrus offers connectors on the following two levels:
 3. Choose `Applicable Environment Type`.
 4. Fill in the form. After `Save` is successful, the version control connector is created.
 
-![connector-create-vcs](/img/v0.4.0/opration/connector/op-conn-create-vcs-en.png)
+![connector-create-vcs](/img/v0.4.0/operation/connector/op-conn-create-vcs-en.png)
 
 ### Creating a Custom Connector
 
@@ -79,7 +79,7 @@ provider "alicloud" {
 }
 ```
 
-![connector-create-custom](/img/v0.4.0/opration/connector/op-conn-create-custom-en.png)
+![connector-create-custom](/img/v0.4.0/operation/connector/op-conn-create-custom-en.png)
 ## Deleting a Connector
 
 1. Click on `Operation Hub` -> `Connectors` in the left-hand sidebar to go to the connectors list.
@@ -87,7 +87,7 @@ provider "alicloud" {
 3. Ensure that no environment depends on this connector before selecting the connector you want to delete, then click the `Delete` button.
 5. Click the `Confirm` button to complete the deletion.
 
-![connector-delete](/img/v0.4.0/opration/connector/op-conn-del-en.png)
+![connector-delete](/img/v0.4.0/operation/connector/op-conn-del-en.png)
 
 ## Usage
 

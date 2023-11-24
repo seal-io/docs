@@ -15,7 +15,7 @@ Walrus提供了以下两种层级的连接器：
 1. 点击左侧导航栏中的`运维中心`。
 2. 点击`连接器`标签页，查看连接器列表。
 
-![connector-list](/img/v0.4.0/opration/connector/op-conn-list.png)
+![connector-list](/img/v0.4.0/operation/connector/op-conn-list.png)
 
 ### 项目连接器列表
 
@@ -44,7 +44,7 @@ Walrus提供了以下两种层级的连接器：
 3. 选择`适用环境类型`。
 4. 填写表单，`保存`成功后即可创建 Kubernetes 连接器。
    
-![connector-create-k8s](/img/v0.4.0/opration/connector/op-conn-create-k8s.png)
+![connector-create-k8s](/img/v0.4.0/operation/connector/op-conn-create-k8s.png)
 
 ### 创建云厂商连接器
 
@@ -53,7 +53,7 @@ Walrus提供了以下两种层级的连接器：
 3. 选择`适用环境类型`。
 4. 填写表单，`保存`成功后即可创建云厂商。
 
-![connector-create-cloud](/img/v0.4.0/opration/connector/op-conn-create-cloud.png)
+![connector-create-cloud](/img/v0.4.0/operation/connector/op-conn-create-cloud.png)
 
 ### 创建版本控制连接器
 
@@ -62,7 +62,7 @@ Walrus提供了以下两种层级的连接器：
 3. 选择`适用环境类型`。
 4. 填写表单`保存`成功可创建版本控制连接器。
 
-![connector-create-vcs](/img/v0.4.0/opration/connector/op-conn-create-vcs.png)
+![connector-create-vcs](/img/v0.4.0/operation/connector/op-conn-create-vcs.png)
 
 ### 创建自定义连接器
 
@@ -79,7 +79,7 @@ provider "alicloud" {
 }
 ```
 
-![connector-create-custom](/img/v0.4.0/opration/connector/op-conn-create-custom.png)
+![connector-create-custom](/img/v0.4.0/operation/connector/op-conn-create-custom.png)
 ## 删除连接器
 
 1. 点击左侧导航栏中的`运维中心` -> `连接器` 查看到连接器列表。
@@ -87,7 +87,7 @@ provider "alicloud" {
 3. 确保没有环境依赖于该连接器后，勾选您需要删除的连接器，点击`删除`按钮。
 5. 点击`确定`按钮完成删除。
 
-![connector-delete](/img/v0.4.0/opration/connector/op-conn-del.png)
+![connector-delete](/img/v0.4.0/operation/connector/op-conn-del.png)
 
 ## 使用方法
 
