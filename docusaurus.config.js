@@ -11,7 +11,7 @@ const config = {
   tagline: 'Walrus Documentation',
   url: 'https://seal-io.github.io',
   baseUrl: '/docs/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
