@@ -13,7 +13,7 @@ Manage project subjects
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus projectsubject delete](walrus_projectsubject_delete)	 - Delete a project subject.
 * [walrus projectsubject list](walrus_projectsubject_list)	 - Get project subjects.
 

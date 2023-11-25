@@ -16,6 +16,7 @@ walrus catalog get-templates <catalog> [flags]
       --extract strings   
       --page int           (default 1)
       --per-page int       (default 100)
+      --project string    
       --query string      
       --sort strings      
 ```

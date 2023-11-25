@@ -10,6 +10,12 @@ Delete a catalog.
 walrus catalog delete <catalog> [flags]
 ```
 
+## Options
+
+```
+      --project string   
+```
+
 ## Options inherited from parent commands
 
 ```
