@@ -14,6 +14,7 @@ walrus environment list [flags]
 
 ```
       --extract strings   
+      --include-summary   
       --page int           (default 1)
       --per-page int       (default 100)
       --query string      

@@ -13,7 +13,7 @@ Manage settings
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus setting get](walrus_setting_get)	 - Get a setting.
 * [walrus setting list](walrus_setting_list)	 - Get settings.
 * [walrus setting update](walrus_setting_update)	 - Update a setting.

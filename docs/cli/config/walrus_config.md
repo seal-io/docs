@@ -13,7 +13,7 @@ Manage CLI configuration
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus config current-context](walrus_config_current-context)	 - Get current context
 * [walrus config setup](walrus_config_setup)	 - Connect Walrus server and setup cli
 * [walrus config sync](walrus_config_sync)	 - Sync cli action to the latest

@@ -13,7 +13,7 @@ Manage templates
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus template create](walrus_template_create)	 - Create a template.
 * [walrus template delete](walrus_template_delete)	 - Delete a template.
 * [walrus template get](walrus_template_get)	 - Get a template.

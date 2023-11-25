@@ -10,6 +10,12 @@ Get a catalog.
 walrus catalog get <catalog> [flags]
 ```
 
+## Options
+
+```
+      --project string   
+```
+
 ## Options inherited from parent commands
 
 ```
