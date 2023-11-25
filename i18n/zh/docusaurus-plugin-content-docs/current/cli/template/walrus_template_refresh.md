@@ -10,6 +10,12 @@ Refresh for a template.
 walrus template refresh <template> [flags]
 ```
 
+## Options
+
+```
+      --project string   
+```
+
 ## Options inherited from parent commands
 
 ```

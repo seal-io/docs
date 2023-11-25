@@ -17,6 +17,8 @@ walrus environment create [flags]
       --description string      
       --labels stringToString    (default [])
       --name string             
+      --type string             
+      --variables jsonArray      (default []...)
 ```
 
 ## Options inherited from parent commands

@@ -10,6 +10,12 @@ Get a template.
 walrus template get <template> [flags]
 ```
 
+## Options
+
+```
+      --project string   
+```
+
 ## Options inherited from parent commands
 
 ```

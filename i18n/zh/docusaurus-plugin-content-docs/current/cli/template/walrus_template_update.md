@@ -15,7 +15,7 @@ walrus template update <template> [flags]
 ```
       --description string      
       --labels stringToString    (default [])
-      --source string           
+      --project string          
 ```
 
 ## Options inherited from parent commands
