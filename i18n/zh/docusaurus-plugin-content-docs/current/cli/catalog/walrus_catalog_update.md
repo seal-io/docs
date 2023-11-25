@@ -15,7 +15,7 @@ walrus catalog update <catalog> [flags]
 ```
       --description string      
       --labels stringToString    (default [])
-      --source string           
+      --project string          
 ```
 
 ## Options inherited from parent commands

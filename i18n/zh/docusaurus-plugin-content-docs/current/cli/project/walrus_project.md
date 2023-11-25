@@ -13,7 +13,7 @@ Manage projects
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus project create](walrus_project_create)	 - Create a project.
 * [walrus project delete](walrus_project_delete)	 - Delete a project.
 * [walrus project get](walrus_project_get)	 - Get a project.
