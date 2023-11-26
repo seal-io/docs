@@ -7,6 +7,7 @@
 ## Deployment
 
 > Prerequisites:
+>
 > - A Linux server with no less than 4 CPU cores, 8GiB memory.
 > - At least 50GB of free disk space.
 > - Docker installed, if not please refer to [the Docker official documentation](https://docs.docker.com/).
@@ -37,6 +38,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 ## Add a Kubernetes Cluster as Deployment Target
 
 > Prerequisites:
+>
 > - A Kubernetes cluster that can be reached by the Walrus server.
 
 1. Click the `Application Management` menu in the navigation bar to go to the `default` project view by default.
@@ -47,6 +49,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 ![qs-add-connector](/img/v0.4.0/quickstart/qs-add-connector-en.png)
 
 ## Create Environment
+
 1. Click the `Environment` tab, and click the `New Environment` button.
 
 ![qs-create-env](/img/v0.4.0/quickstart/qs-create-env-en.png)
@@ -63,22 +66,23 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-go2env](/img/v0.4.0/quickstart/qs-go2env-en.png)
 
-2. Click the `New Service` button.
+2. Click the `New` button and select `Service`.
 
 ![qs-create-svc](/img/v0.4.0/quickstart/qs-create-svc-en.png)
 
-3. Fill in the service name, such as `myapp`, and make sure the template is selected as `webservice`.
+3. Fill in the service name, such as `container-service`, and make sure the template is selected as `kubernetes-containerservice`.
 4. Enter `nginx` image in the Image Name of the template configuration, and click confirm.
 
 ![qs-create-svc2](/img/v0.4.0/quickstart/qs-create-svc2-en.png)
 
-5. Click the `Save` button to complete the creation of the service.
-6. After the service deployment is complete, you can view resources, logs, execute terminal commands, access the address of this nginx service, etc.
+5. Click the `Save and Deploy` button to complete the creation of the service.
+6. After the service deployment is complete, you can view components, logs, execute terminal commands, access the address of this nginx service, etc.
+
 - View deployment logs.
 
 ![qs-logs](/img/v0.4.0/quickstart/qs-logs-en.png)
 
-- View resource logs.
+- View components logs.
 
 ![qs-res-logs](/img/v0.4.0/quickstart/qs-res-logs-en.png)
 

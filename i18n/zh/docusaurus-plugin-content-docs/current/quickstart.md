@@ -66,23 +66,23 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-go2env](/img/v0.4.0/quickstart/qs-go2env.png)
 
-2. 点击`新建服务`按钮。
+2. 点击`新建`按钮并选择`服务`。
 
 ![qs-create-svc](/img/v0.4.0/quickstart/qs-create-svc.png)
 
-3. 填写服务名称，如`myapp`，确认模板选中`webservice`。
+3. 填写服务名称，如`container-service`，确认模板选中`kubernetes-containerservice`。
 4. 在模板配置的 Image Name 中输入`nginx`镜像，点击确定。
 
 ![qs-create-svc2](/img/v0.4.0/quickstart/qs-create-svc2.png)
 
-5. 点击`保存`按钮完成服务的创建。
-6. 等待服务的部署完成后，您可以查看资源，日志，执行终端命令，访问该 nginx 服务的地址等。
+5. 点击`保存并部署`按钮完成服务的创建。
+6. 等待服务的部署完成后，您可以查看组件，日志，执行终端命令，访问该 nginx 服务的地址等。
 
 - 查看部署日志。
 
 ![qs-logs](/img/v0.4.0/quickstart/qs-logs.png)
 
-- 查看资源日志。
+- 查看组件日志。
 
 ![qs-res-logs](/img/v0.4.0/quickstart/qs-res-logs.png)
 
