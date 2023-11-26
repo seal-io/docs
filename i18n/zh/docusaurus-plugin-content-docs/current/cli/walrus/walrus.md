@@ -34,7 +34,7 @@ Command line interface for Walrus
 * [walrus resourcedefinition](resourcedefinition/walrus_resourcedefinition)	 - Manage resource definitions
 * [walrus resourcerevision](resourcerevision/walrus_resourcerevision)	 - Manage resource revisions
 * [walrus role](role/walrus_role)	 - Manage roles
-* [walrus schema](/walrus_schema)	 - Manage schema for templates
+* [walrus schema](schema/walrus_schema)	 - Manage schema for templates
 * [walrus setting](setting/walrus_setting)	 - Manage settings
 * [walrus template](template/walrus_template)	 - Manage templates
 * [walrus templateversion](templateversion/walrus_templateversion)	 - Manage template versions
@@ -42,4 +42,3 @@ Command line interface for Walrus
 * [walrus workflow](workflow/walrus_workflow)	 - Manage workflows
 * [walrus workflowexecution](workflowexecution/walrus_workflowexecution)	 - Manage workflow executions
 * [walrus workflowstepexecution](workflowstepexecution/walrus_workflowstepexecution)	 - Manage workflow step executions
-
