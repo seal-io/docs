@@ -225,15 +225,15 @@ git push --tags
 
 1. Open Walrus in your browser and log in.
 2. Go to the `Template` tab under `Operations Hub` and create a template by using the template we just created, here we name the template `aliyun-ec2`.
-![create-template](/img/v0.3.0/tutorials/how-to-create-template/create-template-us.png)
+![create-template](/img/v0.4.0/tutorials/how-to-create-template/create-template-us.png)
 After the import task is completed, the template will be displayed in the template list, we can see the template version is `v0.0.1`.
-![template-version](/img/v0.3.0/tutorials/how-to-create-template/template-version-us.png)
+![template-version](/img/v0.4.0/tutorials/how-to-create-template/template-version-us.png)
 3. Add Alibaba Cloud Provider in the `Connectors` tab under `Operations Hub`.
 4. Add Connector to the Environment.
 5. Create a Service using the template `aliyun-ec2`, the form group and labels are generated according to the annotations in the template variables we defined.
-![create-service](/img/v0.3.0/tutorials/how-to-create-template/create-service-us.png)
+![create-service](/img/v0.4.0/tutorials/how-to-create-template/create-service-us.png)
 
 After the service is created, we can see the details of the service and the outputs of the template.
-![service-detail](/img/v0.3.0/tutorials/how-to-create-template/service-us.png)
+![service-detail](/img/v0.4.0/tutorials/how-to-create-template/service-us.png)
 Check the ECS instance on Alibaba Cloud console, we can see the ECS instance is created successfully.
-![ecs-instance](/img/v0.3.0/tutorials/how-to-create-template/ec2-us.png)
+![ecs-instance](/img/v0.4.0/tutorials/how-to-create-template/ec2-us.png)

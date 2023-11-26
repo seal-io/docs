@@ -223,15 +223,15 @@ git push --tags
 
 1. 在浏览器中打开 Walrus 并登录。
 2. 转到 `运维中心` 下的模板管理，使用我们刚刚创建的模板新建一个模板，这里我们将模板命名为 `aliyun-ec2`。
-![create-template](/img/v0.3.0/tutorials/how-to-create-template/create-template.png)
+![create-template](/img/v0.4.0/tutorials/how-to-create-template/create-template.png)
 导入任务完成后，模板将显示在模板列表中，我们可以看到模板版本为刚刚创建的版本`v0.0.1`。
-![template-version](/img/v0.3.0/tutorials/how-to-create-template/template-version.png)
+![template-version](/img/v0.4.0/tutorials/how-to-create-template/template-version.png)
 3. 在 `运维中心` 的 `连接器`下添加阿里云连接器。
 4. 配置阿里云连接器到环境.
 5. 使用模板 `aliyun-ec2` 创建一个服务， 表单组和标签的渲染是根据上述模板中定义的变量注释自动生成的。
-![create-service](/img/v0.3.0/tutorials/how-to-create-template/create-service.png)
+![create-service](/img/v0.4.0/tutorials/how-to-create-template/create-service.png)
 
 服务创建后，我们可以看到服务的详情和模板的输出
-![service-detail](/img/v0.3.0/tutorials/how-to-create-template/service.png)
+![service-detail](/img/v0.4.0/tutorials/how-to-create-template/service.png)
 在阿里云控制台检查 ECS 实例，我们可以看到 ECS 实例已成功创建。
-![ecs-instance](/img/v0.3.0/tutorials/how-to-create-template/ec2.png)
+![ecs-instance](/img/v0.4.0/tutorials/how-to-create-template/ec2.png)

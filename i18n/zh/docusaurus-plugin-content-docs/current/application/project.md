@@ -12,14 +12,14 @@ sidebar_position: 1
 ## 查看项目列表
 点击导航栏`应用管理`，点击上方的`项目`下拉菜单，点击`管理`，进入项目列表。
 
-![app-proj-mgt](/img/v0.3.0/application/project/app-proj-mgt.png)
+![app-proj-mgt](/img/v0.4.0/application/project/app-proj-mgt.png)
 
 ## 创建项目
 
 1. 进入项目列表。
 2. 点击`新建项目`，输入"名称"和"描述"，并打上"标签"。
 
-![app-proj-add](/img/v0.3.0/application/project/app-proj-add.png)
+![app-proj-add](/img/v0.4.0/application/project/app-proj-add.png)
 
 ## 进入项目
 
@@ -27,11 +27,11 @@ sidebar_position: 1
 
 1. 如果在"项目列表"下，点击项目名称，进入对应的项目页。
 
-![app-proj-view](/img/v0.3.0/application/project/app-proj-view.png)
+![app-proj-view](/img/v0.4.0/application/project/app-proj-view.png)
 
 2. 如果已在某个项目下，点击上方`项目`下拉菜单，选择项目名称，进入对应的项目页。
 
-![app-proj-switch](/img/v0.3.0/application/project/app-proj-switch.png)
+![app-proj-switch](/img/v0.4.0/application/project/app-proj-switch.png)
 
 ## 查询项目
 
@@ -43,14 +43,14 @@ sidebar_position: 1
 2. 点击待修改项目行`编辑`，选择更改"名称"、"描述"或"标签"。
 3. 点击`保存`，完成修改。
 
-![app-proj-edit](/img/v0.3.0/application/project/app-proj-edit.png)
+![app-proj-edit](/img/v0.4.0/application/project/app-proj-edit.png)
 
 ## 删除项目
 
 1. 进入"项目列表"。
 2. 勾选待删除项目，点击`删除`，并在弹窗中确认删除，完成删除。
 
-![app-proj-del](/img/v0.3.0/application/project/app-proj-del.png)
+![app-proj-del](/img/v0.4.0/application/project/app-proj-del.png)
 
 > 注意：
 > - 如果项目下还存在环境，项目删除将失败。
@@ -67,11 +67,19 @@ sidebar_position: 1
 
 在项目视图中，点击`连接器`标签页，可进行[连接器管理](/operation/connector)。
 
+## 模板管理
+
+在项目视图中，点击`模板`标签页，可进行[模板管理](/operation/template)。
+
+## 模版库管理
+
+在项目视图中，点击`模版库`标签页，可进行[模版库管理](/operation/catalog)。
+
 ## 成员管理
 
 在项目视图中，点击`成员`标签页，可进行成员管理。
 
-![app-proj-member](/img/v0.3.0/application/project/app-proj-member.png)
+![app-proj-member](/img/v0.4.0/application/project/app-proj-member.png)
 
 ### 查询成员
 
@@ -82,7 +90,7 @@ sidebar_position: 1
 1. 在`成员`标签页，点击`添加成员`。
 2. `选择用户`并`分配角色`后，点击`添加`，完成添加。
 
-![app-proj-member-add](/img/v0.3.0/application/project/app-proj-member-add.png)
+![app-proj-member-add](/img/v0.4.0/application/project/app-proj-member-add.png)
 
 目前，系统提供3种项目用户角色，分别是**只读**，**成员**及**所有者**。
 
@@ -94,4 +102,4 @@ sidebar_position: 1
 
 点击待删除成员行`删除`，并在弹窗中确认删除，完成删除。
 
-![app-proj-member-del](/img/v0.3.0/application/project/app-proj-member-del.png)
+![app-proj-member-del](/img/v0.4.0/application/project/app-proj-member-del.png)

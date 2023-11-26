@@ -17,13 +17,13 @@ sidebar_position: 2
 1. 通过查看环境列表的操作进入列表页面。
 2. 点击`新建环境`，输入`名称`来标识您的环境。环境名称应该是唯一的,这样您可以轻易地在环境列表中找到该环境。
 
-![qs-create-env](/img/v0.3.0/quickstart/qs-create-env.png)
+![qs-create-env](/img/v0.4.0/quickstart/qs-create-env.png)
 
 3. 根据环境的实际情况，添加`环境标签`，`环境描述`。
 4. 添加连接器，点击`添加连接器`，选择环境使用的连接器，点击`确定`按钮。
 5. 点击`保存`按钮即可保存环境配置，您就可以在应用管理中使用这个环境了。
 
-![qs-create-env2](/img/v0.3.0/quickstart/qs-create-env2.png)
+![qs-create-env2](/img/v0.4.0/quickstart/qs-create-env2.png)
 
 ## 编辑环境
 
@@ -32,7 +32,7 @@ sidebar_position: 2
 3. 根据需求修改环境的配置，添加或者删除连接器。
 4. 点击`保存`按钮即可保存环境配置。
 
-![app-env-edit](/img/v0.3.0/application/environment/app-env-edit.png)
+![app-env-edit](/img/v0.4.0/application/environment/app-env-edit.png)
 
 ## 管理服务
 
@@ -50,16 +50,16 @@ sidebar_position: 2
 
 更多依赖图详情，请参见[依赖图](/application/graph)。
 
-![app-env-graph](/img/v0.3.0/application/environment/app-env-graph.png)
+![app-env-graph](/img/v0.4.0/application/environment/app-env-graph.png)
 
-![app-env-graph-res](/img/v0.3.0/application/environment/app-env-graph-res.png)
+![app-env-graph-res](/img/v0.4.0/application/environment/app-env-graph-res.png)
 
 ## 环境变量
 
 环境变量是一种存储在环境中的键值对，可以在环境的服务中引用。 环境变量在创建或者编辑部署服务时，在配置模块中的相关参数时使用。当前环境的变量只能在当前环境中使用，不同环境的变量是相互独立的。
 > 如果项目或全局存在同名的变量,则环境中定义的变量值会覆盖项目或全局变量的值。
 
-![app/env-var](/img/v0.3.0/application/environment/app-env-var.png)
+![app/env-var](/img/v0.4.0/application/environment/app-env-var.png)
 
 使用方法：在创建服务时，在需要使用变量的输入框中输入`${var.环境变量名称}`
 
@@ -71,16 +71,16 @@ sidebar_position: 2
 1. 点击导航栏中的`应用管理`->`环境`菜单进入到环境列表。
 2. 在环境列表中选择需要克隆的环境，点击`克隆`操作。
 
-![app-env-clone](/img/v0.3.0/application/environment/app-env-clone.png)
+![app-env-clone](/img/v0.4.0/application/environment/app-env-clone.png)
 
 3. 配置克隆环境的名称、描述、标签等信息,选择连接器。
 4. 根据需要修改克隆环境中服务的配置，点击选中服务，在弹窗中可修改服务配置，点击`确定`保存修改，然后点击`保存`按钮即可完成克隆环境。
 
-![app-env-clone-details](/img/v0.3.0/application/environment/app-env-clone-details.png)
+![app-env-clone-details](/img/v0.4.0/application/environment/app-env-clone-details.png)
 
 5. 克隆环境创建完成后，您可以在应用管理中使用这个环境了，被克隆的服务也会自动根据依赖关系自动编排部署，您可以在服务列表中查看服务的状态。
 
-![app-env-clone-deploy](/img/v0.3.0/application/environment/app-env-clone-deploy.png)
+![app-env-clone-deploy](/img/v0.4.0/application/environment/app-env-clone-deploy.png)
 
 ## 删除环境
 
