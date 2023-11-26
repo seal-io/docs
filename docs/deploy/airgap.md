@@ -192,7 +192,7 @@ Navigate to `Operation Hub` -> `Catalogs`, check the `builtin` catalog, and choo
 
 And then choose `Add Catalog`, enter the catalog's name, description, source and choose type. For the source address, provide the complete git organization/group URL of the intranet catalog, such as https://github.com/walrus-catalog. Confirm and save.
 
-![create](/static/img/v0.4.0/catalog/create-en.png)
+![create](/img/v0.4.0/catalog/create-en.png)
 
 Confirm that the intranet catalog is refreshing correctly. Navigate to `Operation Hub` -> `Templates` and verify that the templates load successfully.
 
