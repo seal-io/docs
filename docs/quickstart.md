@@ -70,7 +70,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-create-svc](/img/v0.4.0/quickstart/qs-create-svc-en.png)
 
-3. Fill in the service name, such as `container-service`, and make sure the template is selected as `kubernetes-containerservice`.
+3. Fill in the service name, such as `myapp`, and make sure the template is selected as `kubernetes-containerservice`.
 4. Enter `nginx` image in the Image Name of the template configuration, and click confirm.
 
 ![qs-create-svc2](/img/v0.4.0/quickstart/qs-create-svc2-en.png)

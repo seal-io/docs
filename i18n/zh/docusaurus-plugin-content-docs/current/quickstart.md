@@ -70,7 +70,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-create-svc](/img/v0.4.0/quickstart/qs-create-svc.png)
 
-3. 填写服务名称，如`container-service`，确认模板选中`kubernetes-containerservice`。
+3. 填写服务名称，如`myapp`，确认模板选中`kubernetes-containerservice`。
 4. 在模板配置的 Image Name 中输入`nginx`镜像，点击确定。
 
 ![qs-create-svc2](/img/v0.4.0/quickstart/qs-create-svc2.png)
