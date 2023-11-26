@@ -82,7 +82,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-logs](/img/v0.4.0/quickstart/qs-logs-en.png)
 
-- View components logs.
+- View component logs.
 
 ![qs-res-logs](/img/v0.4.0/quickstart/qs-res-logs-en.png)
 
