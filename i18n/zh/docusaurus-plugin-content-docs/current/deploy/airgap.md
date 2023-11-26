@@ -190,7 +190,7 @@ kubectl apply -f walrus.yaml
 
 然后选择添加模板库，输入模板库的名称、描述、来源。来源地址填写离线模板库的完整git organization/group地址，例如 `https://github.com/walrus-catalog`，确定保存。
 
-![create](/static/img/v0.4.0/catalog/create.png)
+![create](/img/v0.4.0/catalog/create.png)
 
 确认内网模板库正常刷新，切换到 `运维中心` - `模板`，验证模板正常加载。
 
