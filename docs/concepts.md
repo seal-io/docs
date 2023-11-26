@@ -14,9 +14,9 @@ Projects are your workspaces for team collaboration. You can use projects to gro
 
 Environments represent the deployment targets for applications, such as development, testing, production, etc.
 
-## Services
+## Services and Resources
 
-Services are the deployment units of applications, typically containing configuration, images, and resources. Services are created using service templates.
+Services and resources are the deployment units of applications. Services are generated from service templates and linked to specific deployment patterns. They are characteristically monomorphic but designed to be portable across different environments. For example, Kubernetes container services demonstrate this concept. Resources refer to the necessary infrastructure to operate a service, including elements such as BigTable databases, Pub/Sub topics, S3 buckets, and CDNs. Although these resources can vary in implementation across different infrastructures, they maintain a uniform definition through their polymorphic operations.
 
 ## Templates
 
