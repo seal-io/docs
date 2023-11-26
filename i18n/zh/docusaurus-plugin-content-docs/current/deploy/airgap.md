@@ -8,7 +8,7 @@ sidebar_position: 2
 
 > 前置条件：
 > - 提供内网容器镜像仓库，例如Harbor。
-> - 提供内网Git服务器，例如GitLab。
+> - 提供内网Git代码库，例如GitLab。
 > - 开放Walrus所在服务器到镜像仓库和Git服务器的访问。
 
 ## 准备离线镜像
@@ -188,9 +188,9 @@ kubectl apply -f walrus.yaml
 
 进入 `运维中心` 的 `模板库`，勾选 `builtin` 模板库，选择删除。
 
-然后选择添加模板库，输入模板库的名称、描述、来源。来源地址填写离线模板库的完整Git组织地址，例如 `https://github.com/walrus-catalog`，确定保存。
+然后选择添加模板库，输入模板库的名称、描述、来源。来源地址填写离线模板库的完整git organization/group地址，例如 `https://github.com/walrus-catalog`，确定保存。
 
-![create](/static/img/v0.3.0/catalog/create.png)
+![create](/static/img/v0.4.0/catalog/create.png)
 
 确认内网模板库正常刷新，切换到 `运维中心` - `模板`，验证模板正常加载。
 
