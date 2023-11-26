@@ -10,6 +10,12 @@ Delete a template.
 walrus template delete <template> [flags]
 ```
 
+## Options
+
+```
+      --project string   
+```
+
 ## Options inherited from parent commands
 
 ```

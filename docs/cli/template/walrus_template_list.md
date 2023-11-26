@@ -15,10 +15,14 @@ walrus template list [flags]
 ```
       --catalog-id strings   
       --extract strings      
+      --is-service           
+      --non-catalog          
       --page int              (default 1)
       --per-page int          (default 100)
+      --project string       
       --query string         
       --sort strings         
+      --with-global          
 ```
 
 ## Options inherited from parent commands

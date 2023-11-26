@@ -13,7 +13,7 @@ Manage catalogs
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus catalog create](walrus_catalog_create)	 - Create a catalog.
 * [walrus catalog delete](walrus_catalog_delete)	 - Delete a catalog.
 * [walrus catalog get](walrus_catalog_get)	 - Get a catalog.

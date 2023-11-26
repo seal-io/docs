@@ -13,7 +13,6 @@ walrus setting update <setting> [flags]
 ## Options
 
 ```
-      --name string    
       --value string   
 ```
 

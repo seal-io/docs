@@ -13,7 +13,7 @@ Manage perspectives
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus perspective create](walrus_perspective_create)	 - Create a perspective.
 * [walrus perspective delete](walrus_perspective_delete)	 - Delete a perspective.
 * [walrus perspective get](walrus_perspective_get)	 - Get a perspective.

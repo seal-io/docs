@@ -13,7 +13,7 @@ Manage connectors
 
 ## SEE ALSO
 
-* [walrus](../walrus)	 - walrus is the command line interface for Walrus
+* [walrus](../walrus)	 - Command line interface for Walrus
 * [walrus connector apply-cost-tools](walrus_connector_apply-cost-tools)	 - Apply cost tools for a connector.
 * [walrus connector create](walrus_connector_create)	 - Create a connector.
 * [walrus connector delete](walrus_connector_delete)	 - Delete a connector.

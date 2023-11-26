@@ -31,6 +31,9 @@ Walrus提供了以下两种层级的连接器：
 
 ## 创建连接器
 
+> 注意:
+> 自v0.4.0起，创建连接器时需要选择`适用环境类型`，请查看[环境类型](/application/environment#environment-type)以了解更多信息。
+
 ### 创建 Kubernetes 连接器
 
 1. 在连接器列表点击`新建连接器`，选择`Kubernetes`。
@@ -38,7 +41,8 @@ Walrus提供了以下两种层级的连接器：
 ![connector-create](/img/v0.4.0/quickstart/qs-add-connector.png)
 
 2. 默认开启`启用成本分析`，启用后可在左侧菜单`成本管理`中可创建相关视图查看统计相关的消费金额。
-3. 填写表单，`保存`成功后即可创建 Kubernetes 连接器。
+3. 选择`适用环境类型`。
+4. 填写表单，`保存`成功后即可创建 Kubernetes 连接器。
    
 ![connector-create-k8s](/img/v0.4.0/opration/connector/op-conn-create-k8s.png)
 
@@ -46,7 +50,8 @@ Walrus提供了以下两种层级的连接器：
 
 1. 在连接器列表点击`新建连接器`，选择`云厂商`。
 2. 配置`名称`，`类型`，`AccessKey`，`SecretKey`，`Region`连接。
-3. 填写表单，`保存`成功后即可创建云厂商。
+3. 选择`适用环境类型`。
+4. 填写表单，`保存`成功后即可创建云厂商。
 
 ![connector-create-cloud](/img/v0.4.0/opration/connector/op-conn-create-cloud.png)
 
@@ -54,15 +59,17 @@ Walrus提供了以下两种层级的连接器：
 
 1. 在连接器列表点击`新建连接器`，选择`版本控制`。
 2. 选择类型，目前支持 GitHub，填写相应的 `Access token`，需要开启 repo 的操作权限。
-3. 填写表单`保存`成功可创建版本控制连接器。
+3. 选择`适用环境类型`。
+4. 填写表单`保存`成功可创建版本控制连接器。
 
 ![connector-create-vcs](/img/v0.4.0/opration/connector/op-conn-create-vcs.png)
 
 ### 创建自定义连接器
 
 1. 在连接器列表点击`新建连接器`，选择`自定义`。
-2. 类型为第三方平台 Terraform Provider 的类型，如：aws, alicloud。
-3. 添加属性，例如：Provider 为 [alicloud](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs)，则需填写 access_key，secret_key，region。
+2. 类型为第三方平台 Terraform Provider 的类型，如：AWS, AliCloud。
+3. 选择`适用环境类型`。
+4. 添加属性，例如：Provider 为 [alicloud](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs)，则需填写 access_key，secret_key，region。
 
 ```
 provider "alicloud" {

@@ -10,6 +10,12 @@ Get an environment of a project.
 walrus environment get <environment> [flags]
 ```
 
+## Options
+
+```
+      --include-summary   
+```
+
 ## Options inherited from parent commands
 
 ```

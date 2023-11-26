@@ -10,6 +10,12 @@ Refresh for a catalog.
 walrus catalog refresh <catalog> [flags]
 ```
 
+## Options
+
+```
+      --project string   
+```
+
 ## Options inherited from parent commands
 
 ```

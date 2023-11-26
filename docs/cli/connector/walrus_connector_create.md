@@ -13,16 +13,17 @@ walrus connector create [flags]
 ## Options
 
 ```
-      --category string               
-      --config-data json               (default {}...)
-      --config-version string         
-      --description string            
-      --enable-fin-ops                
-      --fin-ops-custom-pricing json    (default {}...)
-      --labels stringToString          (default [])
-      --name string                   
-      --project string                
-      --type string                   
+      --applicable-environment-type string   
+      --category string                      
+      --config-data json                      (default {}...)
+      --config-version string                
+      --description string                   
+      --enable-fin-ops                       
+      --fin-ops-custom-pricing json           (default {}...)
+      --labels stringToString                 (default [])
+      --name string                          
+      --project string                       
+      --type string                          
 ```
 
 ## Options inherited from parent commands

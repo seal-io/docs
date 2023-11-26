@@ -16,6 +16,7 @@ walrus catalog create [flags]
       --description string      
       --labels stringToString    (default [])
       --name string             
+      --project string          
       --source string           
       --type string             
 ```

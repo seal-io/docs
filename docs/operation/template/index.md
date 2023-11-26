@@ -10,72 +10,187 @@ A template is a pre-defined service framework or architecture which includes a s
 
 Walrus currently supports Terraform module as the template type which is stored in git code repositories.
 
-## Template version
+## Template Sources
 
-Walrus supports managing multiple versions of templates in the same git codebase. Template versions need to use semantic versioning, imported through code repository Tags, currently supporting version number format vX.Y.Z, where X, Y, Z are numbers, e.g. v0.0.1. Template versions need to be placed in the following directory structure:
+- Catalog Import
+
+A catalog is a collection of templates. After adding a catalog, all templates included in the library will be automatically imported.
+
+- Create Independent Template
+
+Add an independent template with a git repository address through the Walrus UI.
+
+## Template Structure
+
+Walrus supports a template structure compatible with Terraform modules, including the following files.
+
 ```shell
 <path-to-template>
-│── README.md
-│── main.tf
-│── outputs.tf
-│── variables.tf
+├── README.md
+├── main.tf
+├── outputs.tf
+├── variables.tf
+├── schema.yaml
+├── icon.svg
 ```
 
-## Template Source
+- main.tf
 
-The template source is the address of a git repository, e.g. https://github.com/walrus-catalog/webservice.
+The main file for Terraform configuration, containing resource definitions and configurations.
 
-It will sync the repository tags to set the template versions. You can alse specify the template version with the query parameter `ref` at the end, such as:
-- https://github.com/walrus-catalog/webservice?ref=v0.0.1
+- variables.tf
 
-The ref value can be a branch name, tag name or a commit hash. It will be useful when you want to use a specific version of the template. If you have an branch named `dev`, you can use the following url to specify the branch:
-- https://github.com/walrus-catalog/webservice?ref=dev
+Configuration file for Terraform variables. In this file, you define information such as variable names, types, default values, and more.
+
+- outputs.tf
+
+Configuration file for Terraform outputs. Outputs allow you to export specific values from Terraform execution for use by other Terraform configurations, scripts, or manual operations. In this file, you define output names and their associated values.
+
+- schema.yaml
+
+Configuration file for defining the template UI style. The content of schema.yaml is in the openAPI format of UI Schema, which includes custom configurations such as variable types, styles, validations, default values, etc., from variables.tf.
+
+- icon.svg
+
+The template will use the image file named "icon" in the root path of the default branch of the source repository as the template's icon. The supported image file formats are: .png, .jpg, .jpeg, .svg. If no icon file is found, the default icon will be used.
+
+## Customizing Template UI Styles
+Walrus extends style definitions based on Terraform variables through UI Schema, aiding in generating more user-friendly forms on the interface.
+
+### Configuration Method
+
+#### schema.yaml
+
+UI styles can be configured by adding a schema.yaml in the template repository. If the repository includes schema.yaml, Walrus will use the UI styles configured in schema.yaml.
+
+Below is an example of schema.yaml:
+
+```yaml
+openapi: 3.0.3
+info:
+  title: OpenAPI schema for template webservice
+components:
+  schemas:
+    variables:
+      required:
+        - image
+      type: object
+      properties:
+        image:
+          title: Image Name
+          type: string
+          description: Docker image name
+          x-walrus-ui:
+            group: Basic
+        ports:
+          title: Ports
+          type: array
+          description: Service ports to expose
+          default:
+            - 80
+          items:
+            type: number
+          x-walrus-ui:
+            group: Basic
+```
+
+Walrus provides a tool to generate the schema.yaml file based on the Terraform module.
+
+1. Go to [Walrsu Release](https://github.com/seal-io/walrus/releases) and download walrus-cli.
+2. Run the command to grant permission: `chmod +x walrus-cli`
+3. Run the command to generate schema.yaml: `walrus-cli schema generate --dir=${dir for module}`
+
+#### Walrus UI Configuration
+
+When the repository does not include a schema.yaml file, Walrus will automatically configure UI styles based on the variables.tf file. The generated styles can be viewed in the template's UI Schema.
+
+### Configuration Items
+
+UI Schema is based on the OpenAPI 3.0 file structure, written in YAML format. It includes both the basic structure of the OpenAPI Schema and the extensions part, combining to define extended styles.
 
 
-## Variable style extension
+### OpenAPI Schema Basic Configuration
 
-Walrus has extended the Terraform variable definition to support additional attributes describing the variable style, which is useful in generating user-friendly forms on the user interface. The extended styles are defined by HCL annotations.
+| Name        | Description                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------------------------------- |
+| title       | Display name of the variable                                                                                         |
+| type        | Variable type                                                                                                        |
+| description | Variable description                                                                                                 |
+| default     | Default value of the variable                                                                                        |
+| format      | Supports configuring a password, using a password input box for string variables                                     |
+| enum        | Optional range of variable values                                                                                    |
+| readOnly    | Restricts the variable value from being modified                                                                     |
+| writeOnly   | Restricts the variable as write-only                                                                                 |
+| minimum     | Restricts the minimum value for number/integer-type variables                                                        |
+| maximum     | Restricts the maximum value for number/integer-type variables                                                        |
+| minLength   | Restricts the minimum length for string-type variables                                                               |
+| maxLength   | Restricts the maximum length for string-type variables                                                               |
+| required    | Configures the required sub-variables for Object-type variables, with an array containing the names of sub-variables |
+| properties  | Used for configuring sub-variables for object-type variables                                                         |
+| items       | Used for configuring elements for array-type variables                                                               |
 
-| Attribute Name | Type | Description | Example |
-|----------------|------|-------------|---------|
-| label | String | UI labels | @label "Name" |
-| group | String | Grouping | @group "Basic Information" |
-| options | Array | Option list| @options ["NodePort","ClusterIP","LoadBalancer"] |
-| show_if | String | Show condition, displays the variable only if the condition is true | @show_if "cluster_type=NodePort" |
-| hidden | Boolean | Whether to show on UI | @hidden |
+### x-walrus-ui Extension Configuration
 
-The following is a sample for the variable extension:
+OpenAPI supports additional properties with the x- prefix, and Walrus supports additional configuration of styles through the x-walrus-ui extension.
+
+| Name      | Description                                |
+| --------- | ------------------------------------------ |
+| group     | Variable grouping                          |
+| hidden    | Whether to hide the variable               |
+| immutable | Whether the variable supports modification |
+| showIf    | Variable display condition                 |
+| widget    | Configures the use of Walrus controls      |
+
+### Walrus Extension Widget
+
+Built-in extension controls within Walrus can be configured in the widget, and the UI will display according to the configured style.
+
+| Name       | Description          |
+| ---------- | -------------------- |
+| YamlEditor | YAML editor          |
+| TextArea   | Multi-line input box |
+
+## Runtime Context
+
+In the template, runtime context information related to projects, environments, and resources can be obtained through the context variable. You need to declare the context variable in the template, and Walrus will automatically inject the value of the context variable during deployment. The declaration is as follows:
+
 ```hcl
-# variables.tf
+variable "context" {
+  description = <<-EOF
+Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.
 
-# @group "Resources"
-# @label "CPU Limit"
-# @options ["0.5","1","2"]
-# @show_if "advanced=true"
-variable "limit_cpu" {
-  type        = string
-  description = "CPU limit. e.g. 0.5, 1, 2"
-  default     = "0.5"
+Examples:
+context:
+  project:
+    name: string
+    id: string
+  environment:
+    name: string
+    id: string
+  resource:
+    name: string
+    id: string
+EOF
+  type        = map(any)
+  default     = {}
 }
 ```
 
-## Metadata Variables
+The context information is as follows:
 
-Walrus provides the following metadata variables. When you declare matching variable names in your template, Walrus injects the values of the metadata variables during deployment.
+| Context     | Sub  Context | Property	Type | Description                                                       |
+| ----------- | ------------ | ------------- | ----------------------------------------------------------------- |
+| project     | name         | String        | Project name to which the resource belongs                        |
+| project     | id           | String        | Project ID to which the resource belongs                          |
+| environment | name         | String        | Environment name to which the resource belongs                    |
+| environment | id           | String        | Environment ID to which the resource belongs                      |
+| environment | namespace    | String        | Namespace managed by Walrus, available in Kubernetes environments |
+| resource    | name         | String        | Service name                                                      |
+| resource    | id           | String        | Service ID                                                        |
 
-| Variable Name                  | Type | Description                                                                            |
-|--------------------------------|-----|----------------------------------------------------------------------------------------|
-| walrus_metadata_project_name   | String | Service project name                                                                   |
-| walrus_metadata_project_id       | String | Service project ID                                                                     |
-| walrus_metadata_environment_name | String | Service environment name                                                               |
-| walrus_metadata_environment_id   | String | Service environment ID                                                                 |
-| walrus_metadata_service_name     | String | Service name                                                                           |
-| walrus_metadata_service_id       | String | Service ID                                                                             |
-| walrus_metadata_namespace_name   | String | Name of the Walrus-managed environment namespace, available in Kubernetes environments |
+## Output
 
-## Outputs
-
-Walrus will capture the outputs defined in the Terraform files. After deployment, outputs will be displayed on the service output page. Walrus supports capturing custom Access URLs. Configure the output name to start with`endpoint` (as shown below), and these outputs will be captured by Walrus and displayed as `Access URLs`.
+Walrus captures the outputs defined in the Terraform file, and after deployment, the outputs will be displayed on the service's output page. Walrus supports capturing user-defined access URLs. Configure the output name with endpoint as a prefix (as shown in the configuration below), and Walrus will capture these outputs as Access URL for display.
 
 ```hcl
 output "endpoint_web" {

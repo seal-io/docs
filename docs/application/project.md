@@ -92,9 +92,9 @@ Enter the member (user) name, click `Search` to conduct a fuzzy search based on 
 
 ![app-proj-member-add](/img/v0.4.0/application/project/app-proj-member-add-en.png)
 
-Currently, the system provides 3 kinds of project user roles, which are **Read-Only**, **Member**, and **Owner**.
+Currently, the system provides 3 kinds of project user roles, which are **Viewer**, **Member**, and **Owner**.
 
-- **Read-Only**: Can only read the resources at the project level.
+- **Viewer**: Can only read the resources at the project level.
 - **Member**: Can manage the configuration of resources at the project level, such as creating services, configuring variables, changing connectors, etc.
 - **Owner**: Has the highest authority of the project, in addition to managing the configuration of project resources, they can also manage project members. The admin is usually the owner of all projects.
 
