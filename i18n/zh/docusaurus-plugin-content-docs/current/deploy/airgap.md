@@ -56,7 +56,7 @@ sudo docker run -d --privileged --restart=always --name walrus \
   -p 80:80 -p 443:443 \
   -e SERVER_SETTING_IMAGE_REGISTRY='registry.example.com' \
   -e SERVER_SETTING_DEPLOYER_IMAGE='registry.example.com/sealio/terraform-deployer:v0.1.4-airgap'  \
-  registry.example.com/sealio/walrus:v0.4.0
+  registry.example.com/sealio/walrus:{{ VERSION }}
 ```
 
 如果内网镜像仓库为私有仓库，需要配置认证信息才能拉取镜像，则需要额外的配置，步骤如下。
@@ -94,7 +94,7 @@ sudo docker run -d --privileged --restart=always --name walrus \
   -e SERVER_SETTING_IMAGE_REGISTRY='registry.example.com' \
   -e SERVER_SETTING_DEPLOYER_IMAGE='registry.example.com/sealio/terraform-deployer:v0.1.4-airgap'  \
   -v /etc/walrus/k3s/registries.yaml:/etc/rancher/k3s/registries.yaml \
-  registry.example.com/sealio/walrus:v0.4.0
+  registry.example.com/sealio/walrus:{{ VERSION }}
 ```
 
 3. Walrus容器运行起来后，进入Walrus容器验证私有镜像仓库配置是否生效：
@@ -126,7 +126,7 @@ spec:
     spec:
       containers:
         - name: walrus-server
-          image: sealio/walrus:v0.4.0
+          image: sealio/walrus:{{ VERSION }}
           ...
           env:
             - name: SERVER_SETTING_IMAGE_REGISTRY
