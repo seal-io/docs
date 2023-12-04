@@ -114,7 +114,8 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "database"
 spec:
-  storageClassName: standard
+  # When a PVC does not specify a storageClassName,
+  # the default StorageClass is used.
   accessModes:
     - ReadWriteOnce
   resources:
@@ -412,6 +413,45 @@ metadata:
     "app.kubernetes.io/component": "walrus"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: walrus
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+rules:
+  - apiGroups:
+      - "apiextensions.k8s.io"
+    resources:
+      - "customresourcedefinitions"
+    verbs:
+      - "*"
+  - apiGroups:
+      - "rbac.authorization.k8s.io"
+    resources:
+      - "clusterroles"
+      - "roles"
+      - "rolebindings"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: walrus
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+subjects:
+  - kind: ServiceAccount
+    name: walrus
+    namespace: walrus-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: walrus
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: walrus-system
@@ -420,6 +460,13 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "walrus"
 rules:
+  - apiGroups:
+      - "authorization.k8s.io"
+    resources:
+      - "subjectaccessreviews"
+      - "selfsubjectaccessreviews"
+    verbs:
+      - "create"
   - apiGroups:
       - "batch"
     resources:
@@ -433,6 +480,9 @@ rules:
       - "pods"
       - "pods/log"
       - "events"
+      - "services"
+      - "configmaps"
+      - "serviceaccounts"
     verbs:
       - "*"
   - apiGroups:
@@ -441,6 +491,38 @@ rules:
       - "leases"
     verbs:
       - "*"
+  - apiGroups:
+      - "apps"
+    resources:
+      - "deployments"
+      - "replicasets"
+    verbs:
+      - "*"
+  - apiGroups:
+    - ""
+    resources:
+    - events
+    verbs:
+    - get
+    - watch
+    - list
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - eventsources
+      - sensors
+      - workflows
+      - workfloweventbindings
+      - workflowtemplates
+      - cronworkflows
+    verbs:
+      - create
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - delete
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -459,6 +541,133 @@ roleRef:
   name: walrus
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: walrus-system
+  name: walrus-deployer
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: walrus-system
+  name: walrus-deployer
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+rules:
+  - apiGroups:
+      - "batch"
+    resources:
+      - "jobs"
+    verbs:
+      - "*"
+  - apiGroups:
+      - ""
+    resources:
+      - "secrets"
+      - "pods"
+      - "pods/log"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: walrus-system
+  name: walrus-deployer
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+subjects:
+  - kind: ServiceAccount
+    name: walrus-deployer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: walrus-deployer
+---
+# Service account for workflow.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: walrus-system
+  name: walrus-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: walrus-system
+  name: walrus-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+rules:
+  # The below rules are used for running workflow.
+  - apiGroups:
+      - ""
+    resources:
+      - "pods"
+    verbs:
+      - "get"
+      - "watch"
+      - "patch"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods/logs"
+    verbs:
+      - "get"
+      - "watch"
+  - apiGroups:
+      - ""
+    resources:
+      - "secrets"
+    verbs:
+      - "get"
+  - apiGroups:
+      - "argoproj.io"
+    resources:
+      - "workflowtasksets"
+    verbs:
+      - "watch"
+      - "list"
+  - apiGroups:
+      - "argoproj.io"
+    resources:
+      - "workflowtaskresults"
+    verbs:
+      - "create"
+      - "patch"
+  - apiGroups:
+      - "argoproj.io"
+    resources:
+      - "workflowtasksets/status"
+    verbs:
+      - "patch"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: walrus-system
+  name: walrus-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+subjects:
+  - kind: ServiceAccount
+    name: walrus-workflow
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: walrus-workflow
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: walrus-system
@@ -467,7 +676,8 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "walrus"
 spec:
-  storageClassName: standard
+  # When a PVC does not specify a storageClassName,
+  # the default StorageClass is used.
   accessModes:
     - ReadWriteOnce
   resources:
@@ -598,6 +808,9 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 10
             httpGet:
+              httpHeaders:
+                - name: "User-Agent"
+                  value: ""
               port: 80
               path: /livez
           volumeMounts:
@@ -613,8 +826,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: walrus
-
-EOF
 ```
 
 3. Apply the YAML:
