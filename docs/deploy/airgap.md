@@ -106,7 +106,7 @@ cat /var/lib/k3s/agent/etc/containerd/config.toml
 
 For more details, refer to the official K3s documentation [K3s Private Registry Configuration](https://docs.k3s.io/installation/private-registry).
 
-4. Access the Walrus UI, and after the initial login, navigate to `https://<WALRUS_URL>/v1/settings`. Validate whether the `ImageRegistry` and `DeployerImage` settings are effective.
+3. Access the Walrus UI, and after the initial login, navigate to `https://<WALRUS_URL>/v1/settings`. Validate whether the `ImageRegistry` and `DeployerImage` settings are effective.
 
 ### High Availability Installation
 
