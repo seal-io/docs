@@ -48,7 +48,7 @@ openssl rand -hex 16
 sudo docker run -d --privileged --restart=always \
   -p 80:80 -p 443:443 \
   -e SERVER_DATA_SOURCE_DATA_ENCRYPTION=aesgcm:${the output from step 1} \
-  sealio/walrus:{{ VERSION }}
+  sealio/walrus:v0.3.1
 
 ```
 
