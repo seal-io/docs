@@ -16,7 +16,7 @@
 执行以下命令启动 Walrus 服务：
 
 ```shell
-sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 --name walrus sealio/walrus:{{ VERSION }}
+sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 --name walrus sealio/walrus:v0.3.1
 ```
 
 更多部署要求，请参考[部署](/deploy/standalone)。

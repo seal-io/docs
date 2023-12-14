@@ -17,7 +17,7 @@ sidebar_position: 1
 ```shell
 sudo docker run -d --privileged --restart=always \
   -p 80:80 -p 443:443 \
-  sealio/walrus:{{ VERSION }}
+  sealio/walrus:v0.3.1
 ```
 
 ## 配置TLS
@@ -38,7 +38,7 @@ sudo docker run -d --privileged --restart=always \
 sudo docker run -d --privileged --restart=always \
  -p 80:80 -p 443:443 \
  -e SERVER_TLS_AUTO_CERT_DOMAINS=<YOUR_DOMAIN_NAME> \
- sealio/walrus:{{ VERSION }}
+ sealio/walrus:v0.3.1
 ```
 
 上述采用的是 [HTTP-01](https://letsencrypt.org/docs/challenge-types/#http-01-challenge) 挑战模式，如果**无法开放80端口**，将自动转为使用 [TLS-ALPN-01](https://letsencrypt.org/docs/challenge-types/#tls-alpn-01) 挑战模式。
@@ -47,7 +47,7 @@ sudo docker run -d --privileged --restart=always \
 sudo docker run -d --privileged --restart=always \
  -p 443:443 \
  -e SERVER_TLS_AUTO_CERT_DOMAINS=<YOUR_DOMAIN_NAME> \
- sealio/walrus:{{ VERSION }}
+ sealio/walrus:v0.3.1
 ```
 
 ### 使用自定义的证书
@@ -65,7 +65,7 @@ sudo docker run -d --privileged --restart=always \
   -v /<CERT_FILE>:/etc/walrus/ssl/cert.pem \
   -e SERVER_TLS_PRIVATE_KEY_FILE=/etc/walrus/ssl/key.pem \
   -e SERVER_TLS_CERT_FILE=/etc/walrus/ssl/cert.pem \
-  sealio/walrus:{{ VERSION }}
+  sealio/walrus:v0.3.1
 ```
 
 ### 使用TLS终止
@@ -79,7 +79,7 @@ sudo docker run -d --privileged --restart=always \
 sudo docker run -d --privileged --restart=always \
   -p 80:80 \
   -e SERVER_ENABLE_TLS=false \
-  sealio/walrus:{{ VERSION }}
+  sealio/walrus:v0.3.1
 ```
 
 ## 配置数据库
@@ -101,7 +101,7 @@ docker run -d --restart=always \
 sudo docker run -d --privileged --restart=always \
   -p 80:80 -p 443:443 \
   -e SERVER_DATA_SOURCE_ADDRESS="postgres://root:Root123@<postgres-ip-address>:5432/walrus?sslmode=disable"\
-  sealio/walrus:{{ VERSION }}
+  sealio/walrus:v0.3.1
 ```
 
 ## 配置HTTP代理
@@ -113,7 +113,7 @@ sudo docker run -d --privileged --restart=always \
   -e HTTP_PROXY="http://192.168.0.100:3128" \
   -e HTTPS_PROXY="http://192.168.0.100:3128" \
   -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,.svc,.cluster.local,example.com" \
-  sealio/walrus:{{ VERSION }}
+  sealio/walrus:v0.3.1
 ```
 > 注意：
 > - 如果有任何连接器(K8s、云或任何其他基础设施)想要添加到Walrus，并且应该绕过代理，请确保在运行Walrus时，将其访问地址(例如，kubeconfig中的K8s API server地址、特定云URL的域名或IP地址)合并到“NO_PROXY”配置中。

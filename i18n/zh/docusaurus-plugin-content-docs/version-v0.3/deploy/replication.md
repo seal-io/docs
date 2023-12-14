@@ -533,7 +533,7 @@ spec:
       serviceAccountName: walrus
       containers:
         - name: walrus-server
-          image: sealio/walrus:{{ VERSION }}
+          image: sealio/walrus:v0.3.1
           imagePullPolicy: Always
           resources:
             limits:
