@@ -1,0 +1,31 @@
+# walrus template get
+
+Get a template.
+
+## Synopsis
+
+Get a template.
+
+```
+walrus template get <template> [flags]
+```
+
+## Options
+
+```
+      --project string   
+```
+
+## Options inherited from parent commands
+
+```
+  -d, --debug           Enable debug log
+  -h, --help            Help for this command
+  -o, --output string   Output format [table, json, yaml] (default "table")
+  -v, --version         Version for CLI
+```
+
+## SEE ALSO
+
+* [walrus template](walrus_template)	 - Manage templates
+
