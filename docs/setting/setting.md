@@ -35,7 +35,7 @@ The system supports the following settings:
 
 - **Basic**
     - `Deployer Image`: The container image used by Walrus for resource deployment, like [Terraform Deployer](https://github.com/seal-io/terraform-deployer), [OpenTofu Deployer](https://github.com/seal-io/opentofu-deployer), or other similar container images.
-    - `Deployer Network Mirror URL`: The URL provided mirrors the Terraform/OpenTofu Providers, which effectively improve download speed and avoid version management anxiety. By default, Walrus batteries up [Hermit Crab](https://github.com/seal-io/hermitcrab) as a Provider Mirroring Service, you can simply copy the `https://walrus-mirror-hermitcrab.walrus-system/v1/providers/` here and paste it.
+    - `Deployer Network Mirror URL`: The URL provided mirrors the Terraform/OpenTofu Providers, which effectively improve download speed and avoid version management anxiety. By default, Walrus batteries up [Hermit Crab](https://github.com/seal-io/hermitcrab) as a Provider Mirroring Service, you can simply copy the `https://walrus-mirror-hermitcrab.walrus-system/v1/providers/` from here and paste it.
 - **Proxy**
     - `HTTP_PROXY`: Provides a proxy address, proxying non-TLS HTTP outbound traffic. It applies to the resource deployment execution environment, defaults to the same configuration as the Walrus server.
     - `HTTPS_PROXY`: Provides a proxy address, proxying TLS HTTP outbound traffic. It applies to the resource deployment execution environment, defaults to the same configuration as the Walrus server.
