@@ -12,22 +12,24 @@ and usage under certain conditions. This enables Walrus to understand and manage
 1. Click on `Operation Hub` in the left-hand sidebar.
 2. Select the `Resource Definitions` tab to view the list of resource definitions.
 
-![connector-list](/img/v0.4.0/operation/definition/op-definition-list-en.png)
+![definition-list](/img/v0.5.0/operation/definition/op-definition-list-en.png)
 
 ## Viewing Resource Definition Details
 
 1. Navigate to `Operation Hub` -> `Resource Definitions` in the left-hand sidebar to access the list of resource definitions.
 2. Locate the resource definition you wish to view and click on its name to open its detailed page.
+3. On the resource definition details page, you can view detailed information about the resource definition, including its matching rules, inputs and outputs, UI schema, and the list of resources created using this resource definition.
+4. In the list of created resources, you can manage resources by starting, stopping, deploying, deleting, etc. The list supports filtering by project name and matching rules.
+
+![definition-detail](/img/v0.5.0/operation/definition/op-definition-detail-en.png)
 
 ## Creating a Resource Definition
 
 1. Select `New Resource Definition` in the list of resource definitions.
-2. Complete the form. `Name` serves as the identifier of the resource definition, while `Type` denotes the resource's type. Both `Name` and
-   `Type` must be unique within the system. `Matching Rules` specify how resources of this type align with templates under
-   certain conditions. For more information, refer to [Resource Definition Matching Rules](#resource-definition-matching-rules).
+2. Complete the form. `Name` serves as the identifier of the resource definition and must be unique within the system. `Type` represents the type of resource, and multiple resource definitions can exist under the same `Type`. `Matching Rules` specifies how resources of this type align with templates under certain conditions. For more information, see [Resource Definition Matching Rules](#resource-definition-matching-rules).
 3. Click `Save` to finalize the creation.
 
-![connector-create-k8s](/img/v0.4.0/operation/definition/op-definition-create-en.png)
+![definition-create](/img/v0.5.0/operation/definition/op-definition-create-en.png)
 
 ## Deleting a Resource Definition
 
@@ -36,7 +38,7 @@ and usage under certain conditions. This enables Walrus to understand and manage
 3. Before selecting the resource definition for deletion, ensure no existing resources depend on it. Then, click the `Delete` button.
 4. Confirm the deletion by clicking the `Confirm` button.
 
-![connector-delete](/img/v0.4.0/operation/definition/op-definition-del-en.png)
+![definition-delete](/img/v0.5.0/operation/definition/op-definition-del-en.png)
 
 ## Resource Definition Matching Rules
 
@@ -50,10 +52,16 @@ A single matching rule can include multiple selectors. These selectors are based
 For instance, a matching rule with selectors `Project Name=foo` and `Environment Name=dev` matches a resource in
 the `foo` project's `dev` environment, whereas it doesn't match a resource in the `test` environment.
 
+![definition-selector](/img/v0.5.0/operation/definition/op-definition-selector-en.png)
+
 ### Rule Precedence
 
 Matching rules are not required to be exclusive. That is, multiple rules can match a single resource.
-In such scenarios, the first matched rule is selected based on the order of the matching rules in the resource definition.
+In such scenarios, the rule with the highest priority is used. Priority is determined by the score of the selectors matched in the rule, with a higher score leading to a higher precedence. Selector scores are as follows:
+
+| Condition Type | Environment Type | Project Label | Project Name | Environment Label | Environment Name | Resource Label |
+| -------------- | ---------------- | ----------- | ------------ | --------------- | ---------------- | ------------ |
+| Match Score    | 1                | 2           | 4            | 8               | 16               | 32           |
 
 ### Template Configuration
 
@@ -84,3 +92,5 @@ available to users for resources of that type.
 4. Click on the ellipsis (`...`) button in the top-right corner and select `Edit`.
 5. Modify the schema in the UI editor as needed. You can toggle between editing and preview modes by clicking `Preview` or `Schema`.
 6. Save your changes by clicking `Save`.
+
+![definition-ui-schema](/img/v0.5.0/operation/definition/op-definition-ui-schema-en.png)

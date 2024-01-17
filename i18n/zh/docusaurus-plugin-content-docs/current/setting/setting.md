@@ -23,10 +23,8 @@ sidebar_position: 2
   - `参与改进计划`开关：发送匿名数据，帮助 Walrus 提高产品质量和改善产品服务。您可以根据自身意愿，开启或关闭改进计划。
 - **证书设置**
     - `跳过证书认证`：跳过不安全的证书验证，常用于从私有仓库地址加载[模板库](./operation/catalog) 或 [模板](./operation/templates)。
-- **资源定义设置**
-    - `使用内置资源定义`开关：启用内置的[资源定义](./operation/resource-definition).
 - **模板库设置**
-    - `使用内置模板库`开关：启用内置的[模板库](./operation/catalog)，即[Walrus Catalog](https://github.com/walrus-catalog).
+    - `使用内置模板库`开关：启用内置的[模板库](./operation/catalog)，即[Walrus Catalog](https://github.com/walrus-catalog). 开启后同时会创建内置的[资源定义](./operation/resource-definition)。
     - `是否同步模板库`开关：周期性同步[模板库](./operation/catalog)。
 - **增强管理**
   - `OpenAI API令牌`：调用 OpenAI API 所需的令牌。

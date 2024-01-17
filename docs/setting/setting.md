@@ -23,10 +23,8 @@ The system supports the following settings:
     - `Participate in the Improvement Plan` Switch: Sends anonymous data to help Walrus improve product quality and service. You can participate in or opt out of the Improvement Plan according to your wishes.
 - **Certificate**
     - `Skip certificate authentication`: Skip to verify the insecure certificate, which is usually used for loading [Catalog](./operation/catalog) or [Templates](./operation/templates) from private repository.
-- **Resource Definition**
-    - `Use built-in resource definition` Switch: Indicate to use the built-in [ResourceDefinition](./operation/resource-definition).
 - **Template Catalog**
-    - `Use built-in catalog` Switch: Indicate to use the built-in [Catalog](./operation/catalog), which is the [Walrus Catalog](https://github.com/walrus-catalog).
+    - `Use built-in catalog` Switch: Indicate to use the built-in [Catalog](./operation/catalog), which is the [Walrus Catalog](https://github.com/walrus-catalog). When enabled, the built-in [Resource Definitions](./operation/resource-definition) will be created.
     - `Whether to synchronize the tempalte catalog data` Switch: Indicate to synchroinze the [Catalog](./operation/catalog) regularly.
 - **Enhanced**
     - `OpenAI API Token`: The token required for calling the OpenAI API.
