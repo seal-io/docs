@@ -22,7 +22,7 @@ The system supports the following settings:
     - `Server Address`: The address for accessing Walrus server, usually filled in when logging into Walrus's UI for the first time.
     - `Participate in the Improvement Plan` Switch: Sends anonymous data to help Walrus improve product quality and service. You can participate in or opt out of the Improvement Plan according to your wishes.
 - **Certificate**
-    - `Skip certificate authentication`: Skip to verify the insecure certificate, which is usally used for loading [Catalog](./operation/catalog) or [Templates](./operation/templates) from private repository.
+    - `Skip certificate authentication`: Skip to verify the insecure certificate, which is usually used for loading [Catalog](./operation/catalog) or [Templates](./operation/templates) from private repository.
 - **Resource Definition**
     - `Use built-in resource definition` Switch: Indicate to use the built-in [ResourceDefinition](./operation/resource-definition).
 - **Template Catalog**
