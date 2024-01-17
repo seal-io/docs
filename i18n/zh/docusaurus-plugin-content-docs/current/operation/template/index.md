@@ -177,22 +177,41 @@ EOF
 
 上下文信息如下：
 
-| 上下文      | 上下文子属性 | 类型   | 描述                                              |
-| ----------- | ------------ | ------ | ------------------------------------------------- |
-| project     | name         | 字符串 | 资源所属项目名称                                  |
-| project     | id           | 字符串 | 资源所属项目 ID                                   |
-| environment | name         | 字符串 | 资源所属环境名称                                  |
-| environment | id           | 字符串 | 资源所属环境 ID                                   |
-| environment | namespace    | 字符串 | Walrus 管理的 namesapce，在 Kubernetes 环境中可用 |
-| resource    | name         | 字符串 | 服务名称                                          |
-| resource    | id           | 字符串 | 服务 ID                                           |
+| 上下文       | 上下文子属性   | 类型    | 描述                                             |
+| ----------- | ------------ | ------ | -------------------------------------------------|
+| project     | name         | 字符串 | 资源所属项目名称                                    |
+| project     | id           | 字符串 | 资源所属项目 ID                                    |
+| environment | name         | 字符串 | 资源所属环境名称                                    |
+| environment | id           | 字符串 | 资源所属环境 ID                                    |
+| environment | namespace    | 字符串 | Walrus 管理的 namesapce，在 Kubernetes 环境中可用   |
+| resource    | name         | 字符串 | 资源名称                                          |
+| resource    | id           | 字符串 | 资源 ID                                           |
 
 ## 输出
 
-Walrus 会抓取 Terraform 文件中定义的输出，部署完成后，输出将显示在服务的输出页中。Walrus 支持抓取用户自定义访问 URL，配置输出名称以`endpoint`为前缀（如下配置），Walrus 将会抓取这些输出作为`访问URL`展示。
+Walrus 会抓取 Terraform 文件中定义的输出，部署完成后，输出将显示在服务的输出页中。
+
+![resource-outputs](/img/v0.5.0/operation/template/resource-outputs.png)
+
+### 可访问 URL
+
+Walrus 支持抓取用户自定义访问 URL。
+
+> 注意：
+> - 当返回 URL 的主机名（通常以 IP 地址的形式）与 Walrus 的本地 IP 地址相同时，Walrus 会将本地 IP 地址替换为 [服务器地址（设置）](../setting) 中的主机名。
+> - 采用上述变换，您将能够访问从嵌入式 Kubernetes 集群公开的资源。
+
+![resource-endpoints](/img/v0.5.0/operation/template/resource-endpoints.png)
+
+把输出名称为 `endpoints` 或者 `walrus_endpoints` （如下配置），Walrus 将会把这些数组作为 *访问URL* 展示。
 
 ```hcl
-output "endpoint_web" {
-  value = "http://${var.host}:${var.port}"
+output "endpoints" {
+  value = {
+    grafana_console    = "http://localhost:3000"
+    prometheus_console = "http://localhost:9090"
+  }
 }
 ```
+
+作为可捕获的结果，`endpoints` 或 `walrus_endpoints` 的值类型必须是字符串[映射](https://developer.hashicorp.com/terraform/language/expressions/types#map)，例如，JSON 形式为 `{"grafana_console":"http://localhost:3000","prometheus_console":"http://localhost:9090”}`。 由于 Terraform 不支持声明输出类型，如果需要显式类型转换，请尝试 [tomap](https://developer.hashicorp.com/terraform/language/functions/tomap) 函数。

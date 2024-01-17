@@ -185,15 +185,34 @@ The context information is as follows:
 | environment | name         | String        | Environment name to which the resource belongs                    |
 | environment | id           | String        | Environment ID to which the resource belongs                      |
 | environment | namespace    | String        | Namespace managed by Walrus, available in Kubernetes environments |
-| resource    | name         | String        | Service name                                                      |
-| resource    | id           | String        | Service ID                                                        |
+| resource    | name         | String        | Resource name                                                     |
+| resource    | id           | String        | Resource ID                                                       |
 
 ## Output
 
-Walrus captures the outputs defined in the Terraform file, and after deployment, the outputs will be displayed on the service's output page. Walrus supports capturing user-defined access URLs. Configure the output name with endpoint as a prefix (as shown in the configuration below), and Walrus will capture these outputs as Access URL for display.
+Walrus captures the outputs defined in the Terraform file, and after deployment, the outputs will be displayed on the resource's output page. 
+
+![resource-outputs](/img/v0.5.0/operation/template/resource-outputs.png)
+
+### Endpoints
+
+Walrus supports capturing user-defined access URLs.
+
+> Note: 
+> - When the returning endpoint's hostname, usually in the form of an IP address, is the same as Walrus's local IP address, Walrus will replace the local IP address with the hostname from the [Server Address(setting)](../setting). 
+> - Adopting the above mutation, you will be able to access the resource exposed from the embedded Kubernetes cluster.
+
+![resource-endpoints](/img/v0.5.0/operation/template/resource-endpoints.png)
+
+Name the output as `endpoints` or `walrus_endpoints`(as shown in the configuration below), Walrus will treat these outputs as *Endpoints* for display.
 
 ```hcl
-output "endpoint_web" {
-  value = "http://${var.host}:${var.port}"
+output "endpoints" {
+  value = {
+    grafana_console    = "http://localhost:3000"
+    prometheus_console = "http://localhost:9090"
+  }
 }
 ```
+
+As a capturable result, the value type of `endpoints` or `walrus_endpoints` must be a string [map](https://developer.hashicorp.com/terraform/language/expressions/types#map), for example, the JSON form is `{"grafana_console":"http://localhost:3000","prometheus_console":"http://localhost:9090"}`. Since Terraform doesn't support declaring the type of output, if need an explicit type conversion, please try [tomap](https://developer.hashicorp.com/terraform/language/functions/tomap) function.
