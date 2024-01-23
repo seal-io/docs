@@ -4,11 +4,11 @@ sidebar_position: 4
 
 # Dependency Graph
 
-You can view the topology of deployed services and resources through the dependency graph. Walrus provides dependency graphs at two levels: environment and service/resource.
+You can view the topology of deployed resources through the dependency graph. Walrus provides dependency graphs at two levels: environment and resource.
 
 ## Environment Dependency Graph
 
-The environment dependency graph includes all services and resources in the environment, as well as their relationships and deployment status.
+The environment dependency graph includes all resources in the environment, as well as their relationships and deployment status.
 
 1. Click `Application Management` in the left navigation bar to enter the project and environment.
 2. Click the `Dependency Graph` tab to view the environment dependency graph.
@@ -16,14 +16,14 @@ The environment dependency graph includes all services and resources in the envi
 > Note: In the dependency graph, sub-nodes that are "implemented" and "inherited" are hidden by default. They can be expanded by clicking on the "Show Sub-resources" icon in the toolbar.
 
 ![environment-graph](/img/v0.4.0/application/graph/app-graph-env-en.png)
-## Service/Resource Dependency Graph
+## Resource Dependency Graph
 
-The service/resource dependency graph displays all components under the service or resource, as well as their relationships and deployment status.
+The resource dependency graph displays all components under the resource, as well as their relationships and deployment status.
 
-1. Click `Application Management` in the left navigation bar, enter the project and environment, and go to the service or resource detail page.
+1. Click `Application Management` in the left navigation bar, enter the project and environment, and go to the resource detail page.
 2. Under the `Components` tab of component information, click the icon on the right to switch to the graph view.
 
-![service-graph](/img/v0.4.0/application/graph/app-graph-svc-en.png)
+![resource-graph](/img/v0.4.0/application/graph/app-graph-res-en.png)
 
 ## Dependency Graph Node Relations
 
