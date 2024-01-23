@@ -70,3 +70,8 @@ curl --request PUT 'https://localhost/debug/flags?log-debug=true&log-verbosity=5
 ```
 > 注意：
 > - 出于安全考虑，API 修改日志配置仅支持通过 `localhost` 访问。
+
+## Q4: 国内用户如何使用镜像模板库？
+
+目前系统包含内置的模板库用于快速创建资源，例如，kubernetes、环境等。默认情况下，系统使用的托管在 Github 的模板库，国内用户可能会遇到访问不稳定的问题。为此，系统提供了使用托管在 Gitee 的模板库的配置选项。可以通过环境变量 `SERVER_BUILTIN_CATALOG_PROVIDER` 指定模板源地址。具体使用方式可以参考[快速部署](/quickstart#模板源加速)中该环境变量的用法。
+

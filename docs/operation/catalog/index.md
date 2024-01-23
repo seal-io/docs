@@ -30,7 +30,7 @@ The catalog is a collection of templates. You can view, import, edit, and delete
 
 1. Click the `Operations Hub` menu in the navigation bar and go to the `Catalog` tab.
 2. Click the `Add` button.
-3. Enter the name, description, and source for the catalog. The source address is the address of a Github organization, such as:
+3. Enter the name, description, and source for the catalog. Catalog type support three types: Github, Gitlab and Gitee. The source address is the address of a organization, such as:
 	- AWS: https://github.com/terraform-aws-modules
 	- Azure: https://github.com/Azure-Terraform
 	- Google: https://github.com/terraform-google-modules
@@ -50,7 +50,7 @@ The catalog is a collection of templates. You can view, import, edit, and delete
 
 ![create](/img/v0.4.0/catalog/create-project-en.png)
 
-> Walrus supports Github organizations containing Terraform module repositories. You can import all templates under that organization into the catalog.
+> Walrus supports Github/Gitlab/Gitee organizations containing Terraform module repositories. You can import all templates under that organization into the catalog.
 
 ![create-result](/img/v0.4.0/catalog/create-result-en.png)
 

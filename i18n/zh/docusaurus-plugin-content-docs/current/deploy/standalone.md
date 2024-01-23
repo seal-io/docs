@@ -17,8 +17,11 @@ sidebar_position: 1
 ```shell
 sudo docker run -d --privileged --restart=always \
   -p 80:80 -p 443:443 \
+  -e SERVER_BUILTIN_CATALOG_PROVIDER=gitee \
   sealio/walrus:{{ VERSION }}
 ```
+
+> 国内用户可以通过 `-e SERVER_BUILTIN_CATALOG_PROVIDER=gitee` 指定使用 Gitee 作为内置模板源地址。也可以通过 `-e SERVER_BUILTIN_CATALOG_PROVIDER=github` 指定使用 GitHub 作为内置模板源地址。
 
 ## 配置TLS
 
