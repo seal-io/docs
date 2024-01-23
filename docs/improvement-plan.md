@@ -11,7 +11,7 @@ No specific personal information will be collected, such as usernames, passwords
 The primary data collected includes:
 
 - General Information: Randomly generated UUID for Walrus installation, version, CPU architecture and aggregate count of users.
-- Application Deployment Features: Aggregate counts of projects, environments, custom templates, services and connector types.
+- Application Deployment Features: Aggregate counts of projects, environments, resources and connectors.
 
 ## How can I participate in or opt out of the Improvement Plan?
 

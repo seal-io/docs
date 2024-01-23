@@ -7,7 +7,7 @@ sidebar_position: 2
 > Note:
 > Since v0.4.0, environment introduces `Environment Type` to enhance management.
 
-An environment is the target of service deployment. A project may contain multiple environments.
+An environment is the target of resource deployment. A project may contain multiple environments.
 
 ## Environment Type
 
@@ -17,7 +17,7 @@ An environment is the target of service deployment. A project may contain multip
 Before v0.4.0, the isolation between different environments is not guaranteed, which means we will run into the below problems.
 
 - A production-purpose [Connector](/operation/connector) can be referenced by an environment intended for testing.
-- A common developer can deploy a service into production-purpose environment.
+- A common developer can deploy a resource into production-purpose environment.
 
 Starting with v0.4.0, each environment declares its purpose by its **type**, thus preventing that [User](/users/user) without the ability to operate (write) on that `Environment Type` from operating the environment. It is worth noting that [Connector](/operation/connector) also needs to declare what `Environment Type` it applies to.
 
@@ -60,19 +60,19 @@ By using environment types, we can get the following isolation features.
 
 ![app-env-edit](/img/v0.4.0/application/environment/app-env-edit-en.png)
 
-## Manage Services
+## Manage Resources
 
-Within the environment, you can manage the services, including adding services, deleting services, and modifying service configurations.
+Within the environment, you can manage the resources, including adding resources, deleting resources, and modifying resource configurations.
 1. Click `Application Management` in the navigation bar, switch to the corresponding project, and select the environment that needs to be managed.
-2. View the list of services in the environment under the "Services" tab.
-3. Click `New Service`, select the service that needs to be added, fill in the corresponding information, and click the `Save` button to complete the addition of services.
-4. Click the `Delete` operation in the service list to delete services in the environment.
+2. View the list of resources in the environment under the "Resources" tab.
+3. Click `New Resource`, select the resources that needs to be added, fill in the corresponding information, and click the `Save` button to complete the addition of resources.
+4. Click the `Delete` operation in the resource list to delete resources in the environment.
 
-For more details on service management, please refer to [Services and Resources](/application/service-and-resource).
+For more details on resource management, please refer to [Resources](/application/resource).
 
 ## Dependency Graph
 
-Different services within an environment may depend on each other. The dependencies between services can be viewed through the dependency graph. The dependency graph shows all services and their resources. You can perform operations on resources by clicking the top-right corner of the resource icon. For example, you can view logs or execute terminals on container resources.
+Different resources within an environment may depend on each other. The dependencies between resources can be viewed through the dependency graph. The dependency graph shows all resources and their resources. You can perform operations on resources by clicking the top-right corner of the resource icon. For example, you can view logs or execute terminals on container resources.
 
 For more detailed information on dependency graphs, please refer to [Dependency Graph](/application/graph).
 
@@ -82,33 +82,52 @@ For more detailed information on dependency graphs, please refer to [Dependency 
 
 ## Environment Variables
 
-Environment variables are key-value pairs stored in the environment and can be referenced in the services in the environment. Environment variables are used when creating or editing deployment services and when using related parameters in the configuration module. The variables in the current environment can only be used in the current environment, and the variables in different environments are independent of each other.
+Environment variables are key-value pairs stored in the environment and can be referenced in the resources in the environment. Environment variables are used when creating or editing deployment resources and when using related parameters in the configuration module. The variables in the current environment can only be used in the current environment, and the variables in different environments are independent of each other.
 > If a variable with the same name exists in the project or globally, the variable value defined in the environment will override the project or global variable value.
 
 ![app/env-var](/img/v0.4.0/application/environment/app-env-var-en.png)
 
-Usage: When creating a service, enter `${var.Environment Variable Name}` in the input box where the variable is needed.
+Usage: You can enter ${var.Environment Variable Name} in any input fields that need to use the variable when creating a resource.
 
 For more detailed information on variables, please refer to [Variables](/operation/variable).
 
 ## Clone Environment
 
-In some cases, you may need to create an environment that is identical to an existing one, in which case you can use the Clone Environment feature. Cloning an environment allows you to quickly create a new environment based on the configuration and services of the existing one.
+In some cases, you may need to create an environment that is identical to an existing one, in which case you can use the Clone Environment feature. Cloning an environment allows you to quickly create a new environment based on the configuration and resources of the existing one.
 1. Click `Application Management` -> `Environment` on the navigation bar to enter the environment list.
 2. In the environment list, select the environment that needs to be cloned and click `Clone`.
 
 ![app-env-clone](/img/v0.4.0/application/environment/app-env-clone-en.png)
 
 3. Configure the name, description, tags, etc., of the cloned environment, and select connectors.
-4. If needed, modify the configuration of services in the cloned environment. Click to select the service, modify the service configuration in the pop-up window, click `Confirm` to save the alteration, and then click `Save` to complete the cloning of the environment.
+4. If needed, modify the configuration of resources in the cloned environment. Click to select the resource, modify the resource configuration in the pop-up window, click `Confirm` to save the alteration, and then click `Save` to complete the cloning of the environment.
 
 ![app-env-clone-details](/img/v0.4.0/application/environment/app-env-clone-details-en.png)
 
-5. Once the cloned environment is created, you can use this environment in Application Management. The cloned services will also be automatically deployed in sequence according to the dependencies, and you can view the service status in the service list.
+5. Once the environment cloning is complete, you can use the newly cloned environment in the 'Application Management'. Resources in the original environment will be cloned and deployed in order based on the dependency relationships. You can check the status of each resource in the resource list.
 
 ![app-env-clone-deploy](/img/v0.4.0/application/environment/app-env-clone-deploy-en.png)
+
+## Start Environment
+
+Start the environment, the system will deploy the resources in the environment in sequence according to the dependencies, and you can view the resource status in the resource list. It is used to restore resources that have been stopped or under undeployed status to the current environment.
+
+1. Click `Application Management` -> `Environment` on the navigation bar to enter the environment list.
+2. Select the environment that needs to be started and click `Start`.
+
+![app-env-start](/img/v0.5.0/application/environment/env-start.png)
+
+## Stop Environment
+
+Stop the environment, the system will stop the resources in the environment in sequence according to the dependencies, and you can view the resource status in the resource list. It will stop the resources without deleting the resource configuration and clear the resource components.
+
+1. Click `Application Management` -> `Environment` on the navigation bar to enter the environment list.
+2. Select the environment that needs to be stopped and click `Stop`.
+
+![app-env-stop](/img/v0.5.0/application/environment/env-stop.png)
+
 
 ## Delete Environment
 
 1. Click `Application Management` -> `Environment` in the navigation bar to enter the environment list.
-2. Ensure no services depend on this environment, select the environment you need to delete and click `Delete` to complete the deletion.
+2. Ensure no resources depend on this environment, select the environment you need to delete and click `Delete` to complete the deletion.

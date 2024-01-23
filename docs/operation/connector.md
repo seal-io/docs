@@ -43,7 +43,7 @@ Walrus offers connectors on the following two levels:
 2. `Enable Cost Analysis` is turned on by default. Once enabled, you can create related views in the `Cost Management` menu on the left-hand side to view the related expense statistics.
 3. Choose `Applicable Environment Type`.
 4. Fill out the form. After `Save` is successful, the Kubernetes connector is created.
-   
+
 ![connector-create-k8s](/img/v0.4.0/operation/connector/op-conn-create-k8s-en.png)
 
 ### Creating a Cloud Vendor Connector
@@ -93,7 +93,7 @@ provider "alicloud" {
 
 1. Once the connector is successfully created.
 2. Add the corresponding connectors in the `Projects` -> `Environment` details.
-3. In the `Services` of environment details, a new service can use the connector.
+3. In the `Resources` of environment details, a new resource can use the connector.
 
 > Note:
 > - Only administrators/platform engineers have the permission to create global connectors.
