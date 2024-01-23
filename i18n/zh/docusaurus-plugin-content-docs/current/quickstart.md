@@ -16,7 +16,11 @@
 执行以下命令启动 Walrus 服务：
 
 ```shell
-sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 --name walrus sealio/walrus:{{ VERSION }}
+sudo docker run -d --privileged --restart=always \
+  -p 80:80 -p 443:443 \
+  --name walrus \
+  -e SERVER_BUILTIN_CATALOG_PROVIDER=gitee \
+  sealio/walrus:{{ VERSION }}
 ```
 
 更多部署要求，请参考[部署](/deploy/standalone)。
@@ -34,6 +38,18 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 ```
 
 ![qs-first-login](/img/v0.4.0/quickstart/qs-first-login.png)
+
+## 模板加速
+
+由于网络问题，国内用户可能无法访问 Walrus 内置的模板源。您可以通过以下步骤，将模板源切换为 Gitee。启动 Walrus 服务时，通过环境变量 `SERVER_BUILTIN_CATALOG_PROVIDER` 指定模板源地址。如果您的服务器在国外，可以忽略此步骤， 将模板源切换为 GitHub。上述快速部署指令中已经包含了此环境变量。
+
+```shell
+sudo docker run -d --privileged --restart=always \
+  -p 80:80 -p 443:443 \
+  --name walrus \
+  -e SERVER_BUILTIN_CATALOG_PROVIDER=gitee \
+  sealio/walrus:{{ VERSION }}
+```
 
 ## 添加 Kubernetes 集群作为应用的部署目标
 

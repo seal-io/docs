@@ -23,7 +23,7 @@ The resource dependency graph displays all components under the resource, as wel
 1. Click `Application Management` in the left navigation bar, enter the project and environment, and go to the resource detail page.
 2. Under the `Components` tab of component information, click the icon on the right to switch to the graph view.
 
-![resource-graph](/img/v0.4.0/application/graph/app-graph-res-en.png)
+![resource-graph](/img/v0.5.0/application/graph/app-graph-res-en.png)
 
 ## Dependency Graph Node Relations
 

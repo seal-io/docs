@@ -785,6 +785,8 @@ spec:
               value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD)@database:5432/$(DB_NAME)?sslmode=disable
             - name: SERVER_CASDOOR_SERVER
               value: http://identity-access-manager:8000
+            - name: SERVER_BUILTIN_CATALOG_PROVIDER
+              value: "gitee"
           ports:
             - name: http
               containerPort: 80
