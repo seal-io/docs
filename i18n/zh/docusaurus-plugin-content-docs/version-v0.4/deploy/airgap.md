@@ -17,13 +17,13 @@ sidebar_position: 2
 
 1. 使用 `walrus-save-images.sh` 在可以联网的Docker主机下载离线镜像，参考命令如下：
 ```shell
-sh walrus-save-images.sh --image-list walrus-images.txt
+bash walrus-save-images.sh --image-list walrus-images.txt
 ```
 
 2. 将保存的离线镜像包 `walrus-images.tar.gz` 和 `walrus-load-images.sh` 上传到可以访问内网镜像仓库的Docker主机，使用 `walrus-load-images.sh` 上传离线镜像，内网镜像仓库以Harbor为例（如果不是Harbor，需要提前在镜像仓库中创建 `sealio` 项目），参考命令如下：
 ```shell
 docker login registry.example.com --username admin --password Harbor12345
-sh walrus-load-images.sh --registry registry.example.com --harbor-user admin --harbor-password Harbor12345
+bash walrus-load-images.sh --registry registry.example.com --harbor-user admin --harbor-password Harbor12345
 ```
 
 ## 准备离线模板库
@@ -37,7 +37,7 @@ sh walrus-load-images.sh --registry registry.example.com --harbor-user admin --h
 ORG_NAME="walrus-catalog"
 
 # Get all repos in the Walrus catalog org
-REPOS=$(curl -s "https://api.github.com/orgs/$ORG_NAME/repos" | jq -r '.[].name')
+REPOS=$(curl -s "https://api.github.com/orgs/$ORG_NAME/repos" | jq -r '.[] | select(.archived == false) | .name')
 
 for REPO_NAME in $REPOS; do
   # Clone repo

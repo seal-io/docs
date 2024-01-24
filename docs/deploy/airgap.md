@@ -16,13 +16,13 @@ Retrieve the `walrus-images.txt`, `walrus-save-images.sh` and `walrus-load-image
 
 1. Use `walrus-save-images.sh` to download offline images on a Docker host with internet access:
 ```shell
-sh walrus-save-images.sh --image-list walrus-images.txt
+bash walrus-save-images.sh --image-list walrus-images.txt
 ```
 
 2. Upload the saved offline image package `walrus-images.tar.gz` and `walrus-load-images.sh` to a Docker host that has access to the container registry. Use `walrus-load-images.sh` to upload the offline images. Taking Harbor as an example for the container registry (if not, ensure to create a `sealio` project in the container registry beforehand).
 ```shell
 docker login registry.example.com --username admin --password Harbor12345
-sh walrus-load-images.sh --registry registry.example.com --harbor-user admin --harbor-password Harbor12345
+bash walrus-load-images.sh --registry registry.example.com --harbor-user admin --harbor-password Harbor12345
 ```
 
 ## Preparing offline catalog
@@ -36,7 +36,7 @@ You can refer to the following script to clone all repositories from `walrus-cat
 ORG_NAME="walrus-catalog"
 
 # Get all repos in the Walrus catalog org
-REPOS=$(curl -s "https://api.github.com/orgs/$ORG_NAME/repos" | jq -r '.[].name')
+REPOS=$(curl -s "https://api.github.com/orgs/$ORG_NAME/repos" | jq -r '.[] | select(.archived == false) | .name')
 
 for REPO_NAME in $REPOS; do
   # Clone repo
