@@ -17,11 +17,16 @@
 
 ```shell
 sudo docker run -d --privileged --restart=always \
-  -p 80:80 -p 443:443 \
+  -p 80:80 -p 443:443 -p 30000-30100:30000-30100 \
   --name walrus \
   -e SERVER_BUILTIN_CATALOG_PROVIDER=gitee \
   sealio/walrus:{{ VERSION }}
 ```
+
+> 注意：
+>
+> - 端口范围`30000-30100`用于暴露本地 K3s 环境中部署的应用服务。如果您不需要在本地 K3s 环境中部署应用，可以删除此端口范围。
+> - 为了加速国内用户的模板源的访问，我们通过环境变量`SERVER_BUILTIN_CATALOG_PROVIDER`指定模板源地址为 Gitee。如果您的服务器在国外，可以忽略此环境变量。
 
 更多部署要求，请参考[部署](/deploy/standalone)。
 
@@ -37,73 +42,57 @@ sudo docker run -d --privileged --restart=always \
 sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 ```
 
-![qs-first-login](/img/v0.4.0/quickstart/qs-first-login.png)
+![qs-first-login](/img/v0.5.0/quickstart/qs-first-login.png)
 
-## 模板加速
+3. 登陆后，您可以设置新密码，以及配置 Walrus 的访问地址。
 
-由于网络问题，国内用户可能无法访问 Walrus 内置的模板源。您可以通过以下步骤，将模板源切换为 Gitee。启动 Walrus 服务时，通过环境变量 `SERVER_BUILTIN_CATALOG_PROVIDER` 指定模板源地址。如果您的服务器在国外，可以忽略此步骤， 将模板源切换为 GitHub。上述快速部署指令中已经包含了此环境变量。
+![qs-set-pwd](/img/v0.5.0/quickstart/qs-set-pwd.png)
 
-```shell
-sudo docker run -d --privileged --restart=always \
-  -p 80:80 -p 443:443 \
-  --name walrus \
-  -e SERVER_BUILTIN_CATALOG_PROVIDER=gitee \
-  sealio/walrus:{{ VERSION }}
-```
+## 本地环境
 
-## 添加 Kubernetes 集群作为应用的部署目标
+Walrus 为您提供了一个名为`local`的环境，该环境位于`default`项目下，用于快速体验应用部署流程。
 
-> 前置条件：
+![qs-local-env](/img/v0.5.0/quickstart/qs-local-env.png)
+
+`local`环境连接的是内置的 K3s 创建的本地 Kubernetes 集群连接器，您可以使用它部署应用，而无需配置 Kubernetes 集群。
+
+> 注意：
 >
-> - 一个 Walrus server 可以访问的 Kubernetes 集群。
+> 本地环境的 K3s 集群连接器仅用于测试，不建议在生产环境中使用。如果您需要在生产环境中部署应用，请参考[高可用部署指引](deploy/replication)或手动配置 Kubernetes 集群连接器。
 
-1. 点击导航栏的`应用管理`菜单，默认进入到`default`项目视图。
-2. 点击`连接器`标签页。
-3. 点击`新建连接器`按钮，选择`Kubernetes`类型。
-4. 填入集群名称及 KubeConfig 文件，点击保存。
+！[qs-local-connector](/img/v0.5.0/quickstart/qs-local-connector.png)
 
-![qs-add-connector](/img/v0.4.0/quickstart/qs-add-connector.png)
-
-## 创建环境
-
-1. 点击`环境`标签页，点击`新建环境`按钮。
-
-![qs-create-env](/img/v0.4.0/quickstart/qs-create-env.png)
-
-2. 输入环境名称，如`dev`。
-3. 点击`添加连接器`按钮，选择前置步骤中添加的 Kubernetes 连接器。
-4. 点击保存。
-
-![qs-create-env2](/img/v0.4.0/quickstart/qs-create-env2.png)
-
-## 部署服务
+## 部署资源
 
 1. 在环境列表页中，点击前置步骤创建的环境名称，进入环境视图。
 
-![qs-go2env](/img/v0.4.0/quickstart/qs-go2env.png)
+![qs-env-list](/img/v0.5.0/quickstart/qs-env-list.png)
 
-2. 点击`新建`按钮并选择`服务`。
+2. 点击`导入 YAML`按钮导入 Walrus 内置的 Walrus File 资源 YAML 文件。
 
-![qs-create-svc](/img/v0.4.0/quickstart/qs-create-svc.png)
+![qs-create-res](/img/v0.5.0/quickstart/qs-create-res.png)
 
-3. 填写服务名称，如`myapp`，确认模板选中`kubernetes-containerservice`。
-4. 在模板配置的 Image Name 中输入`nginx`镜像，点击确定。
+3. 从右侧的 Walrus File Hub 中选择`nginx`示例。
 
-![qs-create-svc2](/img/v0.4.0/quickstart/qs-create-svc2.png)
+![qs-create-res-nginx](/img/v0.5.0/quickstart/qs-create-res-nginx.png)
 
-5. 点击`保存并部署`按钮完成服务的创建。
-6. 等待服务的部署完成后，您可以查看组件，日志，执行终端命令，访问该 nginx 服务的地址等。
+4. 点击`导入`按钮完成资源的创建。
+5. 等待资源的部署完成后，您可以查看组件，日志，执行终端命令，访问该 nginx 服务的地址等。
+
+- 访问端点。
+
+![qs-res-access](/img/v0.5.0/quickstart/qs-res-access.png)
 
 - 查看部署日志。
 
-![qs-logs](/img/v0.4.0/quickstart/qs-logs.png)
+![qs-logs](/img/v0.5.0/quickstart/qs-logs.png)
 
 - 查看组件日志。
 
-![qs-res-logs](/img/v0.4.0/quickstart/qs-res-logs.png)
+![qs-res-logs](/img/v0.5.0/quickstart/qs-res-logs.png)
 
 - 打开终端。
 
-![qs-res-exec](/img/v0.4.0/quickstart/qs-res-exec.png)
+![qs-res-exec](/img/v0.5.0/quickstart/qs-res-exec.png)
 
 恭喜，您已完成本节快速入门。
