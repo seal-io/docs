@@ -8,16 +8,20 @@ Connectors are components that integrate with third-party services. Walrus suppo
 
 ## Projects
 
-Projects are your workspaces for team collaboration. You can use projects to group connectors, environments, resources, workflows, variables, and other resources. Within a project, you can manage application deployments in multiple environments.
+Projects serve as collaborative workspaces for teams. Within a project, you can organize connectors, environments, resources, workflows, variables, and other elements. Projects enable efficient management of application deployments across multiple environments.
 
 ## Environments
 
-Environments represent the deployment targets for applications, such as development, testing, production, etc.
+Environments define the deployment targets for applications, such as development, testing, and production environments.
 
 ## Resources
 
-Resources are the deployment units of applications. Resources can be generated from templates and linked to specific deployment patterns. They are characteristically monomorphic but designed to be portable across different environments. For example, Kubernetes container services demonstrate this concept. Resources could also refer to the necessary infrastructure to operate a service, including elements such as BigTable databases, Pub/Sub topics, S3 buckets, and CDNs. Although these resources can vary in implementation across different infrastructures, they maintain a uniform definition through their polymorphic operations.
+Resources represent fundamental components of applications. These can encompass a wide range of entities, such as containers running services, or the necessary infrastructure for service operation, including BigTable databases, Pub/Sub topics, S3 buckets, and CDNs.
 
 ## Templates
 
-In Walrus, templates refer to resource templates used to define and describe various aspects of a service or application's configuration. Platform engineers are responsible for defining and maintaining templates. Application developers use templates to create resources without needing to understand the infrastructure details associated with the templates.
+In Walrus, templates refer to resource templates used to define and describe various aspects of a resource's configuration. Platform engineers are responsible for defining and maintaining templates. Application developers use templates to create resources without needing to understand the infrastructure details associated with the templates.
+
+## Resource Definitions
+
+Walrus helps you build polymorphic, multi-cloud abstraction. Resource definitions form the core of this abstraction. It declares a resource type and matching rules to specify which template to use when deploying that type of resource in a particular environment. This capability shield developers from the intricacies of the underlying infrastructure while providing reasonable control.
