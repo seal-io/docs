@@ -5,6 +5,9 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const variableInjector = require('./src/plugins/variable-injector')
 
+const currentVersion = 'v0.5'
+const latestRelease = 'v0.5.0'
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Walrus Documentation',
@@ -48,7 +51,7 @@ const config = {
           versions: {
             current:{
               // Label for this version.
-              label: 'v0.5',
+              label: currentVersion,
               banner: 'none',
             },
           },
@@ -61,7 +64,7 @@ const config = {
               {
                 replacements: {
                   // Version of the current release.
-                  VERSION: 'v0.5.0',
+                  VERSION: latestRelease,
                 },
               }
             ]
@@ -158,6 +161,24 @@ const config = {
           }
         }
       }
+    ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        createRedirects(existingPath) {
+          // exclude /docs/v*.*/* from redirect
+          let excludeRegex = /^\/v(\d+(\.\d+)?)\//;
+          if (!excludeRegex.test(existingPath)) {
+            // Redirect from /docs/${currentVersion}/* to /docs/* to make both routes work
+            return [
+              existingPath.replace('/', `/${currentVersion}/`),
+            ];
+          }
+
+          // Return a falsy value: no redirect created
+          return undefined;
+        },
+      },
     ],
     'plugin-image-zoom'
   ],
