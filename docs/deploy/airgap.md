@@ -49,7 +49,7 @@ echo "All done!"
 ## Install Walrus
 ### Standalone Installation
 
-Update the image in [Standalone Installation](../deploy/standalone.md) according to the intranet contianer registry. Additionally, add the environment variables `SERVER_SETTING_IMAGE_REGISTRY` and `SERVER_SETTING_DEPLOYER_IMAGE`, pointing to the intranet container registry and the offline Deployer image.
+Update the image in [Standalone Installation](../deploy/standalone.md) according to the intranet contianer registry. Additionally, add the environment variable `SERVER_SETTING_IMAGE_REGISTRY`, pointing to the intranet container registry and the offline Deployer image.
 
 ```shell
 sudo docker run -d --privileged --restart=always --name walrus \
@@ -104,11 +104,11 @@ cat /var/lib/k3s/agent/etc/containerd/config.toml
 
 For more details, refer to the official K3s documentation [K3s Private Registry Configuration](https://docs.k3s.io/installation/private-registry).
 
-4. Access the Walrus UI, and after the initial login, navigate to `https://<WALRUS_URL>/v1/settings`. Validate whether the `ImageRegistry` and `DeployerImage` settings are effective.
+4. Access the Walrus UI, and after the initial login, navigate to `https://<WALRUS_URL>/v1/settings`. Validate whether the `ImageRegistry` setting are effective.
 
 ### High Availability Installation
 
-Update the image in [High Availability Installation](../deploy/replication.md) according to the intranet contianer registry. Additionally, add the `SERVER_SETTING_IMAGE_REGISTRY` and `SERVER_SETTING_DEPLOYER_IMAGE` environment variables to the Walrus deployment, pointing to the intranet container registry and the offline Deployer image.
+Update the image in [High Availability Installation](../deploy/replication.md) according to the intranet contianer registry. Additionally, add the `SERVER_SETTING_IMAGE_REGISTRY` environment variable to the Walrus deployment, pointing to the intranet container registry and the offline Deployer image.
 
 ```shell
 vim walrus.yaml
@@ -171,7 +171,7 @@ spec:
 kubectl apply -f walrus.yaml
 ```
 
-3. Access the Walrus UI, and after the initial login, navigate to `https://<WALRUS_URL>/v1/settings`. Validate whether the `ImageRegistry` and `DeployerImage` settings are effective.
+3. Access the Walrus UI, and after the initial login, navigate to `https://<WALRUS_URL>/v1/settings`. Validate whether the `ImageRegistry` setting are effective.
 
 ## Using intranet catalog
 1. Disable the built-in catalog:

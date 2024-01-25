@@ -49,7 +49,7 @@ echo "All done!"
 
 ## 离线安装Walrus
 ### 单实例部署
-根据内网镜像仓库的地址，修改 [单实例部署](../deploy/standalone.md) 中的镜像地址，并新增 `SERVER_SETTING_IMAGE_REGISTRY` 和 `SERVER_SETTING_DEPLOYER_IMAGE` 环境变量，指向使用内网镜像仓库和离线Deployer镜像，参考命令如下：
+根据内网镜像仓库的地址，修改 [单实例部署](../deploy/standalone.md) 中的镜像地址，并新增 `SERVER_SETTING_IMAGE_REGISTRY` 环境变量，指向使用内网镜像仓库和离线Deployer镜像，参考命令如下：
 
 ```shell
 sudo docker run -d --privileged --restart=always --name walrus \
@@ -103,11 +103,11 @@ cat /var/lib/k3s/agent/etc/containerd/config.toml
 
 详情可参考K3s官方文档 [K3s私有镜像仓库配置](https://docs.k3s.io/installation/private-registry)。
 
-4. 访问Walrus UI，初始登录后，访问 `https://<WALRUS_URL>/v1/settings`，验证 `ImageRegistry` 和 `DeployerImage` 设置是否生效。
+4. 访问Walrus UI，初始登录后，访问 `https://<WALRUS_URL>/v1/settings`，验证 `ImageRegistry` 设置是否生效。
 
 ### 高可用部署
 
-根据内网镜像仓库的地址，修改 [高可用部署](../deploy/replication.md) 中的镜像地址，并为Walrus Deployment新增 `SERVER_SETTING_IMAGE_REGISTRY` 和 `SERVER_SETTING_DEPLOYER_IMAGE` 环境变量，指向使用内网镜像仓库和离线Deployer镜像，参考配置如下：
+根据内网镜像仓库的地址，修改 [高可用部署](../deploy/replication.md) 中的镜像地址，并为Walrus Deployment新增 `SERVER_SETTING_IMAGE_REGISTRY` 环境变量，指向使用内网镜像仓库和离线Deployer镜像，参考配置如下：
 ```shell
 vim walrus.yaml
 ```
@@ -169,7 +169,7 @@ spec:
 kubectl apply -f walrus.yaml
 ```
 
-4. 访问Walrus UI，初始登录后，访问 `https://<WALRUS_URL>/v1/settings`，验证 `ImageRegistry` 和 `DeployerImage` 设置是否生效。
+4. 访问Walrus UI，初始登录后，访问 `https://<WALRUS_URL>/v1/settings`，验证 `ImageRegistry` 设置是否生效。
 
 ## 设置Walrus使用内网模板库
 1. 关闭使用内置模板库：
