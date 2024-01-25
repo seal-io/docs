@@ -55,7 +55,6 @@ Update the image in [Standalone Installation](../deploy/standalone.md) according
 sudo docker run -d --privileged --restart=always --name walrus \
   -p 80:80 -p 443:443 \
   -e SERVER_SETTING_IMAGE_REGISTRY='registry.example.com' \
-  -e SERVER_SETTING_DEPLOYER_IMAGE='registry.example.com/sealio/terraform-deployer:v0.1.4-airgap'  \
   registry.example.com/sealio/walrus:{{ VERSION }}
 ```
 
@@ -93,7 +92,6 @@ configs:
 sudo docker run -d --privileged --restart=always --name walrus \
   -p 80:80 -p 443:443 \
   -e SERVER_SETTING_IMAGE_REGISTRY='registry.example.com' \
-  -e SERVER_SETTING_DEPLOYER_IMAGE='registry.example.com/sealio/terraform-deployer:v0.1.4-airgap'  \
   -v /etc/walrus/k3s/registries.yaml:/etc/rancher/k3s/registries.yaml \
   registry.example.com/sealio/walrus:{{ VERSION }}
 ```
@@ -133,8 +131,6 @@ spec:
           env:
             - name: SERVER_SETTING_IMAGE_REGISTRY
               value: registry.example.com
-            - name: SERVER_SETTING_DEPLOYER_IMAGE
-              value: registry.example.com/sealio/terraform-deployer:v0.1.4-airgap
 ...
 ```
 ```shell
