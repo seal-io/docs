@@ -63,6 +63,7 @@ By using environment types, we can get the following isolation features.
 ## Manage Resources
 
 Within the environment, you can manage the resources, including adding resources, deleting resources, and modifying resource configurations.
+
 1. Click `Application Management` in the navigation bar, switch to the corresponding project, and select the environment that needs to be managed.
 2. Manage the resources in the environment under the `Resources` tab.
 
@@ -80,7 +81,8 @@ For more detailed information on dependency graphs, please refer to [Dependency 
 
 ## Environment Variables
 
-Environment variables are environment-scoped key-value pairs and can be referenced in the configuration of  resources in the environment. Variables of an environment can only be used within the environment, and variables in different environments are independent of each other.
+Environment variables are environment-scoped key-value pairs and can be referenced in the configuration of resources in the environment. Variables of an environment can only be used within the environment, and variables in different environments are independent of each other.
+
 > If a variable with the same name exists in the project or globally, the variable value defined in the environment will override the project or global variable value.
 
 ![app/env-var](/img/v0.5.0/application/environment/app-env-var-en.png)
@@ -92,6 +94,7 @@ For more detailed information on variables, please refer to [Variables](/operati
 ## Clone Environment
 
 In some cases, you may need to create an environment that is identical to an existing one, in which case you can use the Clone Environment feature. Cloning an environment allows you to quickly create a new environment based on the configuration and resources of the existing one.
+
 1. Click `Application Management` and go to a project view.
 2. In the environment list, find the environment that needs to be cloned.
 3. Click the action dropdown and click `Clone`.
@@ -112,7 +115,7 @@ In some cases, you may need to create an environment that is identical to an exi
 
 When you start an environment, Walrus will deploy the resources in the environment in sequence according to the dependencies, and you can view the resource status in the resource list. Resources that have been stopped or under undeployed status in the environment will get deployed.
 
-1. Click `Application Management` and go to a project view. 
+1. Click `Application Management` and go to a project view.
 2. In the environment list, find the environment that needs to be started.
 3. Click the action dropdown and click `Start`.
 
@@ -128,8 +131,28 @@ When you stop an environment, Walrus will stop the resources in the environment 
 
 ![app-env-stop](/img/v0.5.0/application/environment/env-stop.png)
 
-
 ## Delete Environment
 
 1. Click `Application Management` and enter the environment list of a project.
 2. Ensure no resources depend on this environment, select the environment you need to delete and click `Delete` to complete the deletion.
+
+## Set Default Environment
+
+The default environment accessed after logging in for the first time in Walrus is the `local` environment under the `default` project. You can also customize the default environment:
+
+1. In the breadcrumb `Environments` drop-down option at the top, click ![star-line](/img/v0.5.0/application/environment/star-line.png) in front of the environment to set it as the default access environment.
+
+   ![set-default-env-en](/img/v0.5.0/application/environment/set-default-env-en.png)
+
+2. If the project corresponding to the environment is deleted, this setting will also be deleted.
+3. When there is a default environment, logging in or clicking the menu `Applications` will enter the default environment details page.
+
+## Unset Default Environment
+
+In the breadcrumbs `Environments` drop-down option at the top, click ![star-fill](/img/v0.5.0/application/environment/star-fill.png) in front of the environment to cancel the default environment.
+
+![unset-default-env-en](/img/v0.5.0/application/environment/unset-default-env-en.png)
+
+1. After unset or deleting the default environment, the default access after successful login is the first environment under the first project.
+2. After unset the default environment, click the menu `Applications`, and the page entered by default is the recently visited page (project list, project details, environment details).
+3. After deleting the default environment, click the menu `Applications` and the default access is the first environment under the project.
