@@ -15,7 +15,7 @@ sidebar_position: 4
 
 > 注意：在依赖图中，默认隐藏了“已实现”和“已继承”的子节点。可以通过点击工具栏中的“显示子资源”图标来展开它们。
 
-![environment-graph](/img/v0.4.0/application/graph/app-graph-env.png)
+![environment-graph](/img/v0.5.0/application/graph/app-graph-env-en.png)
 ## 资源依赖图
 
 资源依赖图显示了资源下的所有组件及其关系和部署状态。
@@ -23,7 +23,7 @@ sidebar_position: 4
 1. 点击左侧导航栏的 `应用管理`，进入项目和环境，并转到资源的详细页面。
 2. 在组件信息的 `组件` 标签下，点击右侧图标切换到图形视图。
 
-![resource-graph](/img/v0.4.0/application/graph/app-graph-svc.png)
+![resource-graph](/img/v0.5.0/application/graph/app-graph-res-en.png)
 
 ## 依赖图节点关系
 
@@ -36,12 +36,12 @@ sidebar_position: 4
 ![graph-legend](/img/v0.4.0/application/graph/app-graph-legend.png)
 ## 图工具栏
 
-- 视图适中
-- 刷新视图
-- 全屏查看
-- 子节点显示、隐藏切换
+- 视图适中：调整缩放或位置，以确保整个依赖图适应当前视图。
+- 刷新：刷新视图。
+- 全屏：全屏查看。
+- 显示组件：切换显示或隐藏资源的组件。
 
-![graph-toolbar](/img/v0.4.0/application/graph/app-graph-toolbar.png)
+![graph-toolbar](/img/v0.5.0/application/graph/app-graph-toolbar-en.png)
 
 ## 查看组件日志
 

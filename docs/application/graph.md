@@ -15,7 +15,7 @@ The environment dependency graph includes all resources in the environment, as w
 
 > Note: In the dependency graph, sub-nodes that are "implemented" and "inherited" are hidden by default. They can be expanded by clicking on the "Show Sub-resources" icon in the toolbar.
 
-![environment-graph](/img/v0.4.0/application/graph/app-graph-env-en.png)
+![environment-graph](/img/v0.5.0/application/graph/app-graph-env-en.png)
 ## Resource Dependency Graph
 
 The resource dependency graph displays all components under the resource, as well as their relationships and deployment status.
@@ -36,12 +36,12 @@ The relationships between nodes in the dependency graph can be divided into thre
 ![graph-legend](/img/v0.4.0/application/graph/app-graph-legend-en.png)
 ## Graph Toolbar
 
-- View to scale
-- Refresh view
-- Full screen view
-- Toggle display or hide sub-nodes
+- Fit View: Adjusts the zoom or position to ensure the entire content fits within the current view.
+- Refresh: Refresh the view.
+- Full Screen: View in full screen.
+- Show Components: Toggle display or hide components of resources.
 
-![graph-toolbar](/img/v0.4.0/application/graph/app-graph-toolbar-en.png)
+![graph-toolbar](/img/v0.5.0/application/graph/app-graph-toolbar-en.png)
 
 ## View Component Logs
 

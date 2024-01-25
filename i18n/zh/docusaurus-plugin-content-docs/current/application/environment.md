@@ -42,14 +42,14 @@ sidebar_position: 2
 1. 通过查看环境列表的操作进入列表页面。
 2. 点击`新建环境`，输入`名称`来标识您的环境。环境名称应该是唯一的,这样您可以轻易地在环境列表中找到该环境。
 
-![qs-create-env](/img/v0.4.0/quickstart/qs-create-env.png)
+![create-env](/img/v0.5.0/application/environment/env-create.png)
 
 3. 根据环境的实际情况，添加`环境标签`，`环境描述`。
 4. 选择合适的`环境类型`。
 5. 添加连接器，点击`添加连接器`，选择环境使用的连接器，点击`确定`按钮。
 6. 点击`保存`按钮即可保存环境配置，您就可以在应用管理中使用这个环境了。
 
-![qs-create-env2](/img/v0.4.0/quickstart/qs-create-env2.png)
+![create-env-2](/img/v0.5.0/application/environment/env-create-2.png)
 
 ## 编辑环境
 
@@ -58,15 +58,13 @@ sidebar_position: 2
 3. 根据需求修改环境的配置，添加或者删除连接器。
 4. 点击`保存`按钮即可保存环境配置。
 
-![app-env-edit](/img/v0.4.0/application/environment/app-env-edit.png)
+![app-env-edit](/img/v0.5.0/application/environment/app-env-edit-en.png)
 
 ## 管理资源
 
 在环境中，您可以管理环境中的资源，包括添加资源，删除资源，修改资源配置等。
 1. 点击导航栏中的`应用管理`，切换到对应的项目，选择进入需要管理的环境。
-2. 在"资源"标签页，查看环境中的资源列表。
-3. 点击`新建资源`，选择需要添加的资源，填写相应信息，点击`保存`按钮即可完成添加资源。
-5. 点击资源列表中的`删除`操作，即可删除环境中的资源。
+2. 在"资源"标签页中，可以管理环境中的资源。
 
 更多资源管理详情，请参见[资源](/application/resource)。
 
@@ -76,7 +74,7 @@ sidebar_position: 2
 
 更多依赖图详情，请参见[依赖图](/application/graph)。
 
-![app-env-graph](/img/v0.4.0/application/environment/app-env-graph.png)
+![app-env-graph](/img/v0.5.0/application/graph/app-graph-env-en.png)
 
 ![app-env-graph-res](/img/v0.4.0/application/environment/app-env-graph-res.png)
 
@@ -85,7 +83,7 @@ sidebar_position: 2
 环境变量是一种存储在环境中的键值对，可以在环境的资源中引用。 环境变量在创建或者编辑部署资源时，在配置模块中的相关参数时使用。当前环境的变量只能在当前环境中使用，不同环境的变量是相互独立的。
 > 如果项目或全局存在同名的变量,则环境中定义的变量值会覆盖项目或全局变量的值。
 
-![app/env-var](/img/v0.4.0/application/environment/app-env-var.png)
+![app/env-var](/img/v0.5.0/application/environment/app-env-var-en.png)
 
 使用方法：在创建资源时，在需要使用变量的输入框中输入`${var.环境变量名称}`
 
@@ -94,27 +92,27 @@ sidebar_position: 2
 ## 克隆环境
 
 在某些场景下，您可能需要创建一个与现有环境相同的环境，这时您可以使用克隆环境功能。克隆环境可以根据现有环境的配置及资源，快速创建一个新的环境。
-1. 点击导航栏中的`应用管理`->`环境`菜单进入到环境列表。
+1. 点击导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 在环境列表中选择需要克隆的环境，点击`克隆`操作。
 
-![app-env-clone](/img/v0.4.0/application/environment/app-env-clone.png)
+![app-env-clone](/img/v0.5.0/application/environment/app-env-clone-en.png)
 
 3. 配置克隆环境的名称、描述、标签等信息,选择连接器。
 4. 根据需要修改克隆环境中资源的配置，点击选中资源，在弹窗中可修改资源配置，点击`确定`保存修改，然后点击`保存`按钮即可完成克隆环境。
 
-![app-env-clone-details](/img/v0.4.0/application/environment/app-env-clone-details.png)
+![app-env-clone-details](/img/v0.5.0/application/environment/app-env-clone-details-en.png)
 
 5. 克隆环境创建完成后，您可以在应用管理中使用这个环境了，被克隆的资源也会自动根据依赖关系自动编排部署，您可以在资源列表中查看资源的状态。
 
-![app-env-clone-deploy](/img/v0.4.0/application/environment/app-env-clone-deploy.png)
+![app-env-clone-deploy](/img/v0.5.0/application/environment/app-env-clone-deploy-en.png)
 
 
 ## 启动环境
 
-启动环境操作将批量启动环境中的所有资源，用于恢复环境下已停止的源或者将草稿资源部署到环境中。启动环境时，环境中的资源会根据依赖关系自动编排部署，您可以在资源列表中查看资源的状态。
+启动环境操作将批量启动环境中的所有资源，用于恢复环境下已停止的资源或者将草稿状态的资源部署到环境中。启动环境时，环境中的资源会根据依赖关系自动编排部署，您可以在资源列表中查看资源的状态。
 
 
-1. 点击导航栏中的`应用管理`->`环境`菜单进入到环境列表。
+1. 点击导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 选择需要启动的环境，点击`启动`操作。
 
 ![app-env-start](/img/v0.5.0/application/environment/env-start.png)
@@ -123,12 +121,12 @@ sidebar_position: 2
 
 停止环境操作将批量停止环境中的所有资源，停止的资源将释放资源组件，资源的配置仍然在 walrus 中保留。 停止环境时，环境中的资源会根据依赖关系自动编排停止，您可以在资源列表中查看资源的状态。
 
-1. 点击导航栏中的`应用管理`->`环境`菜单进入到环境列表。
+1. 点击导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 选择需要停止的环境，点击`停止`操作。
 
 ![app-env-stop](/img/v0.5.0/application/environment/env-stop.png)
 
 ## 删除环境
 
-1. 点击导航栏中的`应用管理`->`环境`菜单进入到环境列表。
+1. 点击导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 确保没有资源依赖于该环境后，勾选您需要删除的环境，点击`删除`操作即可完成删除。
