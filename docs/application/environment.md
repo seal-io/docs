@@ -138,14 +138,14 @@ When you stop an environment, Walrus will stop the resources in the environment 
 
 ## Set Default Environment
 
-The default environment accessed after logging in for the first time in Walrus is the `local` environment under the `default` project. You can also customize the default environment:
+In Walrus, when there are multiple environments, you can set the environment you are concerned about as the default environment. You can only set one environment from one project as the default environment. The method for setting it is:
 
 1. In the breadcrumb `Environments` drop-down option at the top, click ![star-line](/img/v0.5.0/application/environment/star-line.png) in front of the environment to set it as the default access environment.
 
-   ![set-default-env-en](/img/v0.5.0/application/environment/set-default-env-en.png)
+![set-default-env-en](/img/v0.5.0/application/environment/set-default-env-en.png)
 
-2. If the project corresponding to the environment is deleted, this setting will also be deleted.
-3. When there is a default environment, logging in or clicking the menu `Applications` will enter the default environment details page.
+2. If the project corresponding to the default environment is deleted, this setting will also be deleted.
+3. After setting a default environment, upon successful login or clicking the `Applications` menu, will enter the default environment details page.
 
 ## Unset Default Environment
 
@@ -153,6 +153,6 @@ In the breadcrumbs `Environments` drop-down option at the top, click ![star-fill
 
 ![unset-default-env-en](/img/v0.5.0/application/environment/unset-default-env-en.png)
 
-1. After unset or deleting the default environment, the default access after successful login is the first environment under the first project.
-2. After unset the default environment, click the menu `Applications`, and the page entered by default is the recently visited page (project list, project details, environment details).
-3. After deleting the default environment, click the menu `Applications` and the default access is the first environment under the project.
+1. After unsetting or deleting the default environment, the default access after a successful login will be the first environment under the first project.
+2. After unsetting the default environment, clicking the `Applications` menu will take you to the recently visited page (project list, project details, environment details).
+3. After deleting the default environment, clicking the `Applications` menu will grant default access to the first environment under the project.
