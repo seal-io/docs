@@ -8,6 +8,7 @@ sidebar_position: 2
 
 > 前置条件：
 > - 提供Kubernetes集群作为运行集群。
+> - Kubernetes集群支持 Ingress。
 > - 资源不少于4CPU，8Gi内存的Linux服务器。
 > - 至少50GB的空余磁盘空间。
 > - 服务器开放80和443端口。
@@ -18,6 +19,7 @@ sidebar_position: 2
 ```shell
 vim walrus.yaml
 ```
+
 2. 填充以下YAML内容:
 ```shell
 ---
@@ -52,6 +54,7 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "configuration"
 stringData:
+  local_environment_mode: "disabled"
   enable_tls: "false"
   db_driver: "postgres"
   db_user: "root"
@@ -402,6 +405,11 @@ spec:
 
 # Walrus server
 #
+## RBAC for installing third-party applications.
+##
+## Since the installation of some third-party software has permission granting operations, 
+## it will contain some resource global operation permissions, but only for granting.
+##
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -425,15 +433,25 @@ rules:
     resources:
       - "customresourcedefinitions"
     verbs:
-      - "*"
+      - create
+      - update
+      - get
+      - list
+      - patch
   - apiGroups:
       - "rbac.authorization.k8s.io"
     resources:
       - "clusterroles"
+      - "clusterrolebindings"
       - "roles"
       - "rolebindings"
+      - "serviceaccounts"
     verbs:
-      - "*"
+      - create
+      - update
+      - get
+      - list
+      - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -450,6 +468,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: walrus
+## RBAC for launching Walrus.
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -466,24 +488,6 @@ rules:
       - "subjectaccessreviews"
       - "selfsubjectaccessreviews"
     verbs:
-      - "create"
-  - apiGroups:
-      - "batch"
-    resources:
-      - "jobs"
-    verbs:
-      - "*"
-  - apiGroups:
-      - ""
-    resources:
-      - "secrets"
-      - "pods"
-      - "pods/log"
-      - "events"
-      - "services"
-      - "configmaps"
-      - "serviceaccounts"
-    verbs:
       - "*"
   - apiGroups:
       - "coordination.k8s.io"
@@ -494,35 +498,31 @@ rules:
   - apiGroups:
       - "apps"
     resources:
+      - "statefulsets"
       - "deployments"
       - "replicasets"
     verbs:
       - "*"
   - apiGroups:
-    - ""
+      - "batch"
     resources:
-    - events
+      - "jobs"
     verbs:
-    - get
-    - watch
-    - list
+      - "*"
   - apiGroups:
-      - argoproj.io
+      - ""
     resources:
-      - eventsources
-      - sensors
-      - workflows
-      - workfloweventbindings
-      - workflowtemplates
-      - cronworkflows
+      - "persistentvolumeclaims"
+      - "persistentvolumeclaims/finalizers"
+      - "secrets"
+      - "pods"
+      - "pods/log"
+      - "events"
+      - "services"
+      - "configmaps"
+      - "serviceaccounts"
     verbs:
-      - create
-      - get
-      - list
-      - watch
-      - update
-      - patch
-      - delete
+      - "*"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -539,6 +539,65 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: walrus
+## RBAC for enabling workflow
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: walrus-system
+  name: walrus-enable-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+rules:
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
+      - ""
+    resources:
+      - "persistentvolumeclaims"
+      - "persistentvolumeclaims/finalizers"
+    verbs:
+      - "*"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods/exec"
+    verbs:
+      - "*"
+  - apiGroups:
+      - "policy"
+    resources:
+      - "poddisruptionbudgets"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: walrus-system
+  name: walrus-enable-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+subjects:
+  - kind: ServiceAccount
+    name: walrus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: walrus-enable-workflow
+## RBAC for deploying
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -588,8 +647,11 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: walrus-deployer
+## RBAC for running workflow
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
 ---
-# Service account for workflow.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -608,48 +670,20 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "walrus"
 rules:
-  # The below rules are used for running workflow.
   - apiGroups:
       - ""
     resources:
       - "pods"
-    verbs:
-      - "get"
-      - "watch"
-      - "patch"
-  - apiGroups:
-      - ""
-    resources:
       - "pods/logs"
-    verbs:
-      - "get"
-      - "watch"
-  - apiGroups:
-      - ""
-    resources:
       - "secrets"
     verbs:
-      - "get"
+      - "*"
   - apiGroups:
       - "argoproj.io"
     resources:
-      - "workflowtasksets"
+      - "*"
     verbs:
-      - "watch"
-      - "list"
-  - apiGroups:
-      - "argoproj.io"
-    resources:
-      - "workflowtaskresults"
-    verbs:
-      - "create"
-      - "patch"
-  - apiGroups:
-      - "argoproj.io"
-    resources:
-      - "workflowtasksets/status"
-    verbs:
-      - "patch"
+      - "*"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -666,6 +700,8 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: walrus-workflow
+## Storage
+##
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -683,6 +719,8 @@ spec:
   resources:
     requests:
       storage: 500Mi
+## Service
+##
 ---
 apiVersion: v1
 kind: Service
@@ -698,6 +736,8 @@ spec:
     - name: http
       port: 80
       targetPort: http
+## Deployment
+##
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -776,6 +816,11 @@ spec:
                 secretKeyRef:
                   name: walrus
                   key: db_name
+            - name: SERVER_SETTING_LOCAL_ENVIRONMENT_MODE
+              valueFrom:
+                secretKeyRef:
+                  name: walrus
+                  key: local_environment_mode
             - name: SERVER_ENABLE_TLS
               valueFrom:
                 secretKeyRef:
@@ -785,8 +830,6 @@ spec:
               value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD)@database:5432/$(DB_NAME)?sslmode=disable
             - name: SERVER_CASDOOR_SERVER
               value: http://identity-access-manager:8000
-            - name: SERVER_BUILTIN_CATALOG_PROVIDER
-              value: "gitee"
           ports:
             - name: http
               containerPort: 80
@@ -828,6 +871,48 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: walrus
+```
+
+使用上述 YAML 进行高可用部署后，Walrus 不会在 default 项目下创建出 local 环境，也不会把部署 Walrus 的 Kubernetes 集群作为 local Kubernetes 连接器使用。
+
+如果希望高可用部署后，部署 Walrus 的 Kubernetes 集群作为 local Kubernetes 连接器使用，即允许 Walrus 对该集群进行管理，则需要做如下修改：
+
+```diff
+ apiVersion: v1
+ kind: Secret
+ metadata:
+   namespace: walrus-system
+   name: walrus
+   labels:
+     "app.kubernetes.io/part-of": "walrus"
+     "app.kubernetes.io/component": "configuration"
+ stringData:
+-  local_environment_mode: "disabled"
++  local_environment_mode: "kubernetes"
+   enable_tls: "false"
+   db_driver: "postgres"
+   db_user: "root"
+   db_password: "Root123"
+   db_name: "walrus"
+```
+
+``` diff
+ apiVersion: rbac.authorization.k8s.io/v1
+ kind: ClusterRoleBinding
+ metadata:
+   name: walrus
+   labels:
+     "app.kubernetes.io/part-of": "walrus"
+     "app.kubernetes.io/component": "walrus"
+ subjects:
+   - kind: ServiceAccount
+     name: walrus
+     namespace: walrus-system
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+   kind: ClusterRole
+-  name: walrus
++  name: cluster-admin
 ```
 
 3. 应用YAML:
@@ -894,8 +979,17 @@ kubectl -n walrus-system delete ingress walrus
 
 4. 使用 Kubectl Rollout 重启 Walrus。
 
+> 注意：
+> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。 
+
 ```shell
 kubectl -n walrus-system rollout restart deployment/walrus
+```
+
+5. 由于缺少 Ingress 提供访问点，可以通过 kubectl 的 port-forward 能力进行访问。
+
+```shell
+sudo kubectl port-forward service/walrus 443:443
 ```
 
 ### 使用 [ACME](https://letsencrypt.org/docs/challenge-types) 挑战生成（公开受信）的证书
@@ -964,6 +1058,9 @@ kubectl -n walrus-system delete ingress walrus
 
 6. 使用 Kubectl Patch 修改Walrus的环境变量，以应答ACME挑战。
 
+> 注意：
+> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。 
+
 ```shell
 export DNS_NAME=""; kubectl -n walrus-system patch deployment walrus --type json -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/containers/0/env/-\",\"value\":{\"name\":\"SERVER_TLS_AUTO_CERT_DOMAINS\",\"value\":\"${DNS_NAME}\"}}]"
 ```
@@ -1013,6 +1110,9 @@ kubectl -n walrus-system delete ingress walrus
 
 4. 使用 Kubectl Patch 修改Walrus的环境变量，以启用自定义的证书。
 
+> 注意：
+> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。 
+
 ```shell
 kubectl -n walrus-system patch deployment walrus --type json \
 -p '[{"op":"add","path":"/spec/template/spec/containers/0/env/-","value":{"name":"SERVER_TLS_CERT_FILE","value":"/etc/walrus/ssl/tls.crt"}},{"op":"add","path":"/spec/template/spec/containers/0/env/-","value":{"name":"SERVER_TLS_PRIVATE_KEY_FILE","value":"/etc/walrus/ssl/tls.key"}}]'
@@ -1030,6 +1130,7 @@ Walrus基于[PostgreSQL](https://www.postgresql.org/)关系型数据库实现数
 1. 使用 Kubectl Patch 修改IdentifyAccessManager的环境变量，以连接外部数据源。
 
 ```shell
+# use add operation to override existing env.
 export DB_SOURCE=""; kubectl -n walrus-system patch deployment identity-access-manager --type json \
 -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/initContainers/0/env/-\",\"value\":{\"name\":\"DB_SOURCE\",\"value\":\"${DB_SOURCE}\"}}]"
 ```
@@ -1037,6 +1138,7 @@ export DB_SOURCE=""; kubectl -n walrus-system patch deployment identity-access-m
 2. 使用 Kubectl Patch 修改Walrus的环境变量，以连接外部数据源。
 
 ```shell
+# use add operation to override existing env.
 export DB_SOURCE=""; kubectl -n walrus-system patch deployment walrus --type json \
 -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/containers/0/env/-\",\"value\":{\"name\":\"SERVER_DATA_SOURCE_ADDRESS\",\"value\":\"${DB_SOURCE}\"}}]"
 ```

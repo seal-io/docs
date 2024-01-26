@@ -8,6 +8,7 @@ If you intend to run Walrus in production, you need to follow the high-avaialbil
 
 > Prerequisites:
 > - An highly-available Kubernetes cluster is required as the runtime cluster.
+> - Kubernetes cluster supports Ingress.
 > - Each Kubernetes node should have at least 4 CPU cores and 8GiB memory.
 > - At least 50GB of free disk space on each Kubernetes node.
 > - Ports 80 and 443 are opened on the nodes.
@@ -18,6 +19,7 @@ You can fill in the following YAML with relevant information and use the `kubect
 ```shell
 vim walrus.yaml
 ```
+
 2. Fill in the following YAML:
 ```shell
 ---
@@ -52,6 +54,7 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "configuration"
 stringData:
+  local_environment_mode: "disabled"
   enable_tls: "false"
   db_driver: "postgres"
   db_user: "root"
@@ -402,6 +405,11 @@ spec:
 
 # Walrus server
 #
+## RBAC for installing third-party applications.
+##
+## Since the installation of some third-party software has permission granting operations, 
+## it will contain some resource global operation permissions, but only for granting.
+##
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -425,15 +433,25 @@ rules:
     resources:
       - "customresourcedefinitions"
     verbs:
-      - "*"
+      - create
+      - update
+      - get
+      - list
+      - patch
   - apiGroups:
       - "rbac.authorization.k8s.io"
     resources:
       - "clusterroles"
+      - "clusterrolebindings"
       - "roles"
       - "rolebindings"
+      - "serviceaccounts"
     verbs:
-      - "*"
+      - create
+      - update
+      - get
+      - list
+      - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -450,6 +468,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: walrus
+## RBAC for launching Walrus.
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -466,24 +488,6 @@ rules:
       - "subjectaccessreviews"
       - "selfsubjectaccessreviews"
     verbs:
-      - "create"
-  - apiGroups:
-      - "batch"
-    resources:
-      - "jobs"
-    verbs:
-      - "*"
-  - apiGroups:
-      - ""
-    resources:
-      - "secrets"
-      - "pods"
-      - "pods/log"
-      - "events"
-      - "services"
-      - "configmaps"
-      - "serviceaccounts"
-    verbs:
       - "*"
   - apiGroups:
       - "coordination.k8s.io"
@@ -494,35 +498,31 @@ rules:
   - apiGroups:
       - "apps"
     resources:
+      - "statefulsets"
       - "deployments"
       - "replicasets"
     verbs:
       - "*"
   - apiGroups:
-    - ""
+      - "batch"
     resources:
-    - events
+      - "jobs"
     verbs:
-    - get
-    - watch
-    - list
+      - "*"
   - apiGroups:
-      - argoproj.io
+      - ""
     resources:
-      - eventsources
-      - sensors
-      - workflows
-      - workfloweventbindings
-      - workflowtemplates
-      - cronworkflows
+      - "persistentvolumeclaims"
+      - "persistentvolumeclaims/finalizers"
+      - "secrets"
+      - "pods"
+      - "pods/log"
+      - "events"
+      - "services"
+      - "configmaps"
+      - "serviceaccounts"
     verbs:
-      - create
-      - get
-      - list
-      - watch
-      - update
-      - patch
-      - delete
+      - "*"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -539,6 +539,65 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: walrus
+## RBAC for enabling workflow
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: walrus-system
+  name: walrus-enable-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+rules:
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
+      - ""
+    resources:
+      - "persistentvolumeclaims"
+      - "persistentvolumeclaims/finalizers"
+    verbs:
+      - "*"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods/exec"
+    verbs:
+      - "*"
+  - apiGroups:
+      - "policy"
+    resources:
+      - "poddisruptionbudgets"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: walrus-system
+  name: walrus-enable-workflow
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "walrus"
+subjects:
+  - kind: ServiceAccount
+    name: walrus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: walrus-enable-workflow
+## RBAC for deploying
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -588,8 +647,11 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: walrus-deployer
+## RBAC for running workflow
+##
+## As limiting in the walrus-system, it can be safe to make all verbs as "*".
+##
 ---
-# Service account for workflow.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -608,48 +670,20 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "walrus"
 rules:
-  # The below rules are used for running workflow.
   - apiGroups:
       - ""
     resources:
       - "pods"
-    verbs:
-      - "get"
-      - "watch"
-      - "patch"
-  - apiGroups:
-      - ""
-    resources:
       - "pods/logs"
-    verbs:
-      - "get"
-      - "watch"
-  - apiGroups:
-      - ""
-    resources:
       - "secrets"
     verbs:
-      - "get"
+      - "*"
   - apiGroups:
       - "argoproj.io"
     resources:
-      - "workflowtasksets"
+      - "*"
     verbs:
-      - "watch"
-      - "list"
-  - apiGroups:
-      - "argoproj.io"
-    resources:
-      - "workflowtaskresults"
-    verbs:
-      - "create"
-      - "patch"
-  - apiGroups:
-      - "argoproj.io"
-    resources:
-      - "workflowtasksets/status"
-    verbs:
-      - "patch"
+      - "*"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -666,6 +700,8 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: walrus-workflow
+## Storage
+##
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -683,6 +719,8 @@ spec:
   resources:
     requests:
       storage: 500Mi
+## Service
+##
 ---
 apiVersion: v1
 kind: Service
@@ -698,6 +736,8 @@ spec:
     - name: http
       port: 80
       targetPort: http
+## Deployment
+##
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -776,6 +816,11 @@ spec:
                 secretKeyRef:
                   name: walrus
                   key: db_name
+            - name: SERVER_SETTING_LOCAL_ENVIRONMENT_MODE
+              valueFrom:
+                secretKeyRef:
+                  name: walrus
+                  key: local_environment_mode
             - name: SERVER_ENABLE_TLS
               valueFrom:
                 secretKeyRef:
@@ -826,6 +871,48 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: walrus
+```
+
+After using the above YAML for high-availability deployment, Walrus will not create a local Environment under the default Project, nor will the Kubernetes cluster where Walrus is deployed be used as a local Kubernetes Connector.
+
+If you want to deploy Walrus' Kubernetes cluster as a local Kubernetes Connector after high-availability deployment, that is, allow Walrus to manage the cluster, you need to make the following modifications.
+
+```diff
+ apiVersion: v1
+ kind: Secret
+ metadata:
+   namespace: walrus-system
+   name: walrus
+   labels:
+     "app.kubernetes.io/part-of": "walrus"
+     "app.kubernetes.io/component": "configuration"
+ stringData:
+-  local_environment_mode: "disabled"
++  local_environment_mode: "kubernetes"
+   enable_tls: "false"
+   db_driver: "postgres"
+   db_user: "root"
+   db_password: "Root123"
+   db_name: "walrus"
+```
+
+``` diff
+ apiVersion: rbac.authorization.k8s.io/v1
+ kind: ClusterRoleBinding
+ metadata:
+   name: walrus
+   labels:
+     "app.kubernetes.io/part-of": "walrus"
+     "app.kubernetes.io/component": "walrus"
+ subjects:
+   - kind: ServiceAccount
+     name: walrus
+     namespace: walrus-system
+ roleRef:
+   apiGroup: rbac.authorization.k8s.io
+   kind: ClusterRole
+-  name: walrus
++  name: cluster-admin
 ```
 
 3. Apply the YAML:
@@ -892,8 +979,17 @@ kubectl -n walrus-system delete ingress walrus
 
 4. Use `kubectl rollout` to restart Walrus.
 
+> Note:
+> - After changing the access method, you need to adjust the "Server Address" in "System Settings".
+
 ```shell
 kubectl -n walrus-system rollout restart deployment/walrus
+```
+
+5. Due to lack of the access pointer provided by Ingress, it can be accessed by kubectl's port-forward.
+
+```shell
+sudo kubectl port-forward service/walrus 443:443
 ```
 
 ### Use [ACME](https://letsencrypt.org/docs/challenge-types) to Generate Trusted Certificate
@@ -962,6 +1058,9 @@ kubectl -n walrus-system delete ingress walrus
 
 6. Use `kubectl patch` to modify the environment variables of Walrus to respond to the ACME challenge.
 
+> Note:
+> - After changing the access method, you need to adjust the "Server Address" in "System Settings".
+
 ```shell
 export DNS_NAME=""; kubectl -n walrus-system patch deployment walrus --type json -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/containers/0/env/-\",\"value\":{\"name\":\"SERVER_TLS_AUTO_CERT_DOMAINS\",\"value\":\"${DNS_NAME}\"}}]"
 ```
@@ -1011,6 +1110,9 @@ kubectl -n walrus-system delete ingress walrus
 
 4. Use `kubectl patch` to modify the environment variables of Walrus to enable the custom certificate.
 
+> Note:
+> - After changing the access method, you need to adjust the "Server Address" in "System Settings".
+
 ```shell
 kubectl -n walrus-system patch deployment walrus --type json \
 -p '[{"op":"add","path":"/spec/template/spec/containers/0/env/-","value":{"name":"SERVER_TLS_CERT_FILE","value":"/etc/walrus/ssl/tls.crt"}},{"op":"add","path":"/spec/template/spec/containers/0/env/-","value":{"name":"SERVER_TLS_PRIVATE_KEY_FILE","value":"/etc/walrus/ssl/tls.key"}}]'
@@ -1028,6 +1130,7 @@ By default, Walrus will run an instance of PostgresSQL within the running contai
 1. Use `kubectl patch` to modify the environment variables of IdentifyAccessManager to connect to the external data source.
 
 ```shell
+# use add operation to override existing env.
 export DB_SOURCE=""; kubectl -n walrus-system patch deployment identity-access-manager --type json \
 -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/initContainers/0/env/-\",\"value\":{\"name\":\"DB_SOURCE\",\"value\":\"${DB_SOURCE}\"}}]"
 ```
@@ -1035,6 +1138,7 @@ export DB_SOURCE=""; kubectl -n walrus-system patch deployment identity-access-m
 2. Use `kubectl patch` to modify the environment variables of Walrus to connect to the external data source.
 
 ```shell
+# use add operation to override existing env.
 export DB_SOURCE=""; kubectl -n walrus-system patch deployment walrus --type json \
 -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/containers/0/env/-\",\"value\":{\"name\":\"SERVER_DATA_SOURCE_ADDRESS\",\"value\":\"${DB_SOURCE}\"}}]"
 ```
