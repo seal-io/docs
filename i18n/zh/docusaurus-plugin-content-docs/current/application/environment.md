@@ -94,13 +94,9 @@ sidebar_position: 2
 ## 克隆环境
 
 在某些场景下，您可能需要创建一个与现有环境相同的环境，这时您可以使用克隆环境功能。克隆环境可以根据现有环境的配置及资源，快速创建一个新的环境。
-<<<<<<< HEAD
 
-1. # 点击导航栏中的`应用管理`，进入一个项目的环境列表。
-
-1. 点击导航栏中的`应用管理`->`环境`菜单进入到环境列表。
-   > > > > > > > 5db1e2f (feat: set default environment)
-1. 在环境列表中选择需要克隆的环境，点击`克隆`操作。
+1. 点击左侧导航栏中的`应用管理`，进入一个项目的环境列表。
+2. 在环境列表中选择需要克隆的环境，点击`克隆`操作。
 
 ![app-env-clone](/img/v0.5.0/application/environment/app-env-clone-en.png)
 
@@ -138,9 +134,9 @@ sidebar_position: 2
 
 ## 设置默认环境
 
-在 Walrus 中有多个环境时，可以将你关注的环境设置为默认环境，只能设置一个项目的一个环境为默认环境，设置方式为：
+在 Walrus 中有多个环境时，可以将你关注的环境设置为默认环境，只能设置一个项目的一个环境为默认环境，方法如下：
 
-1. 在顶部面包屑`环境`下拉选项中，点击环境前面的![star-line](/img/v0.5.0/application/environment/star-line.png)，即可设为默认的访问环境。
+1. 在顶部面包屑`环境`下拉选项中，点击![star-line](/img/v0.5.0/application/environment/star-line.png)，即可设为默认环境。
 
    ![set-default-env-zh](/img/v0.5.0/application/environment/set-default-env-zh.png)
 
@@ -149,7 +145,7 @@ sidebar_position: 2
 
 ## 取消设置默认环境
 
-在顶部面包屑`环境`下拉选项，点击环境前面的![star-fill](/img/v0.5.0/application/environment/star-fill.png)，即可取消默认环境。
+在顶部面包屑`环境`下拉选项，点击![star-fill](/img/v0.5.0/application/environment/star-fill.png)，即可取消为默认环境。
 
 ![unset-default-env-zh](/img/v0.5.0/application/environment/unset-default-env-zh.png)
 
