@@ -95,6 +95,7 @@ const sidebars = {
         }
       ]
     },
+    'cli',
     'improvement-plan',
     'faq'
   ],
