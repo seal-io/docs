@@ -16,7 +16,7 @@ const config = {
   baseUrl: '/docs/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon2.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -90,7 +90,7 @@ const config = {
         title: '',
         logo: {
           alt: 'Walrus Logo',
-          src: 'img/logo.png',
+          src: 'img/walrus_logo.png',
         },
         items: [
           {
