@@ -95,7 +95,7 @@ For more detailed information on variables, please refer to [Variables](/operati
 
 In some cases, you may need to create an environment that is identical to an existing one, in which case you can use the Clone Environment feature. Cloning an environment allows you to quickly create a new environment based on the configuration and resources of the existing one.
 
-1. Click `Application Management` and go to a project view.
+1. Click `Projects` and go to a project view.
 2. In the environment list, find the environment that needs to be cloned.
 3. Click the action dropdown and click `Clone`.
 
@@ -138,9 +138,9 @@ When you stop an environment, Walrus will stop the resources in the environment 
 
 ## Set Default Environment
 
-In Walrus, when there are multiple environments, you can set the environment you are concerned about as the default environment. You can only set one environment from one project as the default environment. The method for setting it is:
+In Walrus, when there are multiple environments, you can designate one environment as the default environment. The method is as follows:
 
-1. In the breadcrumb `Environments` drop-down option at the top, click ![star-line](/img/v0.5.0/application/environment/star-line.png) in front of the environment to set it as the default access environment.
+1.  In the `Environments` dropdown option in the top breadcrumb menu, click ![star-line](/img/v0.5.0/application/environment/star-line.png) to set it as the default environment.
 
 ![set-default-env-en](/img/v0.5.0/application/environment/set-default-env-en.png)
 
@@ -149,7 +149,7 @@ In Walrus, when there are multiple environments, you can set the environment you
 
 ## Unset Default Environment
 
-In the breadcrumbs `Environments` drop-down option at the top, click ![star-fill](/img/v0.5.0/application/environment/star-fill.png) in front of the environment to cancel the default environment.
+1. In the `Environments` dropdown option in the top breadcrumb menu, click ![star-line](/img/v0.5.0/application/environment/star-fill.png) to unselect it as the default environment.
 
 ![unset-default-env-en](/img/v0.5.0/application/environment/unset-default-env-en.png)
 
