@@ -91,3 +91,6 @@
   color: var(--ifm-color-secondary-contrast-foreground);
   border-color: var(--ifm-color-secondary-dark);
 }
+.navbar .navbar__brand .navbar__logo {
+  height: 2.5rem;
+}
