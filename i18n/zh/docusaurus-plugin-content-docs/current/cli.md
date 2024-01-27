@@ -1,6 +1,6 @@
 # CLI
 
-walrus 是与 Walrus Server 交互的 CLI。
+Walrus CLI 是与 Walrus Server 交互的命令行工具。
 
 ## 下载安装
 
