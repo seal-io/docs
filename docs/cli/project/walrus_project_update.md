@@ -15,15 +15,14 @@ walrus project update <project> [flags]
 ```
       --description string      
       --labels stringToString    (default [])
+  -o, --output string           Output format [table, json, yaml] (default "table")
 ```
 
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO

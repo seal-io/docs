@@ -15,6 +15,7 @@ walrus workflow update <workflow> [flags]
 ```
       --description string      
       --labels stringToString    (default [])
+  -o, --output string           Output format [table, json, yaml] (default "table")
       --parallelism int         
       --stages jsonArray         (default []...)
       --timeout int             
@@ -24,10 +25,8 @@ walrus workflow update <workflow> [flags]
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO

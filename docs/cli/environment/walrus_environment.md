@@ -5,16 +5,14 @@ Manage environments
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO
 
 * [walrus](../walrus)	 - Command line interface for Walrus
-* [walrus environment clone-environment](walrus_environment_clone-environment)	 - Clone environment for an environment.
+* [walrus environment clone](walrus_environment_clone)	 - Clone for an environment.
 * [walrus environment create](walrus_environment_create)	 - Create an environment.
 * [walrus environment delete](walrus_environment_delete)	 - Delete an environment.
 * [walrus environment get](walrus_environment_get)	 - Get an environment.
