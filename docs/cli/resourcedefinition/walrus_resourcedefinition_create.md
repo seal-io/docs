@@ -17,6 +17,7 @@ walrus resourcedefinition create [flags]
       --labels stringToString       (default [])
       --matching-rules jsonArray    (default []...)
       --name string                
+  -o, --output string              Output format [table, json, yaml] (default "table")
       --type string                
       --ui-schema json              (default {}...)
 ```
@@ -24,10 +25,8 @@ walrus resourcedefinition create [flags]
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO

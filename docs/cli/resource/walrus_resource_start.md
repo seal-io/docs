@@ -7,16 +7,21 @@ Start for a resource.
 Start for a resource of an environment that belongs to a project.
 
 ```
-walrus resource start <environment> <resource> [flags]
+walrus resource start <resource> [flags]
+```
+
+## Options
+
+```
+      --change-comment string   
+  -o, --output string           Output format [table, json, yaml] (default "table")
 ```
 
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO

@@ -7,22 +7,22 @@ Rollback for a resource.
 Rollback for a resource of an environment that belongs to a project.
 
 ```
-walrus resource rollback <environment> <resource> [flags]
+walrus resource rollback <resource> [flags]
 ```
 
 ## Options
 
 ```
-      --revision-id string   
+      --change-comment string   
+  -o, --output string           Output format [table, json, yaml] (default "table")
+      --revision-id string      
 ```
 
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO

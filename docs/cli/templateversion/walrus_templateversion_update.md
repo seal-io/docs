@@ -13,6 +13,7 @@ walrus templateversion update <templateversion> [flags]
 ## Options
 
 ```
+  -o, --output string    Output format [table, json, yaml] (default "table")
       --project string   
       --schema json       (default {}...)
       --ui-schema json    (default {}...)
@@ -21,10 +22,8 @@ walrus templateversion update <templateversion> [flags]
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO

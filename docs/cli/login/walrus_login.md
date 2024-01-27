@@ -1,9 +1,9 @@
-# walrus config setup
+# walrus login
 
-Connect Walrus server and setup cli
+Login Walrus server and setup cli
 
 ```
-walrus config setup short-name [flags]
+walrus login [flags]
 ```
 
 ## Options
@@ -19,13 +19,11 @@ walrus config setup short-name [flags]
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO
 
-* [walrus config](walrus_config)	 - Manage CLI configuration
+* [walrus](../walrus)	 - Command line interface for Walrus
 

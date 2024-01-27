@@ -1,13 +1,13 @@
-# walrus environment clone-environment
+# walrus environment clone
 
-Clone environment for an environment.
+Clone for an environment.
 
 ## Synopsis
 
-Clone environment for an environment of a project.
+Clone for an environment of a project.
 
 ```
-walrus environment clone-environment <environment> [flags]
+walrus environment clone <environment> [flags]
 ```
 
 ## Options
@@ -18,6 +18,7 @@ walrus environment clone-environment <environment> [flags]
       --draft                   
       --labels stringToString    (default [])
       --name string             
+  -o, --output string           Output format [table, json, yaml] (default "table")
       --type string             
       --variables jsonArray      (default []...)
 ```
@@ -25,10 +26,8 @@ walrus environment clone-environment <environment> [flags]
 ## Options inherited from parent commands
 
 ```
-  -d, --debug           Enable debug log
-  -h, --help            Help for this command
-  -o, --output string   Output format [table, json, yaml] (default "table")
-  -v, --version         Version for CLI
+  -d, --debug   Enable debug log
+  -h, --help    Help for this command
 ```
 
 ## SEE ALSO
