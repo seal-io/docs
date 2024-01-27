@@ -22,10 +22,10 @@ Walrus resource templates define applications at a high level. Configuration par
 
 ### Rich Open Source Ecosystem and Extensibility
 
-It can integrate with a variety of tools such as Terraform, Helm, and Kustomize. By reusing the rich capabilities from the open-source ecosystems of Terraform and Kubernetes, it is highly extensible to meet the diverse needs of enterprises.
+It can integrate with a variety of tools such as Terraform, OpenTofu, Helm, and Kustomize. By reusing the rich capabilities from the open-source ecosystems of Terraform and Kubernetes, it is highly extensible to meet the diverse needs of enterprises.
 
 ## Architecture
 
 The architecture of Walrus is shown as below:
 
-![architecture](/img/architecture.png)
+![architecture](/img/v0.5.0/architecture.png)
