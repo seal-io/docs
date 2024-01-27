@@ -23,10 +23,10 @@ Walrus的应用管理具备如下特性：
 
 ### 丰富的开源生态及扩展性
 
-可以与Terraform，Helm，Kustomize等多种工具对接。能够复用Terraform和Kubernetes开源生态中的丰富能力实现各种资源的支持，同时具备强大的扩展能力，灵活满足企业的不同需求。
+可以与Terraform，OpenTofu，Helm，Kustomize等多种工具对接。能够复用Terraform和Kubernetes开源生态中的丰富能力实现各种资源的支持，同时具备强大的扩展能力，灵活满足企业的不同需求。
 
 ## 架构
 
 Walrus的架构图如下所示：
 
-![architecture](/img/architecture.png)
+![architecture](/img/v0.5.0/architecture.png)

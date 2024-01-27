@@ -25,3 +25,5 @@ In Walrus, templates refer to resource templates used to define and describe var
 ## Resource Definitions
 
 Walrus helps you build polymorphic, multi-cloud abstraction. Resource definitions form the core of this abstraction. It declares a resource type and matching rules to specify which template to use when deploying that type of resource in a particular environment. This capability shield developers from the intricacies of the underlying infrastructure while providing reasonable control.
+
+If you are familiar with Docker, resource definition is similar to Docker Manifest. It can include templates for different architectures, allowing for the selection of the appropriate architecture based on the deployment environment.

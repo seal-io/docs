@@ -48,31 +48,19 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-set-pwd](/img/v0.5.0/quickstart/qs-set-pwd.png)
 
-## 本地环境
-
-Walrus 为您提供了一个名为`local`的环境，该环境位于`default`项目下，用于快速体验应用部署流程。
-
-![qs-local-env](/img/v0.5.0/quickstart/qs-local-env.png)
-
-`local`环境连接的是内置的 K3s 创建的本地 Kubernetes 集群连接器，您可以使用它部署应用，而无需配置 Kubernetes 集群。
-
-> 注意：
->
-> 本地环境的 K3s 集群连接器仅用于测试，不建议在生产环境中使用。如果您需要在生产环境中部署应用，请参考[高可用部署指引](deploy/replication)或手动配置 Kubernetes 集群连接器。
-
-！[qs-local-connector](/img/v0.5.0/quickstart/qs-local-connector.png)
-
 ## 部署资源
 
-1. 在环境列表页中，点击前置步骤创建的环境名称，进入环境视图。
+1. 点击导航栏中的`应用管理`菜单，进入`local`环境的资源列表页面。
 
-![qs-env-list](/img/v0.5.0/quickstart/qs-env-list.png)
+> 注意：
+> - Walrus 默认为您创建了`default`项目下的`local`环境，用于快速体验应用部署流程。它连接的是一个内置的 K3S 集群。您可以通过在启动时修改 Walrus 的配置来取消环境的创建。
+> - 内置的 K3S 集群连接器仅用于测试，不建议在生产环境中使用。如果您需要在生产环境中部署应用，请参考[高可用部署指引](deploy/replication)或者手动配置 Kubernetes 集群连接器。
 
-2. 点击`导入 YAML`按钮导入 Walrus 内置的 Walrus File 资源 YAML 文件。
+2. 点击`导入 YAML`按钮导入 Walrus 内置的 Walrus file。
 
 ![qs-create-res](/img/v0.5.0/quickstart/qs-create-res.png)
 
-3. 从右侧的 Walrus File Hub 中选择`nginx`示例。
+3. 从右侧的 **Walrus File Hub** 中选择`nginx`示例。
 
 ![qs-create-res-nginx](/img/v0.5.0/quickstart/qs-create-res-nginx.png)
 

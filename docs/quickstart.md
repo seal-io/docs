@@ -39,35 +39,23 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-first-login](/img/v0.5.0/quickstart/qs-first-login-en.png)
 
-3. After logging in, you can set a new password and configure the access address of Walrus.
+3. After logging in, you can set a new password and configure the server address of Walrus.
 
 ![qs-set-pwd](/img/v0.5.0/quickstart/qs-set-pwd-en.png)
 
-## Local Environment
-
-Walrus provides a default `local` environment under the `default` project for you to quickly experience the application deployment process.
-
-![qs-local-env](/img/v0.5.0/quickstart/qs-local-env-en.png)
-
-The `local` environment connects to a local Kubernetes cluster connector created by built-in K3s. You can use it to deploy applications without having to configure a Kubernetes cluster.
-
-> Note:
->
-> The embedded K3s cluster connector is only used for testing and is not recommended for production environments. If you need to deploy applications in a production environment, please refer to [HA setup guide](deploy/replication) or configure a Kubernetes cluster connector manually.
-
-![qs-local-connector](/img/v0.5.0/quickstart/qs-local-connector-en.png)
-
 ## Deploy Resources
 
-1. In the environment list page, click the `local` environment to enter the environment view.
+1. Click `Applications` in the navigation bar. You will enter the resource list page of the local environment.
 
-![qs-env-list](/img/v0.5.0/quickstart/qs-env-list-en.png)
+> Note:
+> - Walrus provides a `local` environment under the `default` project for you to quickly experience the application deployment process. It connects to an embedded K3S cluster. You can opt out of the environment creation by changing Walrus configuration on bootstrap.
+> - The embedded K3S cluster connector is only used for testing and is not recommended for production environments. If you need to deploy applications in a production environment, please refer to [HA setup guide](deploy/replication) or configure a Kubernetes cluster connector manually.
 
-2. Click the `Import YAML` button to import the built-in Walrus File resource.
+2. Click the `Import YAML` button to import a Walrus file.
 
 ![qs-create-res](/img/v0.5.0/quickstart/qs-create-res-en.png)
 
-3. Select the `nginx` example from the Walrus File Hub on the right.
+3. Select the `nginx` example from the **Walrus File Hub** on the right.
 
 ![qs-create-res-nginx](/img/v0.5.0/quickstart/qs-create-res-nginx-en.png)
 
