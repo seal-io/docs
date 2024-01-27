@@ -10,7 +10,7 @@ sidebar_position: 1
 > - All project names within the system must be unique.
 
 ## View Project List
-Click `Application Management` on the navigation bar, then click the `Project` dropdown menu at the top, and click `Manage` to enter the project list.
+Click `Applications` on the navigation bar, then click the `Project` dropdown menu at the top, and click `Manage` to enter the project list.
 
 ![app-proj-mgt](/img/v0.5.0/application/project/app-proj-mgt-en.png)
 

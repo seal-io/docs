@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # 模板库
 
-模板库是模板的集合，您可以在模板库中查看、导入、编辑、删除模板。
+模板库是模板的集中管理仓库，可以帮助您方便地查看、导入、编辑和删除模板。一个模板库对应版本控制提供商（如GitHub、GitLab和Gitee）中的一个组织（或组），其中包含多个模板代码库。
 
 Walrus 提供了以下两种层级的模板库：
 - 项目模版库：应用于某个项目的模板库，项目模板库中的模板可以在当前项目中使用。
@@ -18,7 +18,7 @@ Walrus 提供了以下两种层级的模板库：
 2. 在`模板库`标签页中，您可以查看模板库中的模板。
 3. 您可以通过`搜索`框搜索模板库中的模板。
 
-![list](/img/v0.4.0/catalog/list.png)
+![list](/img/v0.5.0/operation/catalog/list-catalog-en.png)
 
 ### 项目模板库
 
@@ -26,7 +26,7 @@ Walrus 提供了以下两种层级的模板库：
 2. 点击`模版库`标签页，查看项目模板库列表。
 3. 您可以通过`搜索`框搜索模板库中的模板。
 
-![list](/img/v0.4.0/catalog/list-project.png)
+![list](/img/v0.5.0/operation/catalog/list-project-catalog-en.png)
 
 ## 新增模板库
 
@@ -38,7 +38,7 @@ Walrus 提供了以下两种层级的模板库：
  `https://github.com/terraform-aliyun-modules`。
 4. 点击`保存`按钮。
 
-![create](/img/v0.4.0/catalog/create.png)
+![create](/img/v0.5.0/operation/catalog/create-en.png)
 
 ### 项目模板库
 
@@ -47,10 +47,9 @@ Walrus 提供了以下两种层级的模板库：
 3. 输入模板库的名称、描述、来源。其中，模板库目前支持类型有三种： Github，Gitlab 和 Gitee，来源是一个组织的地址，例如，例如 `https://github.com/alibabacloud-automation`。
 4. 点击`保存`按钮。
 
-![create](/img/v0.4.0/catalog/create-project.png)
+![create](/img/v0.5.0/operation/catalog/create-project-en.png)
 
 > Walrus 支持包含 Terraform 模块仓库的 Github/Gitlab/Gitee 组织，您可以在模板库中导入该组织下的所有模板。
-> ![create-result](/img/v0.4.0/catalog/create-result.png)
 
 ## 删除模板库
 

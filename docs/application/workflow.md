@@ -7,7 +7,7 @@ sidebar_position: 6
 A workflow is a set of tasks that are executed in a specific order. The tasks can be executed in parallel or sequentially. Workflows can be used to automate the deployment of applications. For example, deploying a web application requires deploying multiple services in a specific order. You can create a workflow to automate the deployment of the web application.
 
 ## View Workflow List
-1. Click `Application Management` -> `Workflows` on the left navigation bar.
+1. Click `Applications` -> `Workflows` on the left navigation bar.
 2. The workflow list under this project can be viewed on the workflow list page.
 3. Use the search bar on the workflow list page to quickly search for related workflows.
 
@@ -67,5 +67,5 @@ Workflow execution can be stopped by clicking the `Stop` button or re-executed b
 
 ## Delete Workflow
 
-1. Navigate to `Application Management` and enter the environment view, then click the `Workflows` tab.
+1. Navigate to `Applications` and enter the environment view, then click the `Workflows` tab.
 2. Select the workflow that you need to delete and click the `Delete` button to remove the workflow.

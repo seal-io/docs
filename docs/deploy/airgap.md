@@ -184,13 +184,13 @@ Navigate to `System Settings` -> `Server Management`, edit `Certificate Settings
 
 3. Remove the built-in catalog and add the intranet catalog:
 
-Navigate to `Operation Hub` -> `Catalogs`, check the `builtin` catalog, and choose to delete it.
+Navigate to `Operations` -> `Catalogs`, check the `builtin` catalog, and choose to delete it.
 
 And then choose `Add Catalog`, enter the catalog's name, description, source and choose type. For the source address, provide the complete git organization/group URL of the intranet catalog, such as https://github.com/walrus-catalog. Confirm and save.
 
 ![create](/img/v0.4.0/catalog/create-en.png)
 
-Confirm that the intranet catalog is refreshing correctly. Navigate to `Operation Hub` -> `Templates` and verify that the templates load successfully.
+Confirm that the intranet catalog is refreshing correctly. Navigate to `Operations` -> `Templates` and verify that the templates load successfully.
 
 > Note:
 > - OpenAI-related features (AI Draft Template) are not available in offline environments.

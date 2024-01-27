@@ -10,7 +10,7 @@ You can view the topology of deployed resources through the dependency graph. Wa
 
 The environment dependency graph includes all resources in the environment, as well as their relationships and deployment status.
 
-1. Click `Application Management` in the left navigation bar to enter the project and environment.
+1. Click `Applications` in the left navigation bar to enter the project and environment.
 2. Click the `Dependency Graph` tab to view the environment dependency graph.
 
 > Note: In the dependency graph, sub-nodes that are "implemented" and "inherited" are hidden by default. They can be expanded by clicking on the "Show Sub-resources" icon in the toolbar.
@@ -20,7 +20,7 @@ The environment dependency graph includes all resources in the environment, as w
 
 The resource dependency graph displays all components under the resource, as well as their relationships and deployment status.
 
-1. Click `Application Management` in the left navigation bar, enter the project and environment, and go to the resource detail page.
+1. Click `Applications` in the left navigation bar, enter the project and environment, and go to the resource detail page.
 2. Under the `Components` tab of component information, click the icon on the right to switch to the graph view.
 
 ![resource-graph](/img/v0.5.0/application/graph/app-graph-res-en.png)

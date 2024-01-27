@@ -6,88 +6,88 @@ sidebar_position: 3
 
 Walrus offers connectors on the following two levels:
 
-- Project Connectors: Applied to a specific project
-- Global Connectors: Can be applied to all projects
-## Viewing the Connectors List
+- **Project Connectors**: Applied to a specific project
+- **Global Connectors**: Can be applied to all projects
+## View Connector List
 
-### Global Connectors List
+### Global Connector List
 
-1. Click on `Operation Hub` in the left-hand sidebar.
+1. Click on `Operations` in the left-hand sidebar.
 2. Click on the `Connectors` tab to view the connectors list.
 
-![connector-list](/img/v0.4.0/operation/connector/op-conn-list-en.png)
+![connector-list](/img/v0.5.0/operation/connector/op-conn-list-en.png)
 
-### Project Connectors List
+### Project Connector List
 
-1. Click on `Application Management` in the left-hand sidebar and select the appropriate project.
+1. Click on `Applications` in the left-hand sidebar and select the appropriate project.
 2. Click on the `Connectors` tab to view the connectors list.
 
-![project-connector-list](/img/v0.4.0/application/project/app-proj-conn-list-en.png)
+![project-connector-list](/img/v0.5.0/operation/connector/app-proj-conn-list-en.png)
 
 ## Viewing Connector Details
 
-1. Click on `Operation Hub` -> `Connectors` in the left-hand sidebar to go to the connectors list.
-2. Find the connector you need to view and click on its name to enter the connector's detail page.
+1. Click on `Operations` in the left-hand sidebar.
+2. Click on the `Connectors` tab to view the connectors list.
+3. Find the connector you need to view and click on its name to enter the connector's detail page.
 
-## Creating a Connector
+## Create Connector
 
 > Note:
 > Since v0.4.0, connector creation needs choose `Applicable Environment Type`, please check [Environment Type](/application/environment#environment-type) for more details.
 
-### Creating a Kubernetes Connector
+### Create a Kubernetes Connector
 
 1. Click on `New Connector` in the connectors list and select `Kubernetes`.
 
-![connector-create](/img/v0.4.0/quickstart/qs-add-connector-en.png)
+![connector-create](/img/v0.5.0/operation/connector/op-add-connector-en.png)
 
-2. `Enable Cost Analysis` is turned on by default. Once enabled, you can create related views in the `Cost Management` menu on the left-hand side to view the related expense statistics.
-3. Choose `Applicable Environment Type`.
-4. Fill out the form. After `Save` is successful, the Kubernetes connector is created.
+2. Choose `Applicable Environment Type`.
+3. Fill out the form and click `Save`.
 
-![connector-create-k8s](/img/v0.4.0/operation/connector/op-conn-create-k8s-en.png)
+![connector-create-k8s](/img/v0.5.0/operation/connector/op-conn-create-k8s-en.png)
 
-### Creating a Cloud Vendor Connector
+### Creating a Cloud Provider Connector
 
-1. Click on `New Connector` in the connectors list and select `Cloud Vendor`.
-2. Configure `Name`, `Type`, `AccessKey`, `SecretKey`, `Region` connections.
-3. Choose `Applicable Environment Type`.
-4. Fill out the form. After `Save` is successful, the cloud vendor is created.
+1. Click on `New Connector` in the connectors list and select `Cloud Provider`.
+2. Choose `Applicable Environment Type`.
+3. Fill out the form and click `Save`.
 
-![connector-create-cloud](/img/v0.4.0/operation/connector/op-conn-create-cloud-en.png)
+![connector-create-cloud](/img/v0.5.0/operation/connector/op-conn-create-cloud-en.png)
 
 ### Creating a Version Control Connector
 
 1. Click on `New Connector` in the connectors list and select `Version Control`.
-2. Choose the type. Currently supports GitHub, fill out the corresponding `Access token`. The permission to operate the repo needs to be turned on.
-3. Choose `Applicable Environment Type`.
-4. Fill in the form. After `Save` is successful, the version control connector is created.
+2. Choose `Applicable Environment Type`.
+3. Fill in the form. The provided access token should have the permission to operate the repositories.
+4. Click `Save`.
 
-![connector-create-vcs](/img/v0.4.0/operation/connector/op-conn-create-vcs-en.png)
+![connector-create-vcs](/img/v0.5.0/operation/connector/op-conn-create-vcs-en.png)
 
 ### Creating a Custom Connector
 
 1. Click on `New Connector` in the connectors list and select `Custom`.
-2. The type is the type of third-party platform Terraform Provider, for example: AWS, AliCloud.
-3. Choose `Applicable Environment Type`.
-4. Add properties, for instance: if the Provider is [AliCloud](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs), you need to fill in access_key, secret_key, region.
+2. Choose `Applicable Environment Type`.
+3. Fill in the type, which  is the type of third-party platform Terraform Provider, for example: aws, alicloud, etc.
+4. Add properties. For example, if the provider is [Artifactory](https://registry.terraform.io/providers/jfrog/artifactory/latest/docs), you need to fill in `url` and `access_token`.
 
 ```
-provider "alicloud" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
-  region     = "${var.region}"
+provider "artifactory" {
+  url           = "${var.artifactory_url}"
+  access_token  = "${var.artifactory_access_token}"
 }
 ```
 
-![connector-create-custom](/img/v0.4.0/operation/connector/op-conn-create-custom-en.png)
+![connector-create-custom](/img/v0.5.0/operation/connector/op-conn-create-custom-en.png)
 ## Deleting a Connector
 
-1. Click on `Operation Hub` -> `Connectors` in the left-hand sidebar to go to the connectors list.
-2. Find the connector you need to delete.
-3. Ensure that no environment depends on this connector before selecting the connector you want to delete, then click the `Delete` button.
+
+1. Click on `Operations` in the left-hand sidebar.
+2. Click on the `Connectors` tab to view the connectors list.
+3. Find the connector you need to delete.
+4. Ensure that no environment depends on this connector before selecting the connector you want to delete, then click the `Delete` button.
 5. Click the `Confirm` button to complete the deletion.
 
-![connector-delete](/img/v0.4.0/operation/connector/op-conn-del-en.png)
+![connector-delete](/img/v0.5.0/operation/connector/op-conn-del-en.png)
 
 ## Usage
 

@@ -9,14 +9,14 @@ and usage under certain conditions. This enables Walrus to understand and manage
 
 ## Viewing the Resource Definition List
 
-1. Click on `Operation Hub` in the left-hand sidebar.
+1. Click on `Operations` in the left-hand sidebar.
 2. Select the `Resource Definitions` tab to view the list of resource definitions.
 
 ![definition-list](/img/v0.5.0/operation/definition/op-definition-list-en.png)
 
 ## Viewing Resource Definition Details
 
-1. Navigate to `Operation Hub` -> `Resource Definitions` in the left-hand sidebar to access the list of resource definitions.
+1. Navigate to `Operations` -> `Resource Definitions` in the left-hand sidebar to access the list of resource definitions.
 2. Locate the resource definition you wish to view and click on its name to open its detailed page.
 3. On the resource definition details page, you can view detailed information about the resource definition, including its matching rules, inputs and outputs, UI schema, and the list of resources created using this resource definition.
 4. In the list of created resources, you can manage resources by starting, stopping, deploying, deleting, etc. The list supports filtering by project name and matching rules.
@@ -33,7 +33,7 @@ and usage under certain conditions. This enables Walrus to understand and manage
 
 ## Deleting a Resource Definition
 
-1. Go to `Operation Hub` -> `Resource Definitions` in the left-hand sidebar to view the list of resource definitions.
+1. Go to `Operations` -> `Resource Definitions` in the left-hand sidebar to view the list of resource definitions.
 2. Identify the resource definition you intend to delete.
 3. Before selecting the resource definition for deletion, ensure no existing resources depend on it. Then, click the `Delete` button.
 4. Confirm the deletion by clicking the `Confirm` button.
@@ -86,7 +86,7 @@ Consequently, the resource definition's schema will include the input `image` an
 You can customize the UI schema of a resource definition. This is especially useful when you want to simplify or modify the configurations
 available to users for resources of that type.
 
-1. Access `Operation Hub` -> `Resource Definitions` in the left-hand sidebar to view the list of resource definitions.
+1. Access `Operations` -> `Resource Definitions` in the left-hand sidebar to view the list of resource definitions.
 2. Locate the desired resource definition and click on its name to view its details.
 3. Select the `UI Schema` tab.
 4. Click on the ellipsis (`...`) button in the top-right corner and select `Edit`.

@@ -8,7 +8,7 @@ sidebar_position: 3
 
 Resources belong to an environment, and you can view the list of resources in the environment view.
 
-1. Click on `Application Management` in the left navigation bar.
+1. Click on `Applications` in the left navigation bar.
 2. By default, you will enter the view of the first environment. You can switch to view resources under different projects or environments through the top-level breadcrumb. You can also set the default environment to enter through the breadcrumb.
 3. In the `Resources` tab, you can view the list of resources under this environment.
 
