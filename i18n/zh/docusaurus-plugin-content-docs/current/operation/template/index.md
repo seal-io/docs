@@ -4,21 +4,21 @@ sidebar_position: 1
 
 # 模板
 
-模板是预定义的服务框架或架构，它包含了一组相关的资源定义，输入以及输出。
+模板是预定义的资源框架或架构，它包含了一组相关的组件定义，输入以及输出。
 
 ## 类型
 
 Walrus 当前支持的模板类型为 Terraform module，存储于 git 代码仓库。
 
-## 模板源
+用户可以通过以下方式添加模板：
 
-- 模版库导入
+### 从模版库导入
 
-  模板库是模板的集合，添加模板库后，将会自动导入模板库中包含的所有模板。
+模板库是模板的集合，添加模板库后，将会自动导入模板库中包含的所有模板。
 
-- 新建独立模板
+### 添加独立的模板
 
-  通过操作Walrus UI，添加源为 git 仓库的地址的独立模板。
+通过操作Walrus UI，添加源为 git 代码仓库的地址的独立模板。
 
 ## 模板结构
 
@@ -94,11 +94,10 @@ components:
             group: Basic
 ```
 
-Walrus提供了工具根据terraform module生成schema.yaml文件。
+Walrus提供了工具根据terraform module生成schema.yaml文件，步骤如下：
 
-1. 进入[Walrsu Release](https://github.com/seal-io/walrus/releases) 下载walrus-cli。
-2. 运行命令授权 `chmod +x walrus-cli`。
-3. 运行命令生成schema.yaml `walrus-cli schema generate --dir=${dir for module}`。
+1. 安装[Walrsu CLI](../cli)。
+2. 运行命令生成schema.yaml `walrus-cli schema generate --dir=${dir for module}`。
 
 #### Walrus UI 配置
 
@@ -197,10 +196,6 @@ Walrus 会抓取 Terraform 文件中定义的输出，部署完成后，输出�
 
 Walrus 支持抓取用户自定义访问 URL。
 
-> 注意：
-> - 当返回 URL 的主机名（通常以 IP 地址的形式）与 Walrus 的本地 IP 地址相同时，Walrus 会将本地 IP 地址替换为 [服务器地址（设置）](../setting) 中的主机名。
-> - 采用上述变换，您将能够访问从嵌入式 Kubernetes 集群公开的资源。
-
 ![resource-endpoints](/img/v0.5.0/operation/template/resource-endpoints.png)
 
 把输出名称为 `endpoints` 或者 `walrus_endpoints` （如下配置），Walrus 将会把这些数组作为 *访问URL* 展示。
@@ -215,3 +210,7 @@ output "endpoints" {
 ```
 
 作为可捕获的结果，`endpoints` 或 `walrus_endpoints` 的值类型必须是字符串[映射](https://developer.hashicorp.com/terraform/language/expressions/types#map)，例如，JSON 形式为 `{"grafana_console":"http://localhost:3000","prometheus_console":"http://localhost:9090”}`。 由于 Terraform 不支持声明输出类型，如果需要显式类型转换，请尝试 [tomap](https://developer.hashicorp.com/terraform/language/functions/tomap) 函数。
+
+> 注意：
+> - 当返回 URL 的主机名（通常以 IP 地址的形式）与 Walrus 的本地 IP 地址相同时，Walrus 会将主机名替换为 [服务器地址（设置）](../setting) 中的主机名。
+> - 采用上述变换，您将能够访问从内置 Kubernetes 集群暴露的服务。

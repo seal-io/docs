@@ -6,36 +6,36 @@ sidebar_position: 2
 
 There are several levels of variables in Walrus:
 
-- Environment Variables: Applied to a specific environment
-- Project Variables: Applied to a specific project
-- Global Variables: Can be applied to all projects
+- **Environment Variables**: Applied to a specific environment.
+- **Project Variables**: Applied to a specific project.
+- **Global Variables**: Can be applied to all projects.
 
 When variables with the same name exist at different levels, the value of the variable is used according to the following **priority**: **Environment > Project > Global**.
 
 ## View Variable List
 
 ### Global Variables
-1. Click on the `Operation Hub` menu in the left navigation bar.
+1. Click on the `Operations` menu in the left navigation bar.
 2. Click on the `Global Variables` tab to manage global variables.
 
-![var-global-list](/img/v0.4.0/operation/variable/op-var-global-list-en.png)
+![var-global-list](/img/v0.5.0/operation/variable/op-var-global-list-en.png)
 
 ### Project Variables
 
-1. Click on `Application Management` in the left navigation bar.
+1. Click on `Applications` in the left navigation bar.
 2. Select the project using the project dropdown button at the top breadcrumb.
 3. Click on the `Variables` tab to manage the variables under this project.
 
-![var-project-list](/img/v0.4.0/operation/variable/op-var-proj-list-en.png)
+![var-project-list](/img/v0.5.0/operation/variable/op-var-proj-list-en.png)
 
 ### Environment Variables
 
-1. Click on `Application Management` in the left navigation bar.
+1. Click on `Applications` in the left navigation bar.
 2. Select the project using the project dropdown button at the top breadcrumb.
-3. Under the `Environment` tab, click on the name of an environment to enter the environment view.
+3. Under the `Environments` tab, click on the name of an environment to enter the environment view.
 4. Click on the `Variables` tab to manage the variables under this environment.
 
-![var-environment-list](/img/v0.4.0/operation/variable/op-var-env-list-en.png)
+![var-environment-list](/img/v0.5.0/operation/variable/op-var-env-list-en.png)
 
 ## Create, Update Variables
 
@@ -43,17 +43,17 @@ When variables with the same name exist at different levels, the value of the va
 2. Click on the 【New Variable】button to create a variable.
 3. Select `Sensitive`. If this option is enabled, the value of the variable cannot be seen after it is saved.
 
-![var-create](/img/v0.4.0/operation/variable/op-var-create-en.png)
+![var-create](/img/v0.5.0/operation/variable/op-var-create-en.png)
 
 4. Click on the `Edit` operation button in the variable list to update the variable.
 
-![var-edit](/img/v0.4.0/operation/variable/op-var-edit-en.png)
+![var-edit](/img/v0.5.0/operation/variable/op-var-edit-en.png)
 
 ## Use Variables
 
-When creating or editing a service, input `${var.variable name}` in the input box in the template configuration to use the corresponding variable.
+When creating or editing a resource, input `${var.variable_name}` in the input box in the template configuration to use the corresponding variable.
 
-![var-reference](/img/v0.4.0/operation/variable/op-var-ref-en.png)
+![var-reference](/img/v0.5.0/operation/variable/op-var-ref-en.png)
 
 ## Delete Variables
 

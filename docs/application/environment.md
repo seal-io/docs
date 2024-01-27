@@ -33,7 +33,7 @@ By using environment types, we can get the following isolation features.
 
 ## View Environment List
 
-1. Click `Application Management` on the left navigation bar. By default, the first project view will be displayed. The project can be switched via the top-level breadcrumb.
+1. Click `Applications` on the left navigation bar. By default, the first project view will be displayed. The project can be switched via the top-level breadcrumb.
 2. The environment list under this project can be viewed in the Environment tab.
 3. You can enter keywords in the search bar of the environment list page to quickly search for related environments.
 
@@ -64,7 +64,7 @@ By using environment types, we can get the following isolation features.
 
 Within the environment, you can manage the resources, including adding resources, deleting resources, and modifying resource configurations.
 
-1. Click `Application Management` in the navigation bar, switch to the corresponding project, and select the environment that needs to be managed.
+1. Click `Applications` in the navigation bar, switch to the corresponding project, and select the environment that needs to be managed.
 2. Manage the resources in the environment under the `Resources` tab.
 
 For more details on resource management, please refer to [Resources](/application/resource).
@@ -115,7 +115,7 @@ In some cases, you may need to create an environment that is identical to an exi
 
 When you start an environment, Walrus will deploy the resources in the environment in sequence according to the dependencies, and you can view the resource status in the resource list. Resources that have been stopped or under undeployed status in the environment will get deployed.
 
-1. Click `Application Management` and go to a project view.
+1. Click `Applications` and go to a project view.
 2. In the environment list, find the environment that needs to be started.
 3. Click the action dropdown and click `Start`.
 
@@ -125,7 +125,7 @@ When you start an environment, Walrus will deploy the resources in the environme
 
 When you stop an environment, Walrus will stop the resources in the environment in sequence according to the dependencies, and you can view the resource status in the resource list. When a resource is stopped, its configuration is kept while the underlying components are cleaned up.
 
-1. Click `Application Management` and go to a project view.
+1. Click `Applications` and go to a project view.
 2. In the environment list, find the environment that needs to be stopped.
 3. Click the action dropdown and click `Stop`.
 
@@ -133,7 +133,7 @@ When you stop an environment, Walrus will stop the resources in the environment 
 
 ## Delete Environment
 
-1. Click `Application Management` and enter the environment list of a project.
+1. Click `Applications` and enter the environment list of a project.
 2. Ensure no resources depend on this environment, select the environment you need to delete and click `Delete` to complete the deletion.
 
 ## Set Default Environment

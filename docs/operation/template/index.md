@@ -4,19 +4,19 @@ sidebar_position: 1
 
 # Template
 
-A template is a pre-defined service framework or architecture which includes a set of related resource definitions, inputs and outputs.
+A template is a pre-defined resource framework or architecture which includes a set of related components, inputs and outputs.
 
 ## Type
 
-Walrus currently supports Terraform module as the template type which is stored in git code repositories.
+Walrus currently supports Terraform module as the template type which is stored in git source code repositories.
 
-## Template Sources
+Users can add templates in Walrus using the following ways:
 
-- Catalog Import
+### Import from a catalog
 
-A catalog is a collection of templates. After adding a catalog, all templates included in the library will be automatically imported.
+A catalog is a registry storing a collection of templates. After adding a catalog, all templates included in the catalog will be automatically imported.
 
-- Create Independent Template
+### Create Independent Templates
 
 Add an independent template with a git repository address through the Walrus UI.
 
@@ -54,16 +54,16 @@ Configuration file for defining the template UI style. The content of schema.yam
 
 The template will use the image file named "icon" in the root path of the default branch of the source repository as the template's icon. The supported image file formats are: .png, .jpg, .jpeg, .svg. If no icon file is found, the default icon will be used.
 
-## Customizing Template UI Styles
-Walrus extends style definitions based on Terraform variables through UI Schema, aiding in generating more user-friendly forms on the interface.
+## Customizing Template UI Schema
+Walrus extends input definitions based on Terraform variables through UI Schema, aiding in generating more user-friendly forms in the UI.
 
 ### Configuration Method
 
 #### schema.yaml
 
-UI styles can be configured by adding a schema.yaml in the template repository. If the repository includes schema.yaml, Walrus will use the UI styles configured in schema.yaml.
+UI schema can be configured by adding a `schema.yaml` in the template repository. If the repository includes the `schema.yaml` file, Walrus will use the UI schema defined in that file.
 
-Below is an example of schema.yaml:
+Below is an example of the schema file:
 
 ```yaml
 openapi: 3.0.3
@@ -94,19 +94,21 @@ components:
             group: Basic
 ```
 
-Walrus provides a tool to generate the schema.yaml file based on the Terraform module.
+Walrus provides a tool to generate the `schema.yaml` file based on the Terraform module.
 
-1. Go to [Walrsu Release](https://github.com/seal-io/walrus/releases) and download walrus-cli.
-2. Run the command to grant permission: `chmod +x walrus-cli`
-3. Run the command to generate schema.yaml: `walrus-cli schema generate --dir=${dir for module}`
+1. Install [Walrus CLI](../cli).
+2. Run the following command to generate the `schema.yaml` file: 
+```
+walrus-cli schema generate --dir=${dir for module}
+```
 
 #### Walrus UI Configuration
 
-When the repository does not include a schema.yaml file, Walrus will automatically configure UI styles based on the variables.tf file. The generated styles can be viewed in the template's UI Schema.
+When the repository does not include a `schema.yaml` file, Walrus will automatically configure UI schema based on the terraform variables. The generated schema can be viewed in the template's UI Schema.
 
 ### Configuration Items
 
-UI Schema is based on the OpenAPI 3.0 file structure, written in YAML format. It includes both the basic structure of the OpenAPI Schema and the extensions part, combining to define extended styles.
+UI Schema is based on the OpenAPI 3.0 file structure, written in YAML format. It includes both the basic structure of the OpenAPI Schema and the extensions part, combining to define UI schema in Walrus.
 
 
 ### OpenAPI Schema Basic Configuration
@@ -131,7 +133,7 @@ UI Schema is based on the OpenAPI 3.0 file structure, written in YAML format. It
 
 ### x-walrus-ui Extension Configuration
 
-OpenAPI supports additional properties with the x- prefix, and Walrus supports additional configuration of styles through the x-walrus-ui extension.
+OpenAPI supports additional properties with the `x-` prefix, and Walrus supports additional configurations through the `x-walrus-ui` extension.
 
 | Name      | Description                                |
 | --------- | ------------------------------------------ |
@@ -143,7 +145,7 @@ OpenAPI supports additional properties with the x- prefix, and Walrus supports a
 
 ### Walrus Extension Widget
 
-Built-in extension controls within Walrus can be configured in the widget, and the UI will display according to the configured style.
+Walrus supports the following UI widgets through the extension, and the UI will display according to the configured UI widgets.
 
 | Name       | Description          |
 | ---------- | -------------------- |
@@ -152,7 +154,7 @@ Built-in extension controls within Walrus can be configured in the widget, and t
 
 ## Runtime Context
 
-In the template, runtime context information related to projects, environments, and resources can be obtained through the context variable. You need to declare the context variable in the template, and Walrus will automatically inject the value of the context variable during deployment. The declaration is as follows:
+Runtime context are information related to projects, environments, and resources. It can be obtained using the `context` variable in templates. You need to declare the context variable in the template, and Walrus will automatically inject the value of the `context` variable during deployment. The declaration is as follows:
 
 ```hcl
 variable "context" {
@@ -176,7 +178,7 @@ EOF
 }
 ```
 
-The context information is as follows:
+The runtime context contains the following information:
 
 | Context     | Sub  Context | Property	Type | Description                                                       |
 | ----------- | ------------ | ------------- | ----------------------------------------------------------------- |
@@ -190,7 +192,7 @@ The context information is as follows:
 
 ## Output
 
-Walrus captures the outputs defined in the Terraform file, and after deployment, the outputs will be displayed on the resource's output page. 
+Walrus captures the outputs defined in the templates. After a deployment is completed, the outputs will be displayed on the resource's output page. 
 
 ![resource-outputs](/img/v0.5.0/operation/template/resource-outputs.png)
 
@@ -198,13 +200,9 @@ Walrus captures the outputs defined in the Terraform file, and after deployment,
 
 Walrus supports capturing user-defined access URLs.
 
-> Note: 
-> - When the returning endpoint's hostname, usually in the form of an IP address, is the same as Walrus's local IP address, Walrus will replace the local IP address with the hostname from the [Server Address(setting)](../setting). 
-> - Adopting the above mutation, you will be able to access the resource exposed from the embedded Kubernetes cluster.
-
 ![resource-endpoints](/img/v0.5.0/operation/template/resource-endpoints.png)
 
-Name the output as `endpoints` or `walrus_endpoints`(as shown in the configuration below), Walrus will treat these outputs as *Endpoints* for display.
+Name the output as `endpoints` or `walrus_endpoints`(as shown in the configuration below), Walrus will treat these outputs as **Endpoints** for the resource.
 
 ```hcl
 output "endpoints" {
@@ -215,4 +213,8 @@ output "endpoints" {
 }
 ```
 
-As a capturable result, the value type of `endpoints` or `walrus_endpoints` must be a string [map](https://developer.hashicorp.com/terraform/language/expressions/types#map), for example, the JSON form is `{"grafana_console":"http://localhost:3000","prometheus_console":"http://localhost:9090"}`. Since Terraform doesn't support declaring the type of output, if need an explicit type conversion, please try [tomap](https://developer.hashicorp.com/terraform/language/functions/tomap) function.
+Type of the output value of `endpoints` or `walrus_endpoints` must be a string [map](https://developer.hashicorp.com/terraform/language/expressions/types#map). For example, the JSON form is `{"grafana_console":"http://localhost:3000","prometheus_console":"http://localhost:9090"}`. Since Terraform doesn't support declaring the type of output, if you need an explicit type conversion, please try the [tomap](https://developer.hashicorp.com/terraform/language/functions/tomap) function.
+
+> Note:
+> - When the endpoint's hostname, usually in the form of an IP address, is the same as Walrus's local IP address, Walrus will replace the hostname with the [Walrus server address](../setting#server).
+> - Adopting the above mutation, you will be able to access the resource exposed from the embedded Kubernetes cluster.
