@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[90612],{74346:e=>{e.exports=JSON.parse('{"title":"API Docs","slug":"/category/openapi","permalink":"/docs/v0.4/category/openapi","navigation":{"next":{"title":"Introduction","permalink":"/docs/v0.4/openapi/restful-apis"}}}')}}]);

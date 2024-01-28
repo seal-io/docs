@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[91796],{86283:e=>{e.exports=JSON.parse('{"title":"Operation Hub","slug":"/category/operation-hub","permalink":"/docs/category/operation-hub","navigation":{"previous":{"title":"Perspectives","permalink":"/docs/cost/perspective"},"next":{"title":"Catalog","permalink":"/docs/operation/catalog/"}}}')}}]);
