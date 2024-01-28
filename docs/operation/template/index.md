@@ -99,7 +99,7 @@ Walrus provides a tool to generate the `schema.yaml` file based on the Terraform
 1. Install [Walrus CLI](../cli).
 2. Run the following command to generate the `schema.yaml` file: 
 ```
-walrus-cli schema generate --dir=${dir for module}
+walrus schema generate --dir=${dir for module}
 ```
 
 #### Walrus UI Configuration
