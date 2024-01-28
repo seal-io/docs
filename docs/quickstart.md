@@ -4,7 +4,7 @@
 >
 > Walrus is alpha-quality software. It is under rapid development. Subsequent versions may introduce API changes that are not compatible.
 
-## Deployment
+## Install Walrus
 
 > Prerequisites:
 >
@@ -13,7 +13,7 @@
 > - Docker installed, if not please refer to [the Docker official documentation](https://docs.docker.com/).
 > - Server ports 80 and 443 are open.
 
-Execute the following command to start the Walrus service:
+Run the following command to start Walrus:
 
 ```shell
 sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 -p 30000-30100:30000-30100 --name walrus sealio/walrus:{{ VERSION }}
@@ -21,7 +21,7 @@ sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 -p 30000-30
 
 > Note:
 >
-> The port range `30000-30100` is used to expose the service of the application deployed in the local K3s environment. If you do not need to deploy applications in the local K3s environment, you can remove this port range.
+> The port range `30000-30100` is used to expose the services deployed in the embedded K3S cluster.
 
 For more detailed installation requirements, please refer to [installation](/deploy/standalone).
 
@@ -29,7 +29,7 @@ For more detailed installation requirements, please refer to [installation](/dep
 
 1. Access Walrus UI through `https://<server-address>`.
 
-2. Login to Walrus with the username `admin` and the initial administrator password, and set a new password and Walrus's access address as prompted by the UI.
+2. Log in to Walrus with the username `admin` and the initial administrator password, and set a new password and Walrus's access address as prompted by the UI.
 
 > Run the following command on the server to get the initial administrator password.
 
@@ -43,9 +43,9 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-set-pwd](/img/v0.5.0/quickstart/qs-set-pwd-en.png)
 
-## Deploy Resources
+## Deploy Application
 
-1. Click `Applications` in the navigation bar. You will enter the resource list page of the local environment.
+1. Click `Applications` in the navigation bar. You will enter the view of the `local` environment in the `default` project.
 
 > Note:
 > - Walrus provides a `local` environment under the `default` project for you to quickly experience the application deployment process. It connects to an embedded K3S cluster. You can opt out of the environment creation by changing Walrus configuration on bootstrap.
@@ -74,7 +74,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-res-logs](/img/v0.5.0/quickstart/qs-res-logs-en.png)
 
-- Open terminal.
+- Access the terminal.
 
 ![qs-res-exec](/img/v0.5.0/quickstart/qs-res-exec-en.png)
 

@@ -4,7 +4,7 @@
 >
 > Walrus 的当前版本处于 alpha 阶段。后续版本可能会引入不兼容的 API 变更。
 
-## 部署
+## 安装 Walrus
 
 > 前置条件：
 >
@@ -25,12 +25,12 @@ sudo docker run -d --privileged --restart=always \
 
 > 注意：
 >
-> - 端口范围`30000-30100`用于暴露本地 K3s 环境中部署的应用服务。如果您不需要在本地 K3s 环境中部署应用，可以删除此端口范围。
+> - 端口范围`30000-30100`用于暴露本地 K3s 环境中部署的应用服务。
 > - 为了加速国内用户的模板源的访问，我们通过环境变量`SERVER_BUILTIN_CATALOG_PROVIDER`指定模板源地址为 Gitee。如果您的服务器在国外，可以忽略此环境变量。
 
 更多部署要求，请参考[部署](/deploy/standalone)。
 
-## 访问
+## 访问 UI
 
 1. 通过`https://<server-address>`访问 Walrus 的 UI。
 
@@ -48,9 +48,9 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-set-pwd](/img/v0.5.0/quickstart/qs-set-pwd.png)
 
-## 部署资源
+## 部署应用
 
-1. 点击导航栏中的`应用管理`菜单，进入`local`环境的资源列表页面。
+1. 点击导航栏中的`应用管理`菜单，进入`default`项目的`local`环境视图。
 
 > 注意：
 > - Walrus 默认为您创建了`default`项目下的`local`环境，用于快速体验应用部署流程。它连接的是一个内置的 K3S 集群。您可以通过在启动时修改 Walrus 的配置来取消环境的创建。
@@ -79,7 +79,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 ![qs-res-logs](/img/v0.5.0/quickstart/qs-res-logs.png)
 
-- 打开终端。
+- 访问终端。
 
 ![qs-res-exec](/img/v0.5.0/quickstart/qs-res-exec.png)
 
