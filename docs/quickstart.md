@@ -21,7 +21,7 @@ sudo docker run -d --privileged --restart=always -p 80:80 -p 443:443 -p 30000-30
 
 > Note:
 >
-> The port range `30000-30100` is used to expose the services deployed in the embedded K3S cluster.
+> The port range `30000-30100` is used to expose the services deployed in the embedded K3S cluster,  allowing you to easily complete this quick start and make the applications accessible. In regular installations, there is no need to expose these ports.
 
 For more detailed installation requirements, please refer to [installation](/deploy/standalone).
 
