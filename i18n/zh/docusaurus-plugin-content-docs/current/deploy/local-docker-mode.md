@@ -4,12 +4,12 @@ sidebar_position: 4
 
 # 本地 Docker 模式
 
-Walrus 能以本地 Docker 模式部署。使用此模式，开发人员可以在其个人计算机上使用 Docker 部署 Walrus file。这使得用户可以在开发阶段使用与生产 Kubernetes 环境一致的应用定义。无需在本地运行 Kubernetes，只需使用 Docker 即可。
+Walrus 能以本地 Docker 模式部署。使用此模式，开发人员可以在其个人计算机上使用 Docker 部署 Walrus file。这使得用户可以在开发阶段使用与生产 Kubernetes 环境一致的应用定义。无需在本地使用 Kubernetes，只需使用 Docker 即可。
 
 ## 先决条件
 
 - 已安装 Docker，请参考 [Docker 官方文档](https://docs.docker.com/) 了解如何在您的计算机上设置 Docker。
-- （可选但建议）已安装 Docker Desktop，并启用 [Docker Extensions](https://docs.docker.com/desktop/extensions/)。
+- （可选）已安装 Docker Desktop，并启用 [Docker Extensions](https://docs.docker.com/desktop/extensions/)。如果适用，将安装 Walrus Docker 扩展。
 - 已安装 Walrus CLI，请参考 [CLI 文档](../cli) 了解如何安装 Walrus CLI。
 
 ## 安装本地 Walrus
@@ -28,6 +28,14 @@ Installing...
 Checking readiness...
 Walrus CLI is configured.
 ```
+
+您可以使用 `--env(-e)` 参数配置本地 Walrus 的[服务器选项](./options)。例如，要将默认的模板库源设置为 Gitee ，请运行以下命令：
+
+```shell
+walrus local install -e SERVER_BUILTIN_CATALOG_PROVIDER=gitee
+```
+
+> 注意：由于 Docker 扩展无法配置启动选项，当设置了此参数时，即使在您的 Docker Desktop 中启用了 Docker 扩展，本地 Walrus 也将使用普通的 Docker 容器安装。
 
 ## 部署资源
 
