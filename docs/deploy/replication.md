@@ -989,7 +989,7 @@ kubectl -n walrus-system rollout restart deployment/walrus
 5. Due to lack of the access pointer provided by Ingress, it can be accessed by kubectl's port-forward.
 
 ```shell
-sudo kubectl port-forward service/walrus 443:443
+sudo kubectl -n walrus-system port-forward service/walrus 443:443
 ```
 
 ### Use [ACME](https://letsencrypt.org/docs/challenge-types) to Generate Trusted Certificate
