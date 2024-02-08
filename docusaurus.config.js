@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const variableInjector = require('./src/plugins/variable-injector')
 
 const currentVersion = 'v0.5'
-const latestRelease = 'v0.5.0'
+const latestRelease = 'v0.5.1'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
