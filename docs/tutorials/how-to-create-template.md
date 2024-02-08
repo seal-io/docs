@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # How to Create a Template
 
-This tutorial explains how to create a Alibaba Cloud EC2 template and use it to create a service of ECS instance(s) on Alibaba Cloud.
+This tutorial explains how to create a Alibaba Cloud rds-mysql template and use it to create a resource of RDS instance(s) on Alibaba Cloud.
 
 ## Prerequisites
 
@@ -14,11 +14,11 @@ This tutorial explains how to create a Alibaba Cloud EC2 template and use it to 
 ## Create a repository on GitHub
 
 1. Create a new repository on GitHub of your own.
- Here we use the repository [demo](https://github.com/walrus-catalog-demo/demo)
+ Here we use the repository [terraform-alicloud-rds-mysql](https://github.com/walrus-catalog/terraform-alicloud-rds-mysql)
 2. Clone the repository to your local machine.
 
 ```bash
-git clone git@github.com:walrus-catalog-demo/demo.git
+git clone git@github.com:walrus-catalog/terraform-alicloud-rds-mysql.git
 ```
 
 ## Create Template Files
@@ -31,128 +31,122 @@ cd demo
 Create files in the directory as follows:
 
 ```bash
-- demo
-  - main.tf
-  - outputs.tf
-  - variables.tf
-  - README.md
+- terraform-alicloud-rds-mysql
+├── icon.svg
+├── main.tf
+├── modules
+├── outputs.tf
+├── schema.yaml
+├── variables.tf
+└── versions.tf
+...
 ```
 
-The `main.tf` file defines the resources to be created. Here we define resource for the template to create an Alibaba Cloud ECS instance.
+The `main.tf` file defines the resources to be created. Here we define resource for the template to create an Alibaba Cloud RDS instance.
 
 ```bash
-resource "alicloud_instance" "example" {
-  instance_name        = "demo-instance"
-  instance_type        = var.instance_type
-  image_id             = var.image_id
-  system_disk_category = var.system_disk_category
-  system_disk_size     = var.system_disk_size
-  internet_charge_type = var.internet_charge_type
-  internet_max_bandwidth_out = var.internet_max_bandwidth_out
+locals {
+  project_name     = coalesce(try(var.context["project"]["name"], null), "default")
+  project_id       = coalesce(try(var.context["project"]["id"], null), "default_id")
+  environment_name = coalesce(try(var.context["environment"]["name"], null), "test")
+  environment_id   = coalesce(try(var.context["environment"]["id"], null), "test_id")
+  resource_name    = coalesce(try(var.context["resource"]["name"], null), "example")
+  resource_id      = coalesce(try(var.context["resource"]["id"], null), "example_id")
 
-  vswitch_id = data.alicloud_vswitches.default.vswitches.0.id
+  namespace = join("-", [local.project_name, local.environment_name])
 
-  host_name = var.hostname
-  key_name = "seal-demo"
+  tags = {
+    "Name" = join("-", [local.namespace, local.resource_name])
 
-  security_groups = [
-    data.alicloud_security_groups.default.groups.0.id
-  ]
+    "walrus.seal.io/catalog-name"     = "terraform-alicloud-rds-mysql"
+    "walrus.seal.io/project-id"       = local.project_id
+    "walrus.seal.io/environment-id"   = local.environment_id
+    "walrus.seal.io/resource-id"      = local.resource_id
+    "walrus.seal.io/project-name"     = local.project_name
+    "walrus.seal.io/environment-name" = local.environment_name
+    "walrus.seal.io/resource-name"    = local.resource_name
+  }
+
+  architecture = coalesce(var.architecture, "standalone")
 }
-
-data "alicloud_vpcs" "default" {
-  name_regex = "default"
-}
-
-data "alicloud_vswitches" "default" {
-  vpc_id = data.alicloud_vpcs.default.vpcs.0.id
-}
-
-data "alicloud_security_groups" "default" {
-  name_regex = "default"
-}
-
-resource "null_resource" "health_check" {
-  depends_on = [
-    alicloud_instance.example,
-  ]
-}
+...
 ```
 
 The `variables.tf` file defines the variables used in the template. Walrus will use the variables to generate the form for users to fill in.
 
-Walrus use the `@label` and `@group` annotations to define the labels and groups of the variables. The optional `@options` annotation is used to define the dropdown options of the variable， if the `@options` annotation is not defined, the variable will be displayed as a text box in the form. More details about the annotations can be found [here](/operation/template#variable-style-extension).
-
-In this example, we define two groups: `Basic` and `Advanced`. It will be displayed as two tabs in the form when creating a service using this template.
-
 ```bash
-# @label "Instance type"
-# @group "Basic"
-variable "instance_type" {
-  description = "The instance type of the ECS instance"
-  default     = "ecs.s6-c1m2.small"
+variable "infrastructure" {
+  ...
+  type = object({
+    vpc_id              = string
+    kms_key_id          = optional(string)
+    domain_suffix       = optional(string)
+    publicly_accessible = optional(bool, false)
+  })
 }
 
-# @label "VM image id"
-# @group "Basic"
-variable "image_id" {
-  description = "The ID of the image used to launch the ECS instance"
-  default     = "ubuntu_18_04_x64_20G_alibase_20230208.vhd"
-}
+#
+# Deployment Fields
+#
 
-# @label "System disk type"
-# @group "Basic"
-# @options ["ephemeral_ssd", "cloud_efficiency", "cloud_ssd", "cloud_essd", "cloud", "cloud_auto"]
-variable "system_disk_category" {
-  description = "The category of the system disk"
-  default     = "cloud_efficiency"
-}
-
-# @label "System disk size"
-# @group "Basic"
-variable "system_disk_size" {
-  description = "The size of the system disk, value range: [20, 500]"
-  default     = 40
-}
-
-# @label "Hostname"
-# @group "Basic"
-variable "hostname" {
+variable "architecture" {
+  ...
   type        = string
-  description = "The hostname of the ECS instance"
-  default     = ""
+  default     = "standalone"
+  validation {
+    condition     = var.architecture == "" || contains(["standalone", "replication"], var.architecture)
+    error_message = "Invalid architecture"
+  }
 }
 
-# @label "Network billing type"
-# @group "Advanced"
-# @options ["PayByTraffic", "PayByBandwidth"]
-variable "internet_charge_type" {
-  description = "The billing method of the public network bandwidth"
-  default     = "PayByTraffic"
+variable "replication_readonly_replicas" {
+  ...
+  type        = number
+  default     = 1
+  validation {
+    condition     = var.replication_readonly_replicas == 0 || contains([1, 3, 5], var.replication_readonly_replicas)
+    error_message = "Invalid number of read-only replicas"
+  }
 }
-
-# @label "Max outbound bandwidth (MB)"
-# @group "Advanced"
-variable "internet_max_bandwidth_out" {
-  description = "The maximum outbound bandwidth of the public network"
-  default     = 5
-}
+...
 ```
 
-The `outputs.tf` file defines the outputs of the template which will be displayed to the user after the service is created. The outputs of the template of a service could also be referenced by other services.
+The `outputs.tf` file defines the outputs of the template which will be displayed to the user after the resource is created. The outputs of the template of a resource could also be referenced by other resourdes.
 
 
 ```bash
-output "public_ip" {
-  value = alicloud_instance.example.public_ip
+#
+# Reference
+#
+
+output "connection" {
+  description = "The connection, a string combined host and port, might be a comma separated string or a single string."
+  value       = join(",", local.endpoints)
 }
 
-output "primary_ip_address" {
-  value = alicloud_instance.example.primary_ip_address
+output "connection_readonly" {
+  description = "The readonly connection, a string combined host and port, might be a comma separated string or a single string."
+  value       = join(",", local.endpoints_readonly)
 }
+
+output "address" {
+  description = "The address, a string only has host, might be a comma separated string or a single string."
+  value       = join(",", local.hosts)
+}
+
+output "address_readonly" {
+  description = "The readonly address, a string only has host, might be a comma separated string or a single string."
+  value       = join(",", local.hosts_readonly)
+}
+
+output "port" {
+  description = "The port of the resource."
+  value       = local.port
+}
+
 ```
 
-The `README.md` file is the description of the template. It will be displayed to the user when creating a service using this template. Here we can use the tool [terraform-docs](https://github.com/terraform-docs/terraform-docs) to generate the description of the template.
+The `README.md` file is the description of the template. It will be displayed to the user when creating a resource using this template. Here we can use the tool [terraform-docs](https://github.com/terraform-docs/terraform-docs) to generate the description of the template.
 
 ```markdown
 terraform-docs markdown . > README.md
@@ -161,49 +155,37 @@ terraform-docs markdown . > README.md
 The generated `README.md` file is as follows:
 
 ```bash
+# Alibaba ApsaraDB RDS for MySQL resource
+
+Terraform module which deploys [MySQL](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql) resource on Alibaba Cloud.
+
+- [x] Support standalone(one read-write HA instance) and replication(one read-write HA instance and multiple read-only instances, for read write splitting).
+
+## Examples
+
+- [Replication](./examples/replication)
+- [Standalone](./examples/standalone)
+
+## Contributing
+
+Please read our [contributing guide](./docs/CONTRIBUTING.md) if you're interested in contributing to Walrus template.
+
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.212.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | n/a |
-| <a name="provider_null"></a> [null](#provider\_null) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [alicloud_instance.example](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/instance) | resource |
-| [null_resource.health_check](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [alicloud_security_groups.default](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/security_groups) | data source |
-| [alicloud_vpcs.default](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/vpcs) | data source |
-| [alicloud_vswitches.default](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/vswitches) | data source |
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_hostname"></a> [hostname](#input\_hostname) | The hostname of the ECS instance | `string` | `""` | no |
-| <a name="input_image_id"></a> [image\_id](#input\_image\_id) | The ID of the image used to launch the ECS instance | `string` | `"ubuntu_18_04_x64_20G_alibase_20230208.vhd"` | no |
-| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | The instance type of the ECS instance | `string` | `"ecs.s6-c1m2.small"` | no |
-| <a name="input_internet_charge_type"></a> [internet\_charge\_type](#input\_internet\_charge\_type) | The billing method of the public network bandwidth | `string` | `"PayByTraffic"` | no |
-| <a name="input_internet_max_bandwidth_out"></a> [internet\_max\_bandwidth\_out](#input\_internet\_max\_bandwidth\_out) | The maximum outbound bandwidth of the public network | `number` | `5` | no |
-| <a name="input_system_disk_category"></a> [system\_disk\_category](#input\_system\_disk\_category) | The category of the system disk | `string` | `"cloud_efficiency"` | no |
-| <a name="input_system_disk_size"></a> [system\_disk\_size](#input\_system\_disk\_size) | The size of the system disk, value range: [20, 500] | `number` | `40` | no |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| <a name="output_primary_ip_address"></a> [primary\_ip\_address](#output\_primary\_ip\_address) | n/a |
-| <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | n/a |
+| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | >= 1.212.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.5.1 |
+...
 ```
 
 ## Commit and Tag Version
@@ -217,23 +199,26 @@ git push -u origin main
 Create a tag for the template version.
 
 ```bash
-git tag v0.0.1
+git tag v0.1.0
 git push --tags
 ```
+
+## Template UI Schema
+Walrus will render the UI form according to the schema.yaml file. The schema.yaml file defines the form group and labels for the template variables. If the schema.yaml file is not provided, Walrus will generate the form group and labels according to the annotations in the template variables. You can follow the [customizing-template-ui-schema](/operation/template#customizing-template-ui-schema) to customize the form group and labels.
 
 ## Create a Template on Walrus
 
 1. Open Walrus in your browser and log in.
-2. Go to the `Template` tab under `Operations Hub` and create a template by using the template we just created, here we name the template `aliyun-ec2`.
-![create-template](/img/v0.4.0/tutorials/how-to-create-template/create-template-us.png)
-After the import task is completed, the template will be displayed in the template list, we can see the template version is `v0.0.1`.
-![template-version](/img/v0.4.0/tutorials/how-to-create-template/template-version-us.png)
+2. Go to the `Template` tab under `Operations Hub` and create a template by using the template we just created, here we name the template `aliyun-rds`.
+![create-template](/img/v0.5.0/tutorials/how-to-create-template/create-template.png)
+After the import task is completed, the template will be displayed in the template list, we can see the template version is `v0.1.0`.
+![template-version](/img/v0.5.0/tutorials/how-to-create-template/template-version.png)
 3. Add Alibaba Cloud Provider in the `Connectors` tab under `Operations Hub`.
 4. Add Connector to the Environment.
-5. Create a Service using the template `aliyun-ec2`, the form group and labels are generated according to the annotations in the template variables we defined.
-![create-service](/img/v0.4.0/tutorials/how-to-create-template/create-service-us.png)
+5. Create a resource using the template `aliyun-rds`, the form group and labels are generated according to the annotations in the template variables we defined.
+![create-resource](/img/v0.5.0/tutorials/how-to-create-template/create-resource.png)
 
-After the service is created, we can see the details of the service and the outputs of the template.
-![service-detail](/img/v0.4.0/tutorials/how-to-create-template/service-us.png)
-Check the ECS instance on Alibaba Cloud console, we can see the ECS instance is created successfully.
-![ecs-instance](/img/v0.4.0/tutorials/how-to-create-template/ec2-us.png)
+After the resource is created, we can see the details of the resource and the outputs of the template.
+![resource-detail](/img/v0.5.0/tutorials/how-to-create-template/resource.png)
+Check the RDS instance on Alibaba Cloud console, we can see the RDS instance is created successfully.
+![ecs-rds](/img/v0.5.0/tutorials/how-to-create-template/rds.png)

@@ -34,14 +34,14 @@ sidebar_position: 1
 点击`运维中心`菜单，进入`模板库`标签页。
 
 1. 点击`添加`按钮。
-2. 填入模板库名称, 来源，，例如`template-demo`。
-![create-catalog](/img/v0.4.0/tutorials/catalog-on-github/create-catalog.png)
+2. 填入模板库名称, 来源，，例如`demo-catalog`。
+![create-catalog](/img/v0.5.0/tutorials/catalog-on-github/create-catalog.png)
 3. 完成导入后，在模板列表中可以看到`my-template`和`my-rds`两个模板。
-![catalog-list](/img/v0.4.0/tutorials/catalog-on-github/catalog-template.png)
+![catalog-list](/img/v0.5.0/tutorials/catalog-on-github/catalog-template.png)
 
 ### 利用模板创建资源
 
 1. 点击`应用管理`，进入选择项目及环境。（如果没有项目及环境，请参考[创建项目及环境](/application/environment)）
-2. 点击`创建服务`按钮，进入创建服务页面，选择导入catalog的模板，例如`my-template`，填入模板参数，点击`创建`按钮。
-3. 查看服务状态，等待服务创建完成。
-![create-service](/img/v0.4.0/tutorials/catalog-on-github/create-service.png)
+2. 点击`创建资源`按钮，进入创建资源页面， 选择模板创建，选择导入 catalog 的模板，例如`demo-catalog/kubernetes-containerservice`，填入模板参数，点击`创建`按钮。
+3. 查看资源状态，等待资源创建完成。
+![create-resource](/img/v0.5.0/tutorials/catalog-on-github/create-resource.png)

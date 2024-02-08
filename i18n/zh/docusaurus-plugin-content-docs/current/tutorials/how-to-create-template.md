@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # 如何创建模板
 
-本教程介绍如何创建 Walrus 阿里云 EC2 模板并使用它在阿里云上创建 ECS 实例服务。
+本教程介绍如何创建 Walrus 阿里云 rds-mysql 模板并使用它在阿里云上创建 rds 实例资源。
 
 ## 前提条件
 
@@ -13,11 +13,11 @@ sidebar_position: 4
 
 ## 在 GitHub 上创建仓库
 
-1. 在 GitHub 上创建你自己的新仓库，这里我们使用仓库 [demo](https://github.com/walrus-catalog-demo/demo)
+1. 在 GitHub 上创建你自己的新仓库，这里我们使用仓库 [terraform-alicloud-rds-mysql](https://github.com/walrus-catalog/terraform-alicloud-rds-mysql)
 2. 将仓库克隆到你的本机。
 
 ```bash
-git clone git@github.com:walrus-catalog-demo/demo.git
+git clone git@github.com:walrus-catalog/terraform-alicloud-rds-mysql.git
 ```
 
 ## 创建模板文件
@@ -30,127 +30,121 @@ cd demo
 在目录中创建如下文件:
 
 ```bash
-- demo
-  - main.tf
-  - outputs.tf
-  - variables.tf
-  - README.md
+- terraform-alicloud-rds-mysql
+├── icon.svg
+├── main.tf
+├── modules
+├── outputs.tf
+├── schema.yaml
+├── variables.tf
+└── versions.tf
+...
 ```
 
-`main.tf` 文件定义了要创建的资源，这里我们为模板定义了一个阿里云 ECS 实例的资源。
+`main.tf` 文件定义了要创建的资源，这里我们为模板定义了一个阿里云 rds 创建相关的资源.
 
 ```bash
-resource "alicloud_instance" "example" {
-  instance_name        = "demo-instance"
-  instance_type        = var.instance_type
-  image_id             = var.image_id
-  system_disk_category = var.system_disk_category
-  system_disk_size     = var.system_disk_size
-  internet_charge_type = var.internet_charge_type
-  internet_max_bandwidth_out = var.internet_max_bandwidth_out
+locals {
+  project_name     = coalesce(try(var.context["project"]["name"], null), "default")
+  project_id       = coalesce(try(var.context["project"]["id"], null), "default_id")
+  environment_name = coalesce(try(var.context["environment"]["name"], null), "test")
+  environment_id   = coalesce(try(var.context["environment"]["id"], null), "test_id")
+  resource_name    = coalesce(try(var.context["resource"]["name"], null), "example")
+  resource_id      = coalesce(try(var.context["resource"]["id"], null), "example_id")
 
-  vswitch_id = data.alicloud_vswitches.default.vswitches.0.id
+  namespace = join("-", [local.project_name, local.environment_name])
 
-  host_name = var.hostname
-  key_name = "seal-demo"
+  tags = {
+    "Name" = join("-", [local.namespace, local.resource_name])
 
-  security_groups = [
-    data.alicloud_security_groups.default.groups.0.id
-  ]
+    "walrus.seal.io/catalog-name"     = "terraform-alicloud-rds-mysql"
+    "walrus.seal.io/project-id"       = local.project_id
+    "walrus.seal.io/environment-id"   = local.environment_id
+    "walrus.seal.io/resource-id"      = local.resource_id
+    "walrus.seal.io/project-name"     = local.project_name
+    "walrus.seal.io/environment-name" = local.environment_name
+    "walrus.seal.io/resource-name"    = local.resource_name
+  }
+
+  architecture = coalesce(var.architecture, "standalone")
 }
-
-data "alicloud_vpcs" "default" {
-  name_regex = "default"
-}
-
-data "alicloud_vswitches" "default" {
-  vpc_id = data.alicloud_vpcs.default.vpcs.0.id
-}
-
-data "alicloud_security_groups" "default" {
-  name_regex = "default"
-}
-
-resource "null_resource" "health_check" {
-  depends_on = [
-    alicloud_instance.example，
-  ]
-}
+...
 ```
 
 `variables.tf` 文件定义了模板中使用的变量，Walrus 将使用这些变量为用户生成模板填写表单。
 
-Walrus 通过 `@label` 和 `@group` 注释来定义变量的标签和组。 可选的 `@options` 注释用于定义变量的下拉选项， 如果没有定义 @options 注释，则该变量将在表单中显示为文本框。 关于模板变量注释的更多详细信息可以在[这里](/operation/template#variable-style-extension)查看。
-
-在这个例子中，我们定义了两个组: `基础` 和 `高级`，它们将在创建服务的模板表单中以两个选项卡的形式显示。
-
 ```bash
-# @label "实例规格"
-# @group "基础"
-variable "instance_type" {
-  description = "The instance type of the ECS instance"
-  default     = "ecs.s6-c1m2.small"
+variable "infrastructure" {
+  ...
+  type = object({
+    vpc_id              = string
+    kms_key_id          = optional(string)
+    domain_suffix       = optional(string)
+    publicly_accessible = optional(bool, false)
+  })
 }
 
-# @label "VM镜像id"
-# @group "基础"
-variable "image_id" {
-  description = "The ID of the image used to launch the ECS instance"
-  default     = "ubuntu_18_04_x64_20G_alibase_20230208.vhd"
-}
+#
+# Deployment Fields
+#
 
-# @label "系统磁盘类型"
-# @group "基础"
-# @options ["ephemeral_ssd"， "cloud_efficiency"， "cloud_ssd"， "cloud_essd"， "cloud"， "cloud_auto"]
-variable "system_disk_category" {
-  description = "The category of the system disk"
-  default     = "cloud_efficiency"
-}
-
-# @label "系统盘大小"
-# @group "基础"
-variable "system_disk_size" {
-  description = "The size of the system disk， value range: [20， 500]"
-  default     = 40
-}
-
-# @label "主机名"
-# @group "基础"
-variable "hostname" {
+variable "architecture" {
+  ...
   type        = string
-  description = "The hostname of the ECS instance"
-  default     = ""
+  default     = "standalone"
+  validation {
+    condition     = var.architecture == "" || contains(["standalone", "replication"], var.architecture)
+    error_message = "Invalid architecture"
+  }
 }
 
-# @label "网络计费类型"
-# @group "高级"
-# @options ["PayByTraffic"， "PayByBandwidth"]
-variable "internet_charge_type" {
-  description = "The billing method of the public network bandwidth"
-  default     = "PayByTraffic"
+variable "replication_readonly_replicas" {
+  ...
+  type        = number
+  default     = 1
+  validation {
+    condition     = var.replication_readonly_replicas == 0 || contains([1, 3, 5], var.replication_readonly_replicas)
+    error_message = "Invalid number of read-only replicas"
+  }
 }
-
-# @label "最大出口带宽(MB)"
-# @group "高级"
-variable "internet_max_bandwidth_out" {
-  description = "The maximum outbound bandwidth of the public network"
-  default     = 5
-}
+...
 ```
 
-`outputs.tf` 文件定义了模板的输出，它们将在服务创建后作为服务的输出参数查看，并且可以被其他服务引用。
+`outputs.tf` 文件定义了模板中的输出变量。当资源创建成功后，Walrus 将会在资源详情页面显示输出变量。
 
 ```bash
-output "public_ip" {
-  value = alicloud_instance.example.public_ip
+#
+# Reference
+#
+
+output "connection" {
+  description = "The connection, a string combined host and port, might be a comma separated string or a single string."
+  value       = join(",", local.endpoints)
 }
 
-output "primary_ip_address" {
-  value = alicloud_instance.example.primary_ip_address
+output "connection_readonly" {
+  description = "The readonly connection, a string combined host and port, might be a comma separated string or a single string."
+  value       = join(",", local.endpoints_readonly)
 }
+
+output "address" {
+  description = "The address, a string only has host, might be a comma separated string or a single string."
+  value       = join(",", local.hosts)
+}
+
+output "address_readonly" {
+  description = "The readonly address, a string only has host, might be a comma separated string or a single string."
+  value       = join(",", local.hosts_readonly)
+}
+
+output "port" {
+  description = "The port of the resource."
+  value       = local.port
+}
+
 ```
 
-`README.md` 文件是模板的描述。在使用此模板创建服务时，我们可以在模板详情页面查看该模板的具体功能参数及定义。这里我们可以使用工具 [terraform-docs](https://github.com/terraform-docs/terraform-docs)来生成模板的描述。
+`README.md` 文件是模板的描述。在使用此模板创建资源时，我们可以在模板详情页面查看该模板的具体功能参数及定义。这里我们可以使用工具 [terraform-docs](https://github.com/terraform-docs/terraform-docs)来生成模板的描述。
 
 ```markdown
 terraform-docs markdown . > README.md
@@ -159,49 +153,37 @@ terraform-docs markdown . > README.md
 生成的 `README.md` 文件如下:
 
 ```bash
+# Alibaba ApsaraDB RDS for MySQL resource
+
+Terraform module which deploys [MySQL](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql) resource on Alibaba Cloud.
+
+- [x] Support standalone(one read-write HA instance) and replication(one read-write HA instance and multiple read-only instances, for read write splitting).
+
+## Examples
+
+- [Replication](./examples/replication)
+- [Standalone](./examples/standalone)
+
+## Contributing
+
+Please read our [contributing guide](./docs/CONTRIBUTING.md) if you're interested in contributing to Walrus template.
+
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.212.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | n/a |
-| <a name="provider_null"></a> [null](#provider\_null) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [alicloud_instance.example](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/instance) | resource |
-| [null_resource.health_check](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [alicloud_security_groups.default](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/security_groups) | data source |
-| [alicloud_vpcs.default](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/vpcs) | data source |
-| [alicloud_vswitches.default](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/vswitches) | data source |
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_hostname"></a> [hostname](#input\_hostname) | The hostname of the ECS instance | `string` | `""` | no |
-| <a name="input_image_id"></a> [image\_id](#input\_image\_id) | The ID of the image used to launch the ECS instance | `string` | `"ubuntu_18_04_x64_20G_alibase_20230208.vhd"` | no |
-| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | The instance type of the ECS instance | `string` | `"ecs.s6-c1m2.small"` | no |
-| <a name="input_internet_charge_type"></a> [internet\_charge\_type](#input\_internet\_charge\_type) | The billing method of the public network bandwidth | `string` | `"PayByTraffic"` | no |
-| <a name="input_internet_max_bandwidth_out"></a> [internet\_max\_bandwidth\_out](#input\_internet\_max\_bandwidth\_out) | The maximum outbound bandwidth of the public network | `number` | `5` | no |
-| <a name="input_system_disk_category"></a> [system\_disk\_category](#input\_system\_disk\_category) | The category of the system disk | `string` | `"cloud_efficiency"` | no |
-| <a name="input_system_disk_size"></a> [system\_disk\_size](#input\_system\_disk\_size) | The size of the system disk， value range: [20， 500] | `number` | `40` | no |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| <a name="output_primary_ip_address"></a> [primary\_ip\_address](#output\_primary\_ip\_address) | n/a |
-| <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | n/a |
+| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | >= 1.212.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.5.1 |
+...
 ```
 
 ## 提交模板版本
@@ -215,23 +197,26 @@ git push -u origin main
 为模板创建一个标签作为版本。
 
 ```bash
-git tag v0.0.1
+git tag v0.1.0
 git push --tags
 ```
+
+## 模板 UI 渲染样式
+默认情况下，Walrus 会根据模板中定义的变量自动生成表单组和标签的渲染。您可以通过[自定义模板样式](/operation/template#自定义模板-ui-样式)来自定义表单组和标签的渲染。
 
 ## 在 Walrus 上创建模板
 
 1. 在浏览器中打开 Walrus 并登录。
-2. 转到 `运维中心` 下的模板管理，使用我们刚刚创建的模板新建一个模板，这里我们将模板命名为 `aliyun-ec2`。
-![create-template](/img/v0.4.0/tutorials/how-to-create-template/create-template.png)
-导入任务完成后，模板将显示在模板列表中，我们可以看到模板版本为刚刚创建的版本`v0.0.1`。
-![template-version](/img/v0.4.0/tutorials/how-to-create-template/template-version.png)
+2. 转到 `运维中心` 下的模板管理，使用我们刚刚创建的模板新建一个模板，这里我们将模板命名为 `aliyun-rds`。
+![create-template](/img/v0.5.0/tutorials/how-to-create-template/create-template.png)
+导入任务完成后，模板将显示在模板列表中，我们可以看到模板版本为刚刚创建的版本`v0.1.0`。
+![template-version](/img/v0.5.0/tutorials/how-to-create-template/template-version.png)
 3. 在 `运维中心` 的 `连接器`下添加阿里云连接器。
 4. 配置阿里云连接器到环境.
-5. 使用模板 `aliyun-ec2` 创建一个服务， 表单组和标签的渲染是根据上述模板中定义的变量注释自动生成的。
-![create-service](/img/v0.4.0/tutorials/how-to-create-template/create-service.png)
+5. 使用模板 `aliyun-rds` 创建一个资源， 表单组和标签的渲染是根据上述模板中定义的变量注释自动生成的。
+![create-resource](/img/v0.5.0/tutorials/how-to-create-template/create-resource.png)
 
-服务创建后，我们可以看到服务的详情和模板的输出
-![service-detail](/img/v0.4.0/tutorials/how-to-create-template/service.png)
-在阿里云控制台检查 ECS 实例，我们可以看到 ECS 实例已成功创建。
-![ecs-instance](/img/v0.4.0/tutorials/how-to-create-template/ec2.png)
+资源创建后，我们可以在资源详情页面查看资源详情。
+![resource-detail](/img/v0.5.0/tutorials/how-to-create-template/resource.png)
+阿里云控制台检查 RDS 实例，我们可以看到 RDS 实例已成功创建。
+![ecs-instance](/img/v0.5.0/tutorials/how-to-create-template/rds.png)
