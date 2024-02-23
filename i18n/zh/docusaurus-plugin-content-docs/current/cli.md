@@ -11,8 +11,9 @@ Walrus 支持从 GitHub Releases 页面或直接从 Walrus UI 下载 Walrus CLI�
 前往 [Walrus Releases 页面](https://github.com/seal-io/walrus/releases) 并下载适用于您操作系统的 CLI 二进制文件。
 
 或者，您可以运行以下命令来下载并安装最新版本的 Walrus CLI：
+
 ```bash
-ARCH=$(uname -m | sed 's/x86_64/amd64/')
+ARCH=$(uname -m | sed 's/x86_64/amd64/; s/aarch64/arm64/')
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 curl -fLO "https://github.com/seal-io/walrus/releases/latest/download/walrus-cli-${OS}-${ARCH}"

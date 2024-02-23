@@ -11,8 +11,9 @@ Walrus supports downloading the Walrus CLI from the GitHub Releases page or dire
 Head to the [Walrus Releases Page](https://github.com/seal-io/walrus/releases) and download the corresponding CLI binary for your operating system in release assets.
 
 Alternatively, you can run the following commands to download and install the latest Walrus CLI:
+
 ```bash
-ARCH=$(uname -m | sed 's/x86_64/amd64/')
+ARCH=$(uname -m | sed 's/x86_64/amd64/; s/aarch64/arm64/')
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 curl -fLO "https://github.com/seal-io/walrus/releases/latest/download/walrus-cli-${OS}-${ARCH}"
