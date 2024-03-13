@@ -1,0 +1,58 @@
+---
+sidebar_position: 4
+---
+
+# Dependency Graph
+
+You can view the topology of deployed resources through the dependency graph. Walrus provides dependency graphs at two levels: environment and resource.
+
+## Environment Dependency Graph
+
+The environment dependency graph includes all resources in the environment, as well as their relationships and deployment status.
+
+1. Click `Applications` in the left navigation bar to enter the project and environment.
+2. Click the `Dependency Graph` tab to view the environment dependency graph.
+
+> Note: In the dependency graph, sub-nodes that are "implemented" and "inherited" are hidden by default. They can be expanded by clicking on the "Show Sub-resources" icon in the toolbar.
+
+![environment-graph](/img/v0.5.0/application/graph/app-graph-env-en.png)
+## Resource Dependency Graph
+
+The resource dependency graph displays all components under the resource, as well as their relationships and deployment status.
+
+1. Click `Applications` in the left navigation bar, enter the project and environment, and go to the resource detail page.
+2. Under the `Components` tab of component information, click the icon on the right to switch to the graph view.
+
+![resource-graph](/img/v0.5.0/application/graph/app-graph-res-en.png)
+
+## Dependency Graph Node Relations
+
+The relationships between nodes in the dependency graph can be divided into three categories:
+
+- Composition: A component relationship, represented by a solid line and a diamond arrow
+- Dependency: Denotes dependency, represented by a dashed line and a V-shaped arrow
+- Realization: Realization or inheritance, represented by a dotted line and a triangular arrow
+
+![graph-legend](/img/v0.4.0/application/graph/app-graph-legend-en.png)
+## Graph Toolbar
+
+- Fit View: Adjusts the zoom or position to ensure the entire content fits within the current view.
+- Refresh: Refresh the view.
+- Full Screen: View in full screen.
+- Show Components: Toggle display or hide components of resources.
+
+![graph-toolbar](/img/v0.5.0/application/graph/app-graph-toolbar-en.png)
+
+## View Component Logs
+
+1. In the dependency graph, select a node that can perform log operations, click the icon in the upper left corner of the node square, and then click `Log`.
+2. You can adjust the size of the log window as needed by stretching it up and down.
+
+![graph-log](/img/v0.4.0/application/graph/app-graph-log-en.png)
+
+## Access Component Terminal
+
+1. In the dependency graph, select a node that can perform terminal operations, click the icon in the upper left corner of the node square, and then click `Terminal`.
+2. You can adjust the size of the terminal window as needed by stretching it up and down.
+
+![graph-exec](/img/v0.4.0/application/graph/app-graph-exec-en.png)
