@@ -27,7 +27,7 @@ This command generates static content into the `build` directory and can be serv
 ### Tag a version
 
 ```shell
-yarn run docusaurus docs:version 0.1
+yarn run docusaurus docs:version v0.1
 ```
 
 ### Release
