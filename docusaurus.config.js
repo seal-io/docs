@@ -5,8 +5,8 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const variableInjector = require('./src/plugins/variable-injector')
 
-const currentVersion = 'v0.5'
-const latestRelease = 'v0.5.1'
+const currentVersion = 'v0.6'
+const latestRelease = 'v0.6.0'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -55,6 +55,7 @@ const config = {
               banner: 'none',
             },
           },
+          onlyIncludeVersions: ['current', 'v0.5', 'v0.4'],
           docLayoutComponent: "@theme/DocPage",
           /* Derived from docusaurus-theme-openapi */
           docItemComponent: "@theme/ApiItem",
