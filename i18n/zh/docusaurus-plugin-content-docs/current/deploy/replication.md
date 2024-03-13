@@ -60,6 +60,9 @@ stringData:
   db_user: "root"
   db_password: "Root123"
   db_name: "walrus"
+  minio_root_user: "minio"
+  minio_root_password: "Minio123"
+  minio_bucket: "walrus"
 ---
 
 
@@ -81,7 +84,7 @@ data:
 
     if [[ ! -d ${PGDATA} ]]; then
       mkdir -p ${PGDATA}
-      chown 999:999 ${PGDATA}
+      chown 9999:9999 ${PGDATA}
     fi
 
   "probe.sh": |
@@ -154,7 +157,7 @@ spec:
       restartPolicy: Always
       initContainers:
         - name: init
-          image: postgres:14.8
+          image: postgres:16.1
           imagePullPolicy: IfNotPresent
           command:
             - /script/init.sh
@@ -168,7 +171,7 @@ spec:
               mountPath: /var/lib/postgresql/data
       containers:
         - name: postgres
-          image: postgres:14.8
+          image: postgres:16.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -178,7 +181,7 @@ spec:
               cpu: '500m'
               memory: '512Mi'
           securityContext:
-            runAsUser: 999
+            runAsUser: 9999
           ports:
             - name: conn
               containerPort: 5432
@@ -234,7 +237,95 @@ spec:
           persistentVolumeClaim:
             claimName: database
 ---
-
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: walrus-system
+  name: minio
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "minio"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: walrus-system
+  name: minio
+spec:
+  selector:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "minio"
+  ports:
+    - name: minio
+      port: 9000
+      targetPort: minio
+---
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  # This name uniquely identifies the Deployment
+  name: minio
+  namespace: walrus-system
+  labels:
+    "app.kubernetes.io/part-of": "walrus"
+    "app.kubernetes.io/component": "minio"
+    "app.kubernetes.io/name": "minio"
+spec:
+  selector:
+    matchLabels:
+      "app.kubernetes.io/part-of": "walrus"
+      "app.kubernetes.io/component": "minio"
+      "app.kubernetes.io/name": "minio"
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        "app.kubernetes.io/part-of": "walrus"
+        "app.kubernetes.io/component": "minio"
+        "app.kubernetes.io/name": "minio"
+    spec:
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: minio
+      containers:
+      - name: minio
+        image: minio/minio:RELEASE.2024-02-26T09-33-48Z
+        args:
+        - server
+        - /storage
+        resources:
+          limits:
+            cpu: '1'
+            memory: '1Gi'
+          requests:
+            cpu: '500m'
+            memory: '512Mi'
+        ports:
+        - name: minio
+          containerPort: 9000
+        env:
+        - name: MINIO_ROOT_USER
+          valueFrom:
+            secretKeyRef:
+              name: walrus
+              key: minio_root_user
+        - name: MINIO_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: walrus
+              key: minio_root_password
+        volumeMounts:
+        - name: storage
+          mountPath: "/storage"
 
 # Identity Access Manager
 #
@@ -317,7 +408,7 @@ spec:
       restartPolicy: Always
       initContainers:
         - name: init
-          image: sealio/casdoor:v1.344.0-seal.1
+          image: sealio/casdoor:v1.515.0-seal.1
           imagePullPolicy: IfNotPresent
           workingDir: /tmp/conf
           command:
@@ -352,7 +443,7 @@ spec:
               mountPath: /tmp/conf
       containers:
         - name: casdoor
-          image: sealio/casdoor:v1.344.0-seal.1
+          image: sealio/casdoor:v1.515.0-seal.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -407,7 +498,7 @@ spec:
 #
 ## RBAC for installing third-party applications.
 ##
-## Since the installation of some third-party software has permission granting operations, 
+## Since the installation of some third-party software has permission granting operations,
 ## it will contain some resource global operation permissions, but only for granting.
 ##
 ---
@@ -429,29 +520,15 @@ metadata:
     "app.kubernetes.io/component": "walrus"
 rules:
   - apiGroups:
-      - "apiextensions.k8s.io"
+      - '*'
     resources:
-      - "customresourcedefinitions"
+      - '*'
     verbs:
-      - create
-      - update
-      - get
-      - list
-      - patch
-  - apiGroups:
-      - "rbac.authorization.k8s.io"
-    resources:
-      - "clusterroles"
-      - "clusterrolebindings"
-      - "roles"
-      - "rolebindings"
-      - "serviceaccounts"
+      - '*'
+  - nonResourceURLs:
+      - '*'
     verbs:
-      - create
-      - update
-      - get
-      - list
-      - patch
+      - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -468,81 +545,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: walrus
-## RBAC for launching Walrus.
-##
-## As limiting in the walrus-system, it can be safe to make all verbs as "*".
-##
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  namespace: walrus-system
-  name: walrus
-  labels:
-    "app.kubernetes.io/part-of": "walrus"
-    "app.kubernetes.io/component": "walrus"
-rules:
-  - apiGroups:
-      - "authorization.k8s.io"
-    resources:
-      - "subjectaccessreviews"
-      - "selfsubjectaccessreviews"
-    verbs:
-      - "*"
-  - apiGroups:
-      - "coordination.k8s.io"
-    resources:
-      - "leases"
-    verbs:
-      - "*"
-  - apiGroups:
-      - "apps"
-    resources:
-      - "statefulsets"
-      - "deployments"
-      - "replicasets"
-    verbs:
-      - "*"
-  - apiGroups:
-      - "batch"
-    resources:
-      - "jobs"
-    verbs:
-      - "*"
-  - apiGroups:
-      - ""
-    resources:
-      - "persistentvolumeclaims"
-      - "persistentvolumeclaims/finalizers"
-      - "secrets"
-      - "pods"
-      - "pods/log"
-      - "events"
-      - "services"
-      - "configmaps"
-      - "serviceaccounts"
-    verbs:
-      - "*"
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  namespace: walrus-system
-  name: walrus
-  labels:
-    "app.kubernetes.io/part-of": "walrus"
-    "app.kubernetes.io/component": "walrus"
-subjects:
-  - kind: ServiceAccount
-    name: walrus
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: walrus
-## RBAC for enabling workflow
-##
-## As limiting in the walrus-system, it can be safe to make all verbs as "*".
-##
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -670,20 +672,48 @@ metadata:
     "app.kubernetes.io/part-of": "walrus"
     "app.kubernetes.io/component": "walrus"
 rules:
+  # The below rules are used for running workflow.
   - apiGroups:
       - ""
     resources:
       - "pods"
+    verbs:
+      - "get"
+      - "watch"
+      - "patch"
+  - apiGroups:
+      - ""
+    resources:
       - "pods/logs"
+    verbs:
+      - "get"
+      - "watch"
+  - apiGroups:
+      - ""
+    resources:
       - "secrets"
     verbs:
-      - "*"
+      - "get"
   - apiGroups:
       - "argoproj.io"
     resources:
-      - "*"
+      - "workflowtasksets"
     verbs:
-      - "*"
+      - "watch"
+      - "list"
+  - apiGroups:
+      - "argoproj.io"
+    resources:
+      - "workflowtaskresults"
+    verbs:
+      - "create"
+      - "patch"
+  - apiGroups:
+      - "argoproj.io"
+    resources:
+      - "workflowtasksets/status"
+    verbs:
+      - "patch"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -816,6 +846,21 @@ spec:
                 secretKeyRef:
                   name: walrus
                   key: db_name
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: walrus
+                  key: minio_root_user
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: walrus
+                  key: minio_root_password
+            - name: MINIO_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: walrus
+                  key: minio_bucket
             - name: SERVER_SETTING_LOCAL_ENVIRONMENT_MODE
               valueFrom:
                 secretKeyRef:
@@ -830,6 +875,10 @@ spec:
               value: $(DB_DRIVER)://$(DB_USER):$(DB_PASSWORD)@database:5432/$(DB_NAME)?sslmode=disable
             - name: SERVER_CASDOOR_SERVER
               value: http://identity-access-manager:8000
+            - name: SERVER_S3_SOURCE_ADDRESS
+              value: s3://$(MINIO_ROOT_USER):$(MINIO_ROOT_PASSWORD)@minio:9000/$(MINIO_BUCKET)?sslmode=disable
+            - name: SERVER_BUILTIN_CATALOG_PROVIDER
+              value: "gitee"
           ports:
             - name: http
               containerPort: 80
@@ -871,6 +920,7 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: walrus
+
 ```
 
 使用上述 YAML 进行高可用部署后，Walrus 不会在 default 项目下创建出 local 环境，也不会把部署 Walrus 的 Kubernetes 集群作为 local Kubernetes 连接器使用。
@@ -980,7 +1030,7 @@ kubectl -n walrus-system delete ingress walrus
 4. 使用 Kubectl Rollout 重启 Walrus。
 
 > 注意：
-> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。 
+> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。
 
 ```shell
 kubectl -n walrus-system rollout restart deployment/walrus
@@ -1059,7 +1109,7 @@ kubectl -n walrus-system delete ingress walrus
 6. 使用 Kubectl Patch 修改Walrus的环境变量，以应答ACME挑战。
 
 > 注意：
-> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。 
+> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。
 
 ```shell
 export DNS_NAME=""; kubectl -n walrus-system patch deployment walrus --type json -p "[{\"op\":\"add\",\"path\":\"/spec/template/spec/containers/0/env/-\",\"value\":{\"name\":\"SERVER_TLS_AUTO_CERT_DOMAINS\",\"value\":\"${DNS_NAME}\"}}]"
@@ -1111,7 +1161,7 @@ kubectl -n walrus-system delete ingress walrus
 4. 使用 Kubectl Patch 修改Walrus的环境变量，以启用自定义的证书。
 
 > 注意：
-> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。 
+> - 变更访问方式后，需要在 "系统设置" 内调整 "服务器地址"。
 
 ```shell
 kubectl -n walrus-system patch deployment walrus --type json \
