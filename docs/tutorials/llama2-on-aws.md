@@ -20,52 +20,58 @@ To follow this tutorial, you will need:
 
 With Walrus, you can have a running llama-2 instance on AWS with a user-friendly web UI in about a minute. Just follow these steps:
 
-### Add the llama-2 Service Template
-1. Log in to Walrus, click on `Operations Center` in the left navigation, go to the `Templates` tab, and click the `New Template` button.
+### Add the llama-2 Template
+1. Log in to Walrus, click on `Operations` in the left navigation, go to the `Templates` tab, and click the `New Template` button.
 2. Enter a template name, e.g., `llama-2`.
 3. In the source field, enter `https://github.com/walrus-tutorials/llama2-on-aws`.
 4. Click `Save`.
 
-![llama2-add-template](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-template.png)
+![llama2-add-template](/img/v0.6.0/tutorials/llama2-on-aws/llama2-add-template.png)
 
-### Configure Environment and AWS Credentials
-1. In the left navigation, click on `Application Management`, go to the `default` project view, and click the `Connectors` tab.
+### Configure AWS Credentials
+1. In the left navigation, click on `Operations` and click the `Connectors` tab.
 2. Click the `New Connector` button and select the `Cloud Provider` type.
 3. Enter a connector name, e.g., `aws`.
-4. Choose `AWS` for the `Type` option.
-5. Select `Tokyo (ap-northeast-1)` for the `Region` option.
-6. Click `Save`.
+4. Choose `Development` for the `Applicable Environment Type` option.
+5. Choose `AWS` for the `Type` option.
+6. Select `Tokyo (ap-northeast-1)` for the `Region` option.
+7. Click `Save`.
 
 > Note:
 > The specified region is used here because the subsequent steps involve using an AMI from that region. If you want to use a different region, you can export the AMI to your region or refer to the following sections on how to build the llama-2 image from scratch.
 
-![llama2-add-connector](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-connector.png)
+![llama2-add-connector](/img/v0.6.0/tutorials/llama2-on-aws/llama2-add-connector.png)
 
-1. Click the `Environments` tab, click the `New Environment` button.
-2. Enter an environment name, e.g., `dev`.
-3. Click the `Add Connector` button and select the `aws` connector created in the previous step.
-4. Click `Save`.
+### Configure Environment
 
-![llama2-add-environment](/img/v0.4.0/tutorials/llama2-on-aws/llama2-add-env.png)
+1. In the left navigation, click on `Applications` and click the `default` project in breadcrumb on the top.
+2. In the `Environments` tab, click the `New Environment` button.
+3. Enter an environment name, e.g., `dev`.
+4. Choose `Development` for the `Environment Type` option.
+5. Click the `Add Connector` button and select the `aws` connector created in the previous step.
+6. Click `Save`.
+
+![llama2-add-environment](/img/v0.6.0/tutorials/llama2-on-aws/llama2-add-environment.png)
 
 ### Create the llama-2 Service
 1. In the `Environments` tab, click on the name of the `dev` environment to enter its view.
-2. Click the `New Service` button.
-3. Enter a service name, e.g., `my-llama-2`.
-4. Choose `llama-2` in the `Template` option.
-5. Click `Save`.
+2. Click the `New Resource` button.
+3. Enter a resource name, e.g., `my-llama-2`.
+4. Enable the `Use Template` option.
+5. Choose `llama-2` in the `Template` option.
+6. Click `Save`.
 
 > Note:
-> The default service configuration assumes your AWS account has a default VPC in the corresponding region. If you don't have a default VPC, create a new VPC, associate a subnet and a security group with it in the AWS VPC console.
-> The security group needs to open port 7860 TCP (for accessing the llama-2 web UI). You can set your VPC name and security group name in the service configuration.
+> The default configuration assumes your AWS account has a default VPC in the corresponding region. If you don't have a default VPC, create a new VPC, associate a subnet and a security group with it in the AWS VPC console.
+> The security group needs to open port 7860 TCP (for accessing the llama-2 web UI). You can set your VPC name and security group name in the configuration.
 
 ### Accessing the llama-2 Web UI
 
-You can see the deployment and running status of the llama-2 service on its details page. Once the llama-2 service deployment is complete, you can access its web UI by clicking the access link of the service in the Walrus UI.
+You can see the deployment and running status of the llama-2 service on its details page. Once the llama-2 service deployment is completed, you can access its web UI by clicking the access link of the resource in the Walrus UI.
 
-![llama2-service-detail](/img/v0.4.0/tutorials/llama2-on-aws/llama2-service-detail.png)
+![llama2-resource-detail](/img/v0.6.0/tutorials/llama2-on-aws/llama2-resource-detail.png)
 
-![llama2-webui](/img/v0.4.0/tutorials/llama2-on-aws/llama2-web-ui.png)
+![llama2-webui](/img/v0.6.0/tutorials/llama2-on-aws/llama2-web-ui.png)
 
 ## Deep Dive: Building the llama-2 Image from Scratch
 
