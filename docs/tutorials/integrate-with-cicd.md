@@ -10,24 +10,24 @@ This tutorial explains how to integrate the Walrus CLI with your CI/CD tools to 
 
 To follow this tutorial, you will need:
 
-1. A GitHub Repo where you can fork our Demo project.
+1. A GitHub Repository.
 2. [Installation of Walrus](/deploy/standalone).
 
 ## Creating an API Key
 
-First, you need to create an API key to allow the Walrus CLI to communicate with the Walrus server.
+To allow the Walrus CLI to interact with the Walrus server, you first need to generate an API key:
 
-1. Go to `User information` and click on `API Keys`, then click `Add new key`, configure a name, and set an expiration time for the key.
-2. Once completed, copy the generated key for later use.
+1. Navigate to `User Information`, select `API Keys`, then click `New Key`. Provide a name for the key and set an expiration period.
+2. After creation, copy the API key for later use.
 
-## Integration of Walrus CLI and CI/CD Tools
+## Integrating Walrus CLI with CI/CD Tools
 
-We will use CLI and GitHub Actions integration as an example.
+For this tutorial, we will demonstrate integration using GitHub Actions.
 
-1. Go to your GitHub repository and create a `ci.yaml` file under the `.github/workflows` directory, defining your CI/CD workflow within.
-2. In the workflow, configure GitHub Actions secrets, including `CI_REGISTRY_PASSWORD`, `CI_WALRUS_SERVER`, and `CI_WALRUS_TOKEN`, to securely store sensitive information. The format for `CI_WALRUS_SERVER` should be https://domain:port/.
+1. In your GitHub repository, create a new file named `ci.yaml` within the `.github/workflows` directory. This file will define your CI/CD workflow.
+2. Configure the workflow to use GitHub Actions secrets, such as `CI_WALRUS_SERVER` and `CI_WALRUS_API_KEY`, for securely handling sensitive data. Ensure the `CI_WALRUS_SERVER` secret follows the format `https://host:port`.
 
-Here's an example `ci.yaml`:
+Below is a sample `ci.yaml` for reference:
 
 ```yaml
 name: ci
@@ -47,17 +47,17 @@ jobs:
     steps:
       - name: Download CLI
         run: |
-          # Download walrus cli
+          # Install walrus cli
           curl -v -k -o walrus -LO "${{ secrets.CI_WALRUS_SERVER }}/cli?arch=amd64&os=linux"
           chmod +x ./walrus
 
       - name: Deploy
         run: |
-          # Setup CLI config
-          ./walrus config setup --server ${{ secrets.CI_WALRUS_SERVER }} --project web --environment dev --token ${{ secrets.CI_WALRUS_TOKEN }}
+          # Configure the CLI
+          ./walrus login --server ${{ secrets.CI_WALRUS_SERVER }} --project web --environment dev --api-key ${{ secrets.CI_WALRUS_API_KEY }}
 
-          # Build and deploy from source code
-          ./walrus service create --name simple-web-service --template '{"name":"deploy-source-code", "version":"v0.0.1"}' --attributes '{ "git_url": "https://github.com/seal-io/simple-web-service", "git_branch": "main", "git_auth": false, "registry_auth": true, "registry_username": "sealio", "registry_password": "${{ secrets.CI_REGISTRY_PASSWORD }}", "image": "sealio/simple-web-service:${{ github.sha }}", "namespace": "default", "name": "simple-web-service"}' -d
+          # Deploy resources using Walrus files.
+          ./walrus apply -f walrus-file.yaml --wait
 ```
 
-After deployment, you can view the corresponding service in Walrus. For more CLI-related operations, please refer to the CLI documentation.
+After successful deployment, you can view the deployed services in the Walrus dashboard. For additional CLI commands and usage, please refer to the CLI documentation.
