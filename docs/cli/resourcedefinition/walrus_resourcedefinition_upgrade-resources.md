@@ -13,11 +13,13 @@ walrus resourcedefinition upgrade-resources [flags]
 ## Options
 
 ```
-      --change-comment string   
-      --draft                   
-      --items jsonArray          (default []...)
-  -o, --output string           Output format [table, json, yaml] (default "table")
-      --reuse-attributes        
+      --change-comment string       
+      --draft                       
+      --items jsonArray              (default []...)
+  -o, --output string               Output format [table, json, yaml] (default "table")
+      --preview                     
+      --reuse-attributes            
+      --run-labels stringToString    (default [])
 ```
 
 ## Options inherited from parent commands

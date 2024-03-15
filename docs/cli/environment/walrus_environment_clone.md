@@ -19,6 +19,7 @@ walrus environment clone <environment> [flags]
       --labels stringToString    (default [])
       --name string             
   -o, --output string           Output format [table, json, yaml] (default "table")
+      --preview                 
       --type string             
       --variables jsonArray      (default []...)
 ```

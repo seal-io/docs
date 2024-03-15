@@ -15,6 +15,7 @@ walrus resourcedefinition delete-resources [flags]
 ```
       --items jsonArray    (default []...)
   -o, --output string     Output format [table, json, yaml] (default "table")
+      --preview           
       --without-cleanup   
 ```
 

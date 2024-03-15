@@ -22,7 +22,9 @@ walrus resource create [flags]
       --labels stringToString                     (default [])
       --name string                              
   -o, --output string                            Output format [table, json, yaml] (default "table")
+      --preview                                  
       --resource-definition-matching-rule json    (default {}...)
+      --run-labels stringToString                 (default [])
       --template json                             (default {}...)
       --type string                              
 ```

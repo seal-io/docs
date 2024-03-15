@@ -26,6 +26,7 @@ walrus apply [flags]
 ## Options
 
 ```
+      --change-comment string     Add comment to the operation
   -e, --environment string        Environment for default use
   -f, --filenames strings         File path or folder path
   -p, --project string            Project for default use

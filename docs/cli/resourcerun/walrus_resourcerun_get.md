@@ -1,20 +1,19 @@
-# walrus environment start
+# walrus resourcerun get
 
-Start for an environment.
+Get a resource run.
 
 ## Synopsis
 
-Start for an environment of a project.
+Get a resource run that belongs to an environment of a project.
 
 ```
-walrus environment start <environment> [flags]
+walrus resourcerun get <resource> <resourcerun> [flags]
 ```
 
 ## Options
 
 ```
   -o, --output string   Output format [table, json, yaml] (default "table")
-      --preview         
 ```
 
 ## Options inherited from parent commands
@@ -26,5 +25,5 @@ walrus environment start <environment> [flags]
 
 ## SEE ALSO
 
-* [walrus environment](walrus_environment)	 - Manage environments
+* [walrus resourcerun](walrus_resourcerun)	 - Manage resource runs
 

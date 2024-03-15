@@ -14,6 +14,7 @@ walrus catalog update <catalog> [flags]
 
 ```
       --description string      
+      --filter-pattern string   
       --labels stringToString    (default [])
   -o, --output string           Output format [table, json, yaml] (default "table")
       --project string          

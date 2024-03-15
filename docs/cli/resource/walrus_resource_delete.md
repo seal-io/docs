@@ -14,6 +14,7 @@ walrus resource delete <resource> [flags]
 
 ```
   -o, --output string     Output format [table, json, yaml] (default "table")
+      --preview           
       --without-cleanup   
 ```
 
