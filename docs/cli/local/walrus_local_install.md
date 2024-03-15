@@ -6,6 +6,12 @@ Install local Walrus
 walrus local install [flags]
 ```
 
+## Options
+
+```
+  -e, --env strings   Set environment variables for the local Walrus
+```
+
 ## Options inherited from parent commands
 
 ```

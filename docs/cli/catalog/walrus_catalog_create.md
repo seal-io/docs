@@ -14,6 +14,7 @@ walrus catalog create [flags]
 
 ```
       --description string      
+      --filter-pattern string   
       --labels stringToString    (default [])
       --name string             
   -o, --output string           Output format [table, json, yaml] (default "table")

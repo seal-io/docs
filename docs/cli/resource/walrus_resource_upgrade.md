@@ -21,8 +21,10 @@ walrus resource upgrade <resource> [flags]
       --endpoints jsonArray                       (default []...)
       --labels stringToString                     (default [])
   -o, --output string                            Output format [table, json, yaml] (default "table")
+      --preview                                  
       --resource-definition-matching-rule json    (default {}...)
       --reuse-attributes                         
+      --run-labels stringToString                 (default [])
       --template json                             (default {}...)
       --type string                              
 ```

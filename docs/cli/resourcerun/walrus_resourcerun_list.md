@@ -1,24 +1,30 @@
-# walrus resourcerevision list
+# walrus resourcerun list
 
-Get resource revisions.
+Get resource runs.
 
 ## Synopsis
 
-Get resource revisions that belongs to an environment of a project.
+Get resource runs that belongs to an environment of a project.
 
 ```
-walrus resourcerevision list <resource> [flags]
+walrus resourcerun list <resource> [flags]
 ```
 
 ## Options
 
 ```
       --extract strings   
+      --id string         
+      --labels strings    
   -o, --output string     Output format [table, json, yaml] (default "table")
       --page int           (default 1)
       --per-page int       (default 100)
+      --preview           
       --query string      
+      --rollback          
       --sort strings      
+      --status string     
+      --type string       
 ```
 
 ## Options inherited from parent commands
@@ -30,5 +36,5 @@ walrus resourcerevision list <resource> [flags]
 
 ## SEE ALSO
 
-* [walrus resourcerevision](walrus_resourcerevision)	 - Manage resource revisions
+* [walrus resourcerun](walrus_resourcerun)	 - Manage resource runs
 

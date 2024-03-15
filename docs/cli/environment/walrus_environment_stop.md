@@ -14,6 +14,7 @@ walrus environment stop <environment> [flags]
 
 ```
   -o, --output string   Output format [table, json, yaml] (default "table")
+      --preview         
 ```
 
 ## Options inherited from parent commands

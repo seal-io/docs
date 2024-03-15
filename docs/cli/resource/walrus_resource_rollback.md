@@ -15,7 +15,8 @@ walrus resource rollback <resource> [flags]
 ```
       --change-comment string   
   -o, --output string           Output format [table, json, yaml] (default "table")
-      --revision-id string      
+      --preview                 
+      --run-id string           
 ```
 
 ## Options inherited from parent commands
