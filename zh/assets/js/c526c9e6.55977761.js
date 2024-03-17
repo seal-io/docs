@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[16846],{3838:l=>{l.exports=JSON.parse('{"title":"CLI Docs","slug":"/category/cli","permalink":"/docs/zh/v0.5/category/cli","navigation":{"next":{"title":"walrus apply","permalink":"/docs/zh/v0.5/cli/apply/walrus_apply"}}}')}}]);
