@@ -42,7 +42,7 @@ By using environment types, we can get the following isolation features.
 1. Access the list page through the action of viewing the environment list.
 2. Click `New Environment`, enter the `name` to identify your environment. The environment name should be unique, so you can easily find it in the environment list.
 
-![create-env](/img/v0.5.0/application/environment/env-create.png)
+![create-env](/img/v0.6.0/application/environment/env-create.png)
 
 3. Add `Environment tags` and `Environment description` based on the actual environment.
 4. Choose proper `Environment type`.
@@ -58,7 +58,7 @@ By using environment types, we can get the following isolation features.
 3. Modify the environment configuration as needed, and add or delete connectors.
 4. Click the `Save` button to save the environment configuration.
 
-![app-env-edit](/img/v0.5.0/application/environment/app-env-edit-en.png)
+![app-env-edit](/img/v0.6.0/application/environment/app-env-edit.png)
 
 ## Manage Resources
 
@@ -99,7 +99,7 @@ In some cases, you may need to create an environment that is identical to an exi
 2. In the environment list, find the environment that needs to be cloned.
 3. Click the action dropdown and click `Clone`.
 
-![app-env-clone](/img/v0.5.0/application/environment/app-env-clone-en.png)
+![app-env-clone](/img/v0.6.0/application/environment/app-env-clone.png)
 
 4. Configure the name, description, tags, etc., of the cloned environment, and select connectors.
 5. If needed, modify the configuration of resources in the cloned environment. Click to select the resource, modify the resource configuration in the pop-up window, then click `Confirm` to save the alteration.
@@ -109,7 +109,7 @@ In some cases, you may need to create an environment that is identical to an exi
 
 7. Once the environment cloning is completed, you can use the newly cloned environment in the 'Application Management'. Resources in the original environment will be cloned and deployed in order based on their dependencies. You can check the status of each resource in the resource list.
 
-![app-env-clone-deploy](/img/v0.5.0/application/environment/app-env-clone-deploy-en.png)
+![app-env-clone-deploy](/img/v0.6.0/application/environment/app-env-clone-deploy.png)
 
 ## Start Environment
 
@@ -119,7 +119,7 @@ When you start an environment, Walrus will deploy the resources in the environme
 2. In the environment list, find the environment that needs to be started.
 3. Click the action dropdown and click `Start`.
 
-![app-env-start](/img/v0.5.0/application/environment/env-start.png)
+![app-env-start](/img/v0.6.0/application/environment/env-start.png)
 
 ## Stop Environment
 
@@ -129,7 +129,7 @@ When you stop an environment, Walrus will stop the resources in the environment 
 2. In the environment list, find the environment that needs to be stopped.
 3. Click the action dropdown and click `Stop`.
 
-![app-env-stop](/img/v0.5.0/application/environment/env-stop.png)
+![app-env-stop](/img/v0.6.0/application/environment/env-stop.png)
 
 ## Delete Environment
 
@@ -142,7 +142,7 @@ In Walrus, when there are multiple environments, you can designate one environme
 
 1.  In the `Environments` dropdown option in the top breadcrumb menu, click ![star-line](/img/v0.5.0/application/environment/star-line.png) to set it as the default environment.
 
-![set-default-env-en](/img/v0.5.0/application/environment/set-default-env-en.png)
+![set-default-env-en](/img/v0.6.0/application/environment/set-default-env.png)
 
 2. If the project corresponding to the default environment is deleted, this setting will also be deleted.
 3. After setting a default environment, upon successful login or clicking the `Applications` menu, will enter the default environment details page.
@@ -151,7 +151,7 @@ In Walrus, when there are multiple environments, you can designate one environme
 
 1. In the `Environments` dropdown option in the top breadcrumb menu, click ![star-line](/img/v0.5.0/application/environment/star-fill.png) to unselect it as the default environment.
 
-![unset-default-env-en](/img/v0.5.0/application/environment/unset-default-env-en.png)
+![unset-default-env-en](/img/v0.6.0/application/environment/unset-default-env.png)
 
 1. After unsetting or deleting the default environment, the default access after a successful login will be the first environment under the first project.
 2. After unsetting the default environment, clicking the `Applications` menu will take you to the recently visited page (project list, project details, environment details).

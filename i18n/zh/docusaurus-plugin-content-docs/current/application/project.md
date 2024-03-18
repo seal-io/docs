@@ -12,7 +12,7 @@ sidebar_position: 1
 ## 查看项目列表
 点击导航栏`应用管理`，点击上方的`项目`下拉菜单，点击`管理`，进入项目列表。
 
-![app-proj-mgt](/img/v0.5.0/application/project/app-proj-mgt-en.png)
+![app-proj-mgt](/img/v0.6.0/application/project/app-proj-mgt-en.png)
 
 ## 创建项目
 
@@ -31,7 +31,7 @@ sidebar_position: 1
 
 2. 如果已在某个项目下，点击上方`项目`下拉菜单，选择项目名称，进入对应的项目页。
 
-![app-proj-switch](/img/v0.5.0/application/project/app-proj-switch-en.png)
+![app-proj-switch](/img/v0.6.0/application/project/app-proj-switch-en.png)
 
 ## 查询项目
 
@@ -40,7 +40,7 @@ sidebar_position: 1
 ## 修改项目
 
 1. 进入"项目列表"。
-2. 点击待修改项目行`编辑`，选择更改"名称"、"描述"或"标签"。
+2. 点击待修改项目行`编辑`，选择更改"描述"或"标签"。
 3. 点击`保存`，完成修改。
 
 ![app-proj-edit](/img/v0.5.0/application/project/app-proj-edit-en.png)

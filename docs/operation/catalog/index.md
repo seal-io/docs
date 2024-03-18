@@ -39,7 +39,7 @@ Walrus provides the following two levels of catalog:
 	- Google: https://github.com/terraform-google-modules
 4. Click the Save button.
 
-![create](/img/v0.5.0/operation/catalog/create-en.png)
+![create](/img/v0.6.0/operation/catalog/create.png)
 
 ### Project Catalog
 
@@ -51,7 +51,7 @@ Walrus provides the following two levels of catalog:
 	- Google: https://github.com/terraform-google-modules
 4. Click the Save button.
 
-![create](/img/v0.5.0/operation/catalog/create-project-en.png)
+![create](/img/v0.6.0/operation/catalog/create-project.png)
 
 ## Delete Catalog
 

@@ -12,7 +12,7 @@ sidebar_position: 1
 ## View Project List
 Click `Applications` on the navigation bar, then click the `Project` dropdown menu at the top, and click `Manage` to enter the project list.
 
-![app-proj-mgt](/img/v0.5.0/application/project/app-proj-mgt-en.png)
+![app-proj-mgt](/img/v0.6.0/application/project/app-proj-mgt-en.png)
 
 ## Create Projects
 
@@ -31,7 +31,7 @@ You can enter projects in the following two ways:
 
 2. If you are already in a specific project, click the `Project` dropdown menu at the top, select the project name to enter the corresponding project page.
 
-![app-proj-switch](/img/v0.5.0/application/project/app-proj-switch-en.png)
+![app-proj-switch](/img/v0.6.0/application/project/app-proj-switch-en.png)
 
 ## Search Projects
 
@@ -40,7 +40,7 @@ In the "Project List" page or the search box of the `Project` dropdown menu, ent
 ## Edit Projects
 
 1. Enter the "Project List".
-2. Click `Edit` on the line of the project to be modified, select to change the "Name", "Description" or "Tags".
+2. Click `Edit` on the line of the project to be modified, select to change the "Description" or "Tags".
 3. Click `Save` to complete the modification.
 
 ![app-proj-edit](/img/v0.5.0/application/project/app-proj-edit-en.png)

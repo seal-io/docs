@@ -134,7 +134,7 @@ Stop operation will stop all components of the resource, unlike delete operation
 1. Navigate to the `Resources` tab in the environment view.
 2. Locate `Ready` resource you need to stop.
 
-！[resource-stop](/img/v0.6.0/application/resource/resource-stop.png)
+![resource-stop](/img/v0.6.0/application/resource/resource-stop.png)
 
 3. Click the `Stop` button，then click the `Confirm` button in the pop-up window to complete the stop operation.
 
@@ -160,7 +160,7 @@ View the component list in the resource detail page:
 
 1. Enter the `Resources` tab of the environment view.
 2. Find the resource you need to view the component list, click the resource name to enter the detail page.
-3. Click the `Components` tab to view the component list.
+3. Click the `Overview` tab to view the component list.
 
 ![resource-component-list2](/img/v0.6.0/application/resource/resource-component-list2.png)
 

@@ -14,7 +14,7 @@ The system supports the following settings:
 
 1. Click on `System` in the navigation bar.
 
-![system-configuration](/img/v0.5.0/settings/ss-config.png)
+![system-configuration](/img/v0.6.0/settings/ss-config.png)
 
 ## Server
 
