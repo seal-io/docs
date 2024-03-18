@@ -38,7 +38,7 @@ Walrus 提供了以下两种层级的模板库：
  `https://github.com/terraform-aliyun-modules`。
 4. 点击`保存`按钮。
 
-![create](/img/v0.5.0/operation/catalog/create-en.png)
+![create](/img/v0.6.0/operation/catalog/create.png)
 
 ### 项目模板库
 
@@ -47,7 +47,7 @@ Walrus 提供了以下两种层级的模板库：
 3. 输入模板库的名称、描述、来源。其中，模板库目前支持类型有三种： Github，Gitlab 和 Gitee，来源是一个组织的地址，例如，例如 `https://github.com/alibabacloud-automation`。
 4. 点击`保存`按钮。
 
-![create](/img/v0.5.0/operation/catalog/create-project-en.png)
+![create](/img/v0.6.0/operation/catalog/create-project.png)
 
 > Walrus 支持包含 Terraform 模块仓库的 Github/Gitlab/Gitee 组织，您可以在模板库中导入该组织下的所有模板。
 

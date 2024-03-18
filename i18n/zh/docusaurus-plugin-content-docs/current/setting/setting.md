@@ -14,7 +14,7 @@ sidebar_position: 2
 
 1. 点击导航栏中的`系统设置`。
 
-![system-configuration](/img/v0.5.0/settings/ss-config.png)
+![system-configuration](/img/v0.6.0/settings/ss-config.png)
 
 ## 服务管理
 

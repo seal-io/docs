@@ -166,7 +166,7 @@ Resources belong to an environment, and you can find the Walrus File operation b
 4. Click on `Import YAML`, and enter the Walrus File content directly into the input box or read it from a file.
 5. Also could choose an application built from the Walrus File Hub, using a pre-written Walrus File.
 
-![walrus-file-import](/img/v0.5.0/application/resource/walrus-file-import.png)
+![walrus-file-import](/img/v0.6.0/application/resource/walrus-file-import.png)
 
 ![walrus-file-import](/img/v0.5.0/application/resource/walrus-file-import-from-hub.png)
 

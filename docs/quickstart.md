@@ -37,7 +37,7 @@ For more detailed installation requirements, please refer to [installation](/dep
 sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 ```
 
-![qs-first-login](/img/v0.5.0/quickstart/qs-first-login-en.png)
+![qs-first-login](/img/v0.6.0/quickstart/qs-first-login-en.png)
 
 3. After logging in, you can set a new password and configure the server address of Walrus.
 
@@ -53,7 +53,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 2. Click the `Import YAML` button to import a Walrus file.
 
-![qs-create-res](/img/v0.5.0/quickstart/qs-create-res-en.png)
+![qs-create-res](/img/v0.6.0/quickstart/qs-create-res-en.png)
 
 3. Select the `nginx` example from the **Walrus File Hub** on the right.
 
@@ -64,18 +64,18 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 - Access the endpoint.
 
-![qs-res-access](/img/v0.5.0/quickstart/qs-res-access-en.png)
+![qs-res-access](/img/v0.6.0/quickstart/qs-res-access-en.png)
 
-- View deployment logs.
+- View run details.
 
-![qs-logs](/img/v0.5.0/quickstart/qs-logs-en.png)
+![qs-logs](/img/v0.6.0/quickstart/qs-run-details-en.png)
 
 - View component logs.
 
-![qs-res-logs](/img/v0.5.0/quickstart/qs-res-logs-en.png)
+![qs-res-logs](/img/v0.6.0/quickstart/qs-res-logs-en.png)
 
 - Access the terminal.
 
-![qs-res-exec](/img/v0.5.0/quickstart/qs-res-exec-en.png)
+![qs-res-exec](/img/v0.6.0/quickstart/qs-res-exec-en.png)
 
 Congratulations, you have deployed your first application using Walrus!

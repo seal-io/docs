@@ -42,7 +42,7 @@ sidebar_position: 2
 1. 通过查看环境列表的操作进入列表页面。
 2. 点击`新建环境`，输入`名称`来标识您的环境。环境名称应该是唯一的,这样您可以轻易地在环境列表中找到该环境。
 
-![create-env](/img/v0.5.0/application/environment/env-create.png)
+![create-env](/img/v0.6.0/application/environment/env-create.png)
 
 3. 根据环境的实际情况，添加`环境标签`，`环境描述`。
 4. 选择合适的`环境类型`。
@@ -58,7 +58,7 @@ sidebar_position: 2
 3. 根据需求修改环境的配置，添加或者删除连接器。
 4. 点击`保存`按钮即可保存环境配置。
 
-![app-env-edit](/img/v0.5.0/application/environment/app-env-edit-en.png)
+![app-env-edit](/img/v0.6.0/application/environment/app-env-edit.png)
 
 ## 管理资源
 
@@ -98,7 +98,7 @@ sidebar_position: 2
 1. 点击左侧导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 在环境列表中选择需要克隆的环境，点击`克隆`操作。
 
-![app-env-clone](/img/v0.5.0/application/environment/app-env-clone-en.png)
+![app-env-clone](/img/v0.6.0/application/environment/app-env-clone.png)
 
 3. 配置克隆环境的名称、描述、标签等信息,选择连接器。
 4. 根据需要修改克隆环境中资源的配置，点击选中资源，在弹窗中可修改资源配置，点击`确定`保存修改，然后点击`保存`按钮即可完成克隆环境。
@@ -107,7 +107,7 @@ sidebar_position: 2
 
 5. 克隆环境创建完成后，您可以在应用管理中使用这个环境了，被克隆的资源也会自动根据依赖关系自动编排部署，您可以在资源列表中查看资源的状态。
 
-![app-env-clone-deploy](/img/v0.5.0/application/environment/app-env-clone-deploy-en.png)
+![app-env-clone-deploy](/img/v0.6.0/application/environment/app-env-clone-deploy.png)
 
 ## 启动环境
 
@@ -116,7 +116,7 @@ sidebar_position: 2
 1. 点击导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 选择需要启动的环境，点击`启动`操作。
 
-![app-env-start](/img/v0.5.0/application/environment/env-start.png)
+![app-env-start](/img/v0.6.0/application/environment/env-start.png)
 
 ## 停止环境
 
@@ -125,7 +125,7 @@ sidebar_position: 2
 1. 点击导航栏中的`应用管理`，进入一个项目的环境列表。
 2. 选择需要停止的环境，点击`停止`操作。
 
-![app-env-stop](/img/v0.5.0/application/environment/env-stop.png)
+![app-env-stop](/img/v0.6.0/application/environment/env-stop.png)
 
 ## 删除环境
 
@@ -138,7 +138,7 @@ sidebar_position: 2
 
 1. 在顶部面包屑`环境`下拉选项中，点击![star-line](/img/v0.5.0/application/environment/star-line.png)，即可设为默认环境。
 
-   ![set-default-env-zh](/img/v0.5.0/application/environment/set-default-env-zh.png)
+   ![set-default-env-zh](/img/v0.6.0/application/environment/set-default-env.png)
 
 2. 若默认环境对应的项目被删除，则该设置也会被删除。
 3. 设置默认环境后，登录成功或者点击菜单`应用`将会进入的默认环境详情页。
@@ -147,7 +147,7 @@ sidebar_position: 2
 
 在顶部面包屑`环境`下拉选项，点击![star-fill](/img/v0.5.0/application/environment/star-fill.png)，即可取消为默认环境。
 
-![unset-default-env-zh](/img/v0.5.0/application/environment/unset-default-env-zh.png)
+![unset-default-env-zh](/img/v0.6.0/application/environment/unset-default-env.png)
 
 1. 取消或者删除默认环境后，登录成功后默认访问为第一个项目下的第一个环境。
 2. 取消默认环境后，点击菜单`应用`，默认进入的页面为最近访问的页面（项目列表、项目详情、环境详情）。

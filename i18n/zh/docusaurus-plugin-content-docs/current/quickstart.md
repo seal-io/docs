@@ -42,7 +42,7 @@ sudo docker run -d --privileged --restart=always \
 sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 ```
 
-![qs-first-login](/img/v0.5.0/quickstart/qs-first-login.png)
+![qs-first-login](/img/v0.6.0/quickstart/qs-first-login.png)
 
 3. 登陆后，您可以设置新密码，以及配置 Walrus 的访问地址。
 
@@ -58,7 +58,7 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 2. 点击`导入 YAML`按钮导入 Walrus 内置的 Walrus file。
 
-![qs-create-res](/img/v0.5.0/quickstart/qs-create-res.png)
+![qs-create-res](/img/v0.6.0/quickstart/qs-create-res.png)
 
 3. 从右侧的 **Walrus File Hub** 中选择`nginx`示例。
 
@@ -69,18 +69,18 @@ sudo docker logs walrus 2>&1 | grep "Bootstrap Admin Password"
 
 - 访问端点。
 
-![qs-res-access](/img/v0.5.0/quickstart/qs-res-access.png)
+![qs-res-access](/img/v0.6.0/quickstart/qs-res-access.png)
 
-- 查看部署日志。
+- 查看执行详情。
 
-![qs-logs](/img/v0.5.0/quickstart/qs-logs.png)
+![qs-logs](/img/v0.6.0/quickstart/qs-run-details.png)
 
 - 查看组件日志。
 
-![qs-res-logs](/img/v0.5.0/quickstart/qs-res-logs.png)
+![qs-res-logs](/img/v0.6.0/quickstart/qs-res-logs.png)
 
 - 访问终端。
 
-![qs-res-exec](/img/v0.5.0/quickstart/qs-res-exec.png)
+![qs-res-exec](/img/v0.6.0/quickstart/qs-res-exec.png)
 
 恭喜，您已完成本节快速入门。
