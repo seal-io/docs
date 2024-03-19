@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Environment
+# Environments
 
 > Note:
 > Since v0.4.0, environment introduces `Environment Type` to enhance management.
@@ -24,7 +24,7 @@ Starting with v0.4.0, each environment declares its purpose by its **type**, thu
 The system has 3 built-in environment types, which are **Development**, **Staging** and **Production**.
 
 - **Development** and **Staging** environments can be operated by any [User](/users/user).
-- **Production** environment can only be operated by **Manager** and **Administrator**, **General User** stays in read-only.
+- **Production** environments can only be operated by **Manager** and **Administrator**, **General User** stays in read-only.
 
 By using environment types, we can get the following isolation features.
 
@@ -34,7 +34,7 @@ By using environment types, we can get the following isolation features.
 ## View Environment List
 
 1. Click `Applications` on the left navigation bar. By default, the first project view will be displayed. The project can be switched via the top-level breadcrumb.
-2. The environment list under this project can be viewed in the Environment tab.
+2. The environment list under this project can be viewed in the Environments tab.
 3. You can enter keywords in the search bar of the environment list page to quickly search for related environments.
 
 ## Create Environment
@@ -47,7 +47,7 @@ By using environment types, we can get the following isolation features.
 3. Add `Environment tags` and `Environment description` based on the actual environment.
 4. Choose proper `Environment type`.
 5. Add a connector, click `Add Connector`, select the connector used in the environment, and finally click the `Confirm` button.
-6. Click the `Save` button to save the environment configuration, and then you can use this environment in Application Management.
+6. Click the `Save` button to save the environment configuration, and then you can use this environment in Applications.
 
 ![create-env-2](/img/v0.5.0/application/environment/env-create-2.png)
 
@@ -107,7 +107,7 @@ In some cases, you may need to create an environment that is identical to an exi
 
 ![app-env-clone-details](/img/v0.5.0/application/environment/app-env-clone-details-en.png)
 
-7. Once the environment cloning is completed, you can use the newly cloned environment in the 'Application Management'. Resources in the original environment will be cloned and deployed in order based on their dependencies. You can check the status of each resource in the resource list.
+1. Once the environment cloning is completed, you can use the newly cloned environment in the 'Applications'. Resources in the original environment will be cloned and deployed in order based on their dependencies. You can check the status of each resource in the resource list.
 
 ![app-env-clone-deploy](/img/v0.6.0/application/environment/app-env-clone-deploy.png)
 

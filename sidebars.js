@@ -32,7 +32,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Application Management',
+      label: 'Applications',
       link: {
         type: 'generated-index',
       },
@@ -45,7 +45,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Operation Hub',
+      label: 'Operations',
       link: {
         type: 'generated-index',
       },
