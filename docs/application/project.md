@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Project
+# Projects
 
 > Note:
 >
@@ -10,18 +10,18 @@ sidebar_position: 1
 > - All project names within the system must be unique.
 
 ## View Project List
-Click `Applications` on the navigation bar, then click the `Project` dropdown menu at the top, and click `Manage` to enter the project list.
+Click `Applications` on the navigation bar, then click the `Projects` dropdown menu at the top, and click `Manage` to enter the project list.
 
 ![app-proj-mgt](/img/v0.6.0/application/project/app-proj-mgt-en.png)
 
-## Create Projects
+## Create Project
 
 1. Enter the project list.
-2. Click `Create New Project`, input the "Name" and "Description", and add "Tags".
+2. Click `New Project`, input the "Name" and "Description", and add "Tags".
 
 ![app-proj-add](/img/v0.5.0/application/project/app-proj-add-en.png)
 
-## Enter Projects
+## Enter Project
 
 You can enter projects in the following two ways:
 
@@ -37,7 +37,7 @@ You can enter projects in the following two ways:
 
 In the "Project List" page or the search box of the `Project` dropdown menu, enter the project name, press enter, and conduct a fuzzy search based on the project name.
 
-## Edit Projects
+## Edit Project
 
 1. Enter the "Project List".
 2. Click `Edit` on the line of the project to be modified, select to change the "Description" or "Tags".
@@ -45,7 +45,7 @@ In the "Project List" page or the search box of the `Project` dropdown menu, ent
 
 ![app-proj-edit](/img/v0.5.0/application/project/app-proj-edit-en.png)
 
-## Delete Projects
+## Delete Project
 
 1. Enter the "Project List".
 2. Check the projects to be deleted, click `Delete`, and confirm deleting in the pop-up window, to complete the deletion.
