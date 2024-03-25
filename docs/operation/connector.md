@@ -54,6 +54,42 @@ Walrus offers connectors on the following two levels:
 
 ![connector-create-cloud](/img/v0.5.0/operation/connector/op-conn-create-cloud-en.png)
 
+#### Creating a Cloud Provider Connector for Azure
+
+1. Create a service principal in either the [Azure portal](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps/RegisteredApps/Overview) or using the Azure CLI.
+
+```shell
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/20000000-0000-0000-0000-000000000000"
+```
+
+2. Click on `New Connector` in the connectors list and select `Cloud Provider`.
+
+3. Choose Type `Azure`, and fill in the form with the following information:
+
+- `Subscription ID`: The subscription ID of the Azure account.
+- `Tenant ID`: The tenant ID of the Azure account.
+- `Client ID`: The client ID of the service principal, which is the application ID.
+- `Client Secret`: The client secret of the service principal.
+
+![connector-create-azure](/img/v0.6.0/operation/connector/op-conn-create-azure-en.png)
+
+#### Creating a Cloud Provider Connector for Google Cloud
+
+1. Create a service account in the Google Cloud Console or choose an existing service account.
+
+2. Download the JSON key file for the service account.
+
+3. Click on `New Connector` in the connectors list and select `Cloud Provider`.
+
+4. Choose Type `Google`, and fill in the form with the following information:
+
+- `Project`: The project ID of the Google Cloud account.
+- `Region`: The region of the Google Cloud account for the resources to be created in.
+- `Zone`: The zone of the Google Cloud account for the resources to be created in. All zones are a part of a region.
+- `Credentials`: The JSON key file for the service account.
+
+![connector-create-gcp](/img/v0.6.0/operation/connector/op-conn-create-gcp-en.png)
+
 ### Creating a Version Control Connector
 
 1. Click on `New Connector` in the connectors list and select `Version Control`.

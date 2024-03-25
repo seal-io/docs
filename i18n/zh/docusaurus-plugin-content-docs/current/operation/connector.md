@@ -53,6 +53,38 @@ Walrus提供了以下两种层级的连接器：
 
 ![connector-create-cloud](/img/v0.5.0/operation/connector/op-conn-create-cloud-en.png)
 
+#### 创建 Azure 云厂商连接器
+
+1. 在 [Azure 门户](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps/RegisteredApps/Overview) 中或使用 Azure CLI 创建服务主体。
+
+```shell
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/20000000-0000-0000-0000-000000000000"
+```
+
+2. 在连接器列表点击`新建连接器`，选择`云厂商`。
+3. 在类型中选择`Azure`，使用服务主体的配置填写表单：
+
+- `Subscription ID`：Azure 订阅 ID。
+- `Tenant ID`：Azure 租户 ID。
+- `Client ID`：Azure 服务主体的客户端 ID。
+- `Client Secret`：Azure 服务主体的客户端密钥。
+
+![connector-create-azure](/img/v0.6.0/operation/connector/op-conn-create-azure.png)
+
+#### 创建 Google 云厂商连接器
+
+1. 在 Google Cloud Console 中创建服务账号或选择现有服务账号。
+2. 下载服务账号的密钥文件。
+3. 在连接器列表点击`新建连接器`，选择`云厂商`。
+4. 在类型中选择`Google`，使用服务账号的配置填写表单：
+
+- `Project`：Google Cloud 项目 ID。
+- `Region`：Google Cloud 项目所在地区。
+- `Zone`：Google Cloud 项目所在区域。所有区域都属于一个地区。
+- `Credentials`：服务账号的 JSON 密钥文件。
+
+![connector-create-gcp](/img/v0.6.0/operation/connector/op-conn-create-gcp.png)
+
 ### 创建版本控制连接器
 
 1. 在连接器列表点击`新建连接器`，选择`版本控制`。
